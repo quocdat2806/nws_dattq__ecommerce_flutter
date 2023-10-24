@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class InfoProductDetail extends StatelessWidget {
   final state;
@@ -32,12 +33,13 @@ class InfoProductDetail extends StatelessWidget {
               ),
               AppStyles.sizedBoxStyle(),
               Text(
-                'Vlado Odelle Dress',
+                state.productEntity?.title ?? '',
                 style: AppStyles.textStyle(
                   fontSize: 15,
                   color: AppColors.greyColor_1,
                   fontFamily: 'Regular',
                 ),
+                maxLines: 1,
               ),
               AppStyles.sizedBoxStyle(),
                Row(
@@ -51,7 +53,8 @@ class InfoProductDetail extends StatelessWidget {
                     ),
                   ),
                   ),
-                  const Text('  (320 Review)'),
+                  const SizedBox(width: 6,),
+                   Text('(320 ${S.of(context).textReview})'),
                 ],
               ),
             ],
@@ -90,7 +93,7 @@ class InfoProductDetail extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    '${state.defaultQuantity!}',
+                    '${state.quantity!}',
                     style: AppStyles.textStyle(
                       fontSize: 18,
                     ),
@@ -119,7 +122,7 @@ class InfoProductDetail extends StatelessWidget {
             ),
             AppStyles.sizedBoxStyle(),
             Text(
-              'Available in stock',
+              S.of(context).textCouterInStock,
               style: AppStyles.textStyle(
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Bold',

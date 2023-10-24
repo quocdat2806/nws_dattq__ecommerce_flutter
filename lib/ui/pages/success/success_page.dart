@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/ui/pages/success/success_navigator.dart';
 import 'package:newware_final_project/ui/widget/button/app_button.dart';
 
@@ -36,7 +36,7 @@ class _SuccessPageState extends State<SuccessPage> {
                 ),
               ),
               Text(
-                AppTexts.textSuccess,
+                S.of(context).textSuccessFully,
                 style: AppStyles.textStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
@@ -45,26 +45,22 @@ class _SuccessPageState extends State<SuccessPage> {
               ),
               AppStyles.sizedBoxStyle(),
               Text(
-               AppTexts.textDescriptionSuccess,
+                S.of(context).textSuccessFullyDesc,
                 style: AppStyles.textStyle(
                   fontSize: 16,
                   color: AppColors.greyColor_1,
                 ),
                 textAlign: TextAlign.center,
               ),
-              AppStyles.sizedBoxStyle(
-                height: 250,
-              ),
+              AppStyles.sizedBoxStyle(height: 250),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: InkWell(
                   onTap: () {
                     successNavigator.openMainPage();
                   },
-                  child: const AppButton(
-                    textButton: AppTexts.textStartShopping,
+                  child: AppButton(
+                    textButton: S.of(context).textStartShopping,
                     textColor: AppColors.primaryColor,
                     backGroundColor: AppColors.secondaryColor,
                     icon: null,

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
-import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class SizeColorProductDetail extends StatelessWidget {
   final listSize;
@@ -31,7 +31,7 @@ class SizeColorProductDetail extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Size',
+                S.of(context).textSize,
                 style: AppStyles.textStyle(
                   fontWeight: FontWeight.w700,
                   fontFamily: 'ExtraBold',

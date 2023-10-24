@@ -3,7 +3,6 @@ import 'package:shimmer/shimmer.dart';
 
 class AppShimmer extends StatelessWidget {
   const AppShimmer({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,9 +13,18 @@ class AppShimmer extends StatelessWidget {
             children: [
               ...List.generate(
                 4,
-                (index) => Container(
-                  padding: const EdgeInsets.all(20),
-                  child: loading(),
+                (index) => Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: MediaQuery.of(context).size.width / 2,
+                      childAspectRatio: 3 / 3.45,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                    itemBuilder: (BuildContext ctx, index) {
+                      return loading(context);
+                    },
+                  ),
                 ),
               )
             ],
@@ -25,49 +33,20 @@ class AppShimmer extends StatelessWidget {
       ),
     );
   }
-  Shimmer loading() {
+
+  Shimmer loading(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 125,
-            width: 125,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                ...List.generate(
-                  5,
-                  (index) => Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        height: 16,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
-        ],
+      child: Container(
+
+        margin: const EdgeInsets.symmetric(vertical: 16),
+        width: MediaQuery.of(context).size.width ,
+        height:  MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.circular(8),
+        ),
       ),
     );
   }

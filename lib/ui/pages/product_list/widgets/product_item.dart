@@ -11,10 +11,10 @@ class ProductItem extends StatelessWidget {
 
   const ProductItem({
     super.key,
-    required this.pathImage,
-    required this.title,
-    required this.description,
-    required this.price,
+     this.pathImage='',
+     this.title = '',
+     this.description='',
+     this.price=0,
   });
 
   @override

@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:newware_final_project/common/app_texts.dart';
 
 extension StringExtension on String {
   String get formattedTime {
@@ -10,14 +11,14 @@ extension StringExtension on String {
   }
 }
 
-class DateDiffrent {
+class DateDifferent {
 String formatDuration(Duration duration) {
   if (duration.inHours < 1) {
-    return '${duration.inMinutes} phút trước ';
+    return '${duration.inMinutes} ${AppTexts.textMinAgo}';
   } else if (duration.inHours < 24) {
-    return '${duration.inHours} giờ trước';
+    return '${duration.inHours} ${AppTexts.textHourAgo}';
   } else {
-    return '${duration.inDays} ngày trước';
+    return '${duration.inDays} ${AppTexts.textDayAgo}';
   }
 }
 

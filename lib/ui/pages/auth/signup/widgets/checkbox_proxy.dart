@@ -28,6 +28,9 @@ class _CheckBoxProxyState extends State<CheckBoxProxy> {
   Widget build(BuildContext context) {
     return CheckboxListTile(
       value: widget.isChecked,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
       contentPadding: const EdgeInsets.all(0),
       controlAffinity: ListTileControlAffinity.leading,
       title: Text(

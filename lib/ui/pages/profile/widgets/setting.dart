@@ -4,15 +4,20 @@ import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/form_setting.dart';
 
 class Setting extends StatelessWidget {
-  const Setting({super.key});
-
+  final Function()? onTabLanguage;
+  const Setting({super.key, this.onTabLanguage});
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: 1, color: const Color(0xFFDDDDDD)),
+        border: Border.all(
+          width: 1,
+          color: const Color(
+            0xFFDDDDDD,
+          ),
+        ),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -20,14 +25,19 @@ class Setting extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: const FormSetting(
+              child: FormSetting(
                 lableText: 'Language',
                 pathIcon: AppImages.pathLanguageImage,
-                children: Row(
-                  children: [
-                    Text('English'),
-                    Icon(Icons.navigate_next),
-                  ],
+                children: InkWell(
+                  onTap: () {
+                    (onTabLanguage!=null) ? onTabLanguage!():null;
+                  },
+                  child: const Row(
+                    children: [
+                      Text('English'),
+                      Icon(Icons.navigate_next),
+                    ],
+                  ),
                 ),
               ),
             ),

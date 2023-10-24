@@ -3,23 +3,23 @@ import 'package:newware_final_project/models/entities/notification/notification_
 import 'package:newware_final_project/models/enums/load_status.dart';
 
 class NotificationState extends Equatable {
-  final List<NotificationEntity> notificationEntity;
+  final List<NotificationEntity> listNotificationEntity;
   final LoadStatus fetchNotifyStatus;
   const NotificationState({
-    this.notificationEntity = const [],
+    this.listNotificationEntity = const [],
     this.fetchNotifyStatus = LoadStatus.initial,
   });
 
   @override
   // TODO: implement props
-  List<Object?> get props => [notificationEntity,fetchNotifyStatus];
+  List<Object?> get props => [listNotificationEntity,fetchNotifyStatus];
 
   NotificationState copyWith({
-    List<NotificationEntity>? notificationEntity,
+    List<NotificationEntity>? listNotificationEntity,
     LoadStatus? fetchNotifyStatus,
   }) {
     return NotificationState(
-      notificationEntity: notificationEntity ?? this.notificationEntity,
+      listNotificationEntity: listNotificationEntity ?? this.listNotificationEntity,
       fetchNotifyStatus: fetchNotifyStatus ?? this.fetchNotifyStatus,
     );
   }

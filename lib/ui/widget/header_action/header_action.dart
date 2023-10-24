@@ -5,13 +5,13 @@ class HeaderAction extends StatefulWidget {
   final Function()? onTabRightIcon;
   final Function()? onTabLeftIcon;
   final String? pathIconLeft;
-  final Widget? childrenIconRight;
+  final Widget? iconRight;
 
   const HeaderAction({
     super.key,
     this.onTabRightIcon,
     this.pathIconLeft,
-    this.childrenIconRight,
+    this.iconRight,
     this.onTabLeftIcon,
   });
 
@@ -27,7 +27,7 @@ class _HeaderActionState extends State<HeaderAction> {
       children: [
         InkWell(
           onTap: () {
-            widget.onTabLeftIcon!();
+            (widget.onTabLeftIcon!=null) ? widget.onTabLeftIcon!():null;
           },
           child: AppStyles.iconSvgStyle(
             pathImage: widget.pathIconLeft,
@@ -36,10 +36,10 @@ class _HeaderActionState extends State<HeaderAction> {
           ),
         ),
         InkWell(
-          onTap: () async {
-            widget.onTabRightIcon!();
+          onTap: ()  {
+            (widget.onTabRightIcon!=null) ? widget.onTabRightIcon!():null;
           },
-          child: widget.childrenIconRight ?? const SizedBox.shrink(),
+          child: widget.iconRight ?? const SizedBox.shrink(),
         ),
       ],
     );

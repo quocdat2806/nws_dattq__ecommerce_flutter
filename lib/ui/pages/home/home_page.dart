@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/category_responsitory.dart';
 import 'package:newware_final_project/ui/pages/home/home_cubit.dart';
-import 'package:newware_final_project/ui/pages/home/home_navigator.dart';
 import 'package:newware_final_project/ui/pages/home/home_state.dart';
 import 'package:newware_final_project/ui/pages/home/widgets/category_item.dart';
 import 'package:newware_final_project/ui/pages/home/widgets/search_category.dart';
@@ -34,16 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (con) {
-        final cateRepo = RepositoryProvider.of<CategoryResponsitory>(context);
-        return HomeCubit(
-          navigator: HomeNavigator(context: context),
-          cateRepo: cateRepo,
-        );
-      },
-      child: const HomePageChildState(),
-    );
+  return  const HomePageChildState();
   }
 }
 
@@ -61,12 +50,10 @@ class _HomePageChildStateState extends State<HomePageChildState> {
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<HomeCubit>(context);
-    _cubit.fetchCategory();
   }
 
   @override
   void dispose() {
-    _cubit.close();
     super.dispose();
   }
 
@@ -81,7 +68,12 @@ class _HomePageChildStateState extends State<HomePageChildState> {
             : Scaffold(
                 body: SafeArea(
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      right: 10,
+                      left: 10,
+                      bottom: 0,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -93,7 +85,7 @@ class _HomePageChildStateState extends State<HomePageChildState> {
                           height: 25,
                         ),
                         SearchCategory(
-                          search: _cubit.searchCategory,
+                          searchFun: _cubit.searchCategory,
                         ),
                         AppStyles.sizedBoxStyle(
                           height: 25,
@@ -110,7 +102,7 @@ class _HomePageChildStateState extends State<HomePageChildState> {
                             ),
                             itemCount: listCategoryLength,
                             itemBuilder: (BuildContext ctx, index) {
-                              return InkWell(
+                              return GestureDetector(
                                 onTap: () {
                                   _cubit.gotoProductListPage(
                                     categoryName:
@@ -139,4 +131,5 @@ class _HomePageChildStateState extends State<HomePageChildState> {
       },
     );
   }
+
 }

@@ -9,8 +9,8 @@ class ProductDetailNavigator extends AppNavigator {
   }) : super(context: context);
 
   void openCartPage() {
-    GoRouter.of(context).pushReplacementNamed(
-      AppRouter.main,
+    GoRouter.of(context).pushNamed(
+      AppRouter.cart,
     );
   }
 

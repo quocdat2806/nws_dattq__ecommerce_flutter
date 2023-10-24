@@ -8,8 +8,6 @@ class OnboardingNavigator extends AppNavigator {
       : super(context: context);
 
   void openAuthPage() {
-    GoRouter.of(context).pushReplacementNamed(
-      AppRouter.auth,
-    );
+    GoRouter.of(context).pushReplacementNamed(AppRouter.auth);
   }
 }

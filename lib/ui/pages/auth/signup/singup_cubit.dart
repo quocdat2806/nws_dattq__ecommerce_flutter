@@ -22,7 +22,7 @@ class SingUpCubit extends Cubit<SingUpState> {
   }) : super(const SingUpState());
 
   void changeName({required String name}) {
-    bool invalidate = name.length > 6;
+    bool invalidate = name.length >= 4;
     if (name.isEmpty) {
       emit(
         state.copyWith(
@@ -47,10 +47,21 @@ class SingUpCubit extends Cubit<SingUpState> {
     }
   }
 
+  void onTabShowAndHidePassword() {
+    bool isHidePassword = !state.isHideOrShowPassword;
+    emit(state.copyWith(isHideOrShowPassword: isHidePassword));
+  }
+
+  void onTabShowAndHideConfirmPassword() {
+    bool isHideConfirmPassword = !state.isHideOrShowConfirmPassword;
+    emit(state.copyWith(isHideOrShowConfirmPassword: isHideConfirmPassword));
+  }
+
   void changeConfirmPassword({
     required String confirmPassword,
   }) {
     bool invalidate = Utils.isPassword(confirmPassword);
+
     if (confirmPassword.isEmpty) {
       emit(
         state.copyWith(
@@ -75,9 +86,7 @@ class SingUpCubit extends Cubit<SingUpState> {
     }
   }
 
-  void changeEmail({
-    required String email,
-  }) {
+  void changeEmail({required String email}) {
     bool invalidate = Utils.isEmail(email);
     if (email.isEmpty) {
       emit(
@@ -139,6 +148,7 @@ class SingUpCubit extends Cubit<SingUpState> {
     String email = state.email ?? '';
     String password = state.password ?? '';
     String name = state.name ?? '';
+
     emit(
       state.copyWith(
         signUpStatus: LoadStatus.loading,
@@ -155,6 +165,7 @@ class SingUpCubit extends Cubit<SingUpState> {
           email,
           password,
         );
+
         await authRepo.saveToken(tokenEntity!);
         await appCubit.updateProfile(result);
         navigator.openSuccessPage();

@@ -8,8 +8,12 @@ class NotificationItem extends StatelessWidget {
   final String? timeDiff;
   final String? idNotification;
 
-  const NotificationItem(
-      {super.key, this.pathImageAvatar, this.timeDiff,this.idNotification});
+  const NotificationItem({
+    super.key,
+    this.pathImageAvatar,
+    this.timeDiff,
+    this.idNotification,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/models/entities/product/product_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/product_responsitory.dart';
@@ -19,13 +19,15 @@ class ProductListCubit extends Cubit<ProductListState> {
       state.copyWith(fetchProductStatus: LoadStatus.loading),
     );
     try {
-      final productList = await proRepo.getProductsInCategory(categoryId);
+      final productList =
+          await proRepo.getProductsInCategory(categoryId, state.offset);
       if (productList != null) {
         emit(
           state.copyWith(
             fetchProductStatus: LoadStatus.success,
             listProduct: productList,
             listFilterProduct: productList,
+            loadMoreStatus: LoadStatus.success,
           ),
         );
       } else {
@@ -44,19 +46,74 @@ class ProductListCubit extends Cubit<ProductListState> {
     }
   }
 
+  void loadMore(int categoryId) async {
+    emit(
+      state.copyWith(loadMoreStatus: LoadStatus.loading),
+    );
+    int off = state.offset;
+    off++;
+    try {
+      final productList = await proRepo.getProductsInCategory(categoryId, off);
+
+      List<ProductEntity> list = [...state.listFilterProduct];
+      list.addAll(productList ?? []);
+      if (productList != null) {
+        emit(
+          state.copyWith(
+              listFilterProduct: list, loadMoreStatus: LoadStatus.loadingMore),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            fetchProductStatus: LoadStatus.failure,
+          ),
+        );
+      }
+    } catch (error) {
+      emit(
+        state.copyWith(
+          fetchProductStatus: LoadStatus.failure,
+        ),
+      );
+    }
+  }
+
+  void clearMore() async {
+    emit(
+      state.copyWith(loadMoreStatus: LoadStatus.loading),
+    );
+    try {
+      emit(
+        state.copyWith(
+            listFilterProduct: state.listProduct,
+            loadMoreStatus: LoadStatus.loadingMore,
+            offset: 0,
+        ),
+      );
+    } catch (error) {
+      emit(
+        state.copyWith(
+          fetchProductStatus: LoadStatus.failure,
+        ),
+      );
+    }
+  }
+
   void openSearchPage() {
     navigator.openSearchPage(
       searchFunc: searchProduct,
       nameSearch: state.nameSearchProduct,
     );
   }
+
   void backPage() {
     navigator.pop();
   }
 
-  void openProductDetailPage(int productId) {
+  void openProductDetailPage({productId}) {
     navigator.openProductDetailPage(productId);
   }
+
   void searchProduct(String nameSearch) {
     if (nameSearch.isEmpty) {
       emit(

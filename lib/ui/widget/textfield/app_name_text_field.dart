@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/common/app_texts.dart';
-import 'package:newware_final_project/hooks/debounce.dart';
-import 'package:newware_final_project/utils/utils.dart';
 
 class AppNameTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -50,15 +48,13 @@ class AppNameTextField extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: (value) {
-                      Debouncer().run(() {
                         onChanged!(value);
-                      });
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return AppTexts.textValidateEmptyString;
                       }
-                      if (!Utils.isPassword(value)) {
+                      if (value.length < 4) {
                         return AppTexts.textErrorNameLable;
                       }
                       return null;

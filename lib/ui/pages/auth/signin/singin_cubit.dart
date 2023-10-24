@@ -81,6 +81,10 @@ class SignInCubit extends Cubit<SignInState> {
     );
 
   }
+  void onTabShowAndHideIcon(){
+    bool isHide = !state.isShowOrHidePassword;
+    emit(state.copyWith(isShowOrHidePassword: isHide));
+  }
   void signIn() async {
     String email = state.email ?? '';
     String password = state.password ?? '';

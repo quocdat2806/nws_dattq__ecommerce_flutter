@@ -7,26 +7,14 @@ class SplashNavigator extends AppNavigator {
   SplashNavigator({required BuildContext context}) : super(context: context);
 
   void openAuthPage() {
-    GoRouter.of(context).pushReplacementNamed(
-      AppRouter.auth,
-    );
+    GoRouter.of(context).pushReplacementNamed(AppRouter.auth);
   }
 
   void openMainPage() {
-    GoRouter.of(context).pushReplacementNamed(
-      AppRouter.main,
-    );
+    GoRouter.of(context).pushReplacementNamed(AppRouter.main);
   }
-
-  void openHomePage() {
-    GoRouter.of(context).pushReplacementNamed(
-      AppRouter.home,
-    );
-  }
-
   void openOnboardingPage() {
-    GoRouter.of(context).pushReplacementNamed(
-      AppRouter.onBoarding,
-    );
+    GoRouter.of(context).pushReplacementNamed(AppRouter.onBoarding);
   }
+
 }

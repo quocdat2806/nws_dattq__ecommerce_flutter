@@ -14,13 +14,11 @@ class ProductListPage extends StatefulWidget {
   static const router = 'productList';
   final int? categoryId;
   final String? categoryName;
-  final Widget? children;
 
   const ProductListPage({
     super.key,
     required this.categoryId,
     required this.categoryName,
-    this.children,
   });
 
   @override
@@ -46,10 +44,12 @@ class _ProductListPageState extends State<ProductListPage> {
 class ProductListChildPageState extends StatefulWidget {
   final String? categoryName;
   final int? categoryId;
-  final Widget? children;
 
-  const ProductListChildPageState(
-      {super.key, this.categoryName, this.categoryId, this.children});
+  const ProductListChildPageState({
+    super.key,
+    this.categoryName,
+    this.categoryId,
+  });
 
   @override
   State<ProductListChildPageState> createState() =>
@@ -58,12 +58,24 @@ class ProductListChildPageState extends StatefulWidget {
 
 class _ProductListChildPageStateState extends State<ProductListChildPageState> {
   late ProductListCubit _cubit;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_scrollListener);
     _cubit = BlocProvider.of<ProductListCubit>(context);
-    _cubit.fetchProduct(widget.categoryId!);
+    _cubit.fetchProduct(widget.categoryId ?? 0);
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      _cubit.loadMore(widget.categoryId!);
+    }
+    if (_scrollController.position.pixels == 0 ) {
+      _cubit.clearMore();
+    }
   }
 
   @override
@@ -90,7 +102,7 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
                           onTabRightIcon: _cubit.openSearchPage,
                           onTabLeftIcon: _cubit.backPage,
                           pathIconLeft: AppImages.pathBackImage,
-                          childrenIconRight: AppStyles.iconSvgStyle(
+                          iconRight: AppStyles.iconSvgStyle(
                             pathImage: AppImages.pathSearchImage,
                           ),
                         ),
@@ -107,6 +119,7 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
                         AppStyles.sizedBoxStyle(height: 15),
                         Expanded(
                           child: GridView.builder(
+                            controller: _scrollController,
                             gridDelegate:
                                 SliverGridDelegateWithMaxCrossAxisExtent(
                               maxCrossAxisExtent:
@@ -120,13 +133,13 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
                               return InkWell(
                                 onTap: () {
                                   _cubit.openProductDetailPage(
-                                    state.listFilterProduct[index].id ?? 0,
+                                    productId:
+                                        state.listFilterProduct[index].id ?? 0,
                                   );
                                 },
                                 child: ProductItem(
-                                  pathImage: state.listFilterProduct[index]
-                                          .images![0] ??
-                                      '',
+                                  pathImage:
+                                      state.listFilterProduct[index].images![0],
                                   title: state.listFilterProduct[index].title ??
                                       '',
                                   description: state
@@ -142,7 +155,6 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
                     ),
                   ),
                 ),
-                bottomNavigationBar: widget.children ?? const SizedBox.shrink(),
               );
       },
     );

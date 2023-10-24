@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class OnboardingSubPage extends StatelessWidget {
   final String title;
   final String image;
-  final String description;
 
   const OnboardingSubPage({
     super.key,
     required this.title,
     required this.image,
-    this.description = AppTexts.descriptionOnbroadingPage,
   });
 
   @override
@@ -55,8 +53,7 @@ class OnboardingSubPage extends StatelessWidget {
           const SizedBox(height: 24),
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              description,
+            child: Text(S.of(context).descOnbroadingPage,
               style: AppStyles.textStyle(
                 fontSize: 16,
                 color: AppColors.greyColor_1,

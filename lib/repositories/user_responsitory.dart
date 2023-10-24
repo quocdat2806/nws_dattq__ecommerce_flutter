@@ -5,16 +5,12 @@ import 'package:newware_final_project/networks/resources/user/user_provider.dart
 
 abstract class UserResponsitory{
   Future<UserEntity?>getProfile(String token);
-  Future<void> updateProfile(UserEntity ?userEntity);
   Future<Map<String,dynamic>?> addToCart(CartEntity ?cartEntity);
   Future<Map<String,dynamic>?> checkoutCart(List<CartEntity>list);
-
   Future<List<CartEntity>?> getCart(userId);
-  Future<void> deleteCart( int userId,String cartId);
+  Future<void> updateCartWhenClosePage(List<CartEntity>list);
+
   Future<List<NotificationEntity>?> getNotify(userId);
-  Future<void> deleteAllNotify( int userId);
-
-
 
 }
 class UserResponsitoryImpl extends UserResponsitory{
@@ -24,11 +20,6 @@ class UserResponsitoryImpl extends UserResponsitory{
     return userProvider.getProfile(token);
   }
 
-  @override
-  Future<void> updateProfile(UserEntity? userEntity) {
-    // TODO: implement updateProfile
-    throw UnimplementedError();
-  }
 
   @override
   Future<Map<String,dynamic>?> addToCart(CartEntity ?cartEntity) {
@@ -40,16 +31,9 @@ class UserResponsitoryImpl extends UserResponsitory{
    return userProvider.getCart(userId);
   }
 
-  @override
-  Future<void> deleteCart(userId,cartId) {
-    return userProvider.deleteCart(userId,cartId);
-  }
 
-  @override
-  Future<void> deleteAllNotify(int userId) {
-    // TODO: implement deleteAllNotify
-    throw UnimplementedError();
-  }
+
+
 
   @override
   Future<List<NotificationEntity>?> getNotify(userId) {
@@ -59,6 +43,11 @@ class UserResponsitoryImpl extends UserResponsitory{
   @override
   Future<Map<String, dynamic>?> checkoutCart(List<CartEntity> list) {
     return userProvider.checkoutCart(list);
+  }
+
+  @override
+  Future<void> updateCartWhenClosePage(List<CartEntity>list) {
+    return userProvider.updateCartWhenClosePage(list);
   }
 
 

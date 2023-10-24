@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   final String? nameSearch;
 
   const SearchPage({super.key, this.nameSearch});
 
   @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final searchEdittingController =
-        TextEditingController(text: nameSearch ?? '');
+        TextEditingController(text: widget.nameSearch ?? '');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -39,14 +48,10 @@ class SearchPage extends StatelessWidget {
           ),
         ),
         actions: [
-          SvgPicture.asset(
-            AppImages.pathQuestionImage,
-            width: 20,
-            height: 20,
+          AppStyles.iconSvgStyle(
+            pathImage: AppImages.pathQuestionImage,
           ),
-          const SizedBox(
-            width: 20,
-          ),
+          const SizedBox(width: 20),
         ],
       ),
       body: SafeArea(
@@ -93,40 +98,15 @@ class SearchPage extends StatelessWidget {
                           searchEdittingController.text,
                         );
                       },
-                      child: SvgPicture.asset(
-                        AppImages.pathSearchImage,
-                        width: 20,
-                        height: 20,
-                        color: Colors.grey,
+                      child: AppStyles.iconSvgStyle(
+                        pathImage: AppImages.pathSearchImage,
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10),
                   ],
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      ' Search History',
-                      style: AppStyles.textStyle(
-                        fontSize: 18,
-                        fontFamily: 'Bold',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  const Text('Clear all')
-                ],
-              ),
-            )
           ],
         ),
       ),

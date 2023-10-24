@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/common/app_texts.dart';
-import 'package:newware_final_project/hooks/debounce.dart';
 import 'package:newware_final_project/utils/utils.dart';
 
 class AppConfirmPasswordField extends StatelessWidget {
@@ -12,12 +11,18 @@ class AppConfirmPasswordField extends StatelessWidget {
   final String? labelText;
   final String? hintText;
   final Widget? icon;
+  final Widget? iconShowOrHide;
+  final bool isShowOrHide;
+  final Function()? showAndHideFun;
 
   const AppConfirmPasswordField({
     Key? key,
     required this.textEditingController,
     this.onChanged,
     this.icon,
+    this.iconShowOrHide,
+    this.isShowOrHide = false,
+    this.showAndHideFun,
     this.labelText = AppTexts.textConfirmPassword,
     this.hintText = AppTexts.textHintConfirmPassword,
     this.passwordEdittingController,
@@ -52,9 +57,7 @@ class AppConfirmPasswordField extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: (value) {
-                      Debouncer().run(() {
-                        onChanged!(value);
-                      });
+                      onChanged!(value);
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -68,8 +71,11 @@ class AppConfirmPasswordField extends StatelessWidget {
                       }
                       return null;
                     },
+                    obscureText: isShowOrHide ? true : false,
+                    enableSuggestions: isShowOrHide ? true : false,
                     keyboardType: TextInputType.visiblePassword,
                     controller: textEditingController,
+                    obscuringCharacter: '*',
                     decoration: InputDecoration(
                       hintText: hintText!,
                       hintStyle: AppStyles.textStyle(
@@ -78,6 +84,13 @@ class AppConfirmPasswordField extends StatelessWidget {
                       border: InputBorder.none,
                     ),
                   ),
+                ),
+                InkWell(
+                  onTap: showAndHideFun,
+                  child: iconShowOrHide ?? const SizedBox.shrink(),
+                ),
+                const SizedBox(
+                  width: 10,
                 ),
                 icon ?? const SizedBox.shrink(),
               ],

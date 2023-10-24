@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newware_final_project/common/app_colors.dart';
+import 'package:newware_final_project/common/app_images_icons.dart';
+import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class CheckOutCart extends StatelessWidget {
   final state;
   final cubit;
-
 
   const CheckOutCart({super.key, this.state, this.cubit});
 
@@ -17,11 +19,10 @@ class CheckOutCart extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
-          mainAxisAlignment:
-          MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Total ${state.listCartEntity.length} item ',
+              '${S.of(context).textTotal} ${state.listCartEntity.length} ${S.of(context).textTotal}',
             ),
             Text('${cubit.handleTotalPrice()}.00')
           ],
@@ -38,26 +39,20 @@ class CheckOutCart extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: InkWell(
             onTap: () {
-              if (state.listCartEntity.isEmpty) {
-                return;
-              }
               cubit.handleCheckout();
             },
             child: Row(
-              mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Process To Checkout',
-                  style: TextStyle(
+                Text(
+                  S.of(context).textCheckoutCart,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                   ),
                 ),
-                SvgPicture.asset(
-                  'assets/icons/arrownext.svg',
-                  width: 20,
-                  height: 20,
+                AppStyles.iconSvgStyle(
+                  pathImage: AppImages.pathArrowNext,
                 ),
               ],
             ),

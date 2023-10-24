@@ -52,6 +52,14 @@ dependencies:
   socket_io_client: ^2.0.3+1
   intl: ^0.18.1
   collection: ^1.17.2
+  flutter_background_service: ^5.0.1
+  device_info_plus: ^9.1.0
+  flutter_background_service_android: ^6.0.1
+  flutter_local_notifications: ^16.1.0
+  firebase_messaging: ^14.7.0
+  firebase_analytics: ^10.6.0
+  flutter_localizations:
+    sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,11 +76,14 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  generate: true
   uses-material-design: true
+
+
+
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -129,3 +140,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

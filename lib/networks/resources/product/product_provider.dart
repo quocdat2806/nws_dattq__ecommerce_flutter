@@ -5,18 +5,18 @@ import 'package:http/http.dart' as http;
 import 'package:newware_final_project/networks/api/product/api_product.dart';
 
 class ProductProvider {
-  Future<List<ProductEntity>?> getProductsInCategory(int categoryId) async {
+  Future<List<ProductEntity>?> getProductsInCategory(
+      int categoryId, int offset) async {
     try {
       var response = await http.get(
         Uri.parse(
-          ApiProduct.getProductsInCategory(categoryId),
+          ApiProduct.getProductsInCategory(categoryId, offset: offset),
         ),
       );
       if (response.statusCode == HttpStatus.CREATED ||
           response.statusCode == 200 ||
           response.statusCode == 201) {
         List<ProductEntity> productList = parseProducts(response.body);
-        print('lisst product ${productList.toString()}');
         return productList;
       } else if (response.statusCode == HttpStatus.NOT_FOUND) {
         throw (Exception("err"),);

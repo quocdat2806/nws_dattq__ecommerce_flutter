@@ -25,9 +25,19 @@ class SplashCubit extends Cubit<SplashState> {
     final tokenEntity = await authRepo.getToken();
     if (tokenEntity == null) {
       if (await SharedPreferencesHelper.isOnboardCompleted()) {
-        navigator.openAuthPage();
+        Future.delayed(
+          const Duration(seconds: 3),
+          () {
+            navigator.openAuthPage();
+          },
+        );
       } else {
-        navigator.openOnboardingPage();
+        Future.delayed(
+          const Duration(seconds: 3),
+          () {
+            navigator.openOnboardingPage();
+          },
+        );
       }
     } else {
       try {
@@ -38,9 +48,19 @@ class SplashCubit extends Cubit<SplashState> {
           navigator.openMainPage();
         } else {
           if (await SharedPreferencesHelper.isOnboardCompleted()) {
-            navigator.openAuthPage();
+            Future.delayed(
+              const Duration(seconds: 3),
+              () {
+                navigator.openAuthPage();
+              },
+            );
           } else {
-            navigator.openOnboardingPage();
+            Future.delayed(
+              const Duration(seconds: 3),
+              () {
+                navigator.openOnboardingPage();
+              },
+            );
           }
         }
       } catch (error, s) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class CategoryItem extends StatelessWidget {
   final String? pathImage;
@@ -34,7 +35,7 @@ class CategoryItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                name!,
+               name!,
                 maxLines: 1,
                 style: AppStyles.textStyle(
                   fontSize: 20,
@@ -44,7 +45,7 @@ class CategoryItem extends StatelessWidget {
               ),
               AppStyles.sizedBoxStyle(height: 4),
               Text(
-                '$totalProduct Product',
+                '$totalProduct ${S.of(context).textProduct}',
                 style: AppStyles.textStyle(
                   fontSize: 14,
                   fontFamily: 'Bold',

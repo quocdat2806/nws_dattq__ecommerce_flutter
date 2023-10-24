@@ -21,6 +21,7 @@ import 'package:newware_final_project/ui/widget/textfield/app_confirm_password_t
 import 'package:newware_final_project/ui/widget/textfield/app_email_text_field.dart';
 import 'package:newware_final_project/ui/widget/textfield/app_password_text_field.dart';
 import 'package:newware_final_project/ui/widget/textfield/app_name_text_field.dart';
+
 class SingUpPage extends StatefulWidget {
   static const router = 'singIn';
 
@@ -92,7 +93,7 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: BlocBuilder<SingUpCubit, SingUpState>(
           bloc: _cubit,
@@ -110,98 +111,125 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                       horizontal: 20,
                       vertical: 30,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Fashion(),
-                        const SubHeaderAuth(
-                          title: AppTexts.textSingUp,
-                          description: AppTexts.textCreateAccount,
-                        ),
-                        AppStyles.sizedBoxStyle(
-                          height: AppDimensions.d_40,
-                        ),
-                        Column(
-                          children: [
-                            Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  AppNameTextField(
-                                    icon: nameIcon,
-                                    onChanged: (text) {
-                                      _cubit.changeName(
-                                        name: text,
-                                      );
-                                    },
-                                    textEditingController: nameTextController,
-                                  ),
-                                  AppStyles.sizedBoxStyle(),
-                                  AppEmailTextField(
-                                    icon: emailIcon,
-                                    onChanged: (text) {
-                                      _cubit.changeEmail(
-                                        email: text,
-                                      );
-                                    },
-                                    textEditingController: emailTextController,
-                                  ),
-                                  AppStyles.sizedBoxStyle(),
-                                  AppPasswordField(
-                                    icon: passwordIcon,
-                                    onChanged: (text) {
-                                      _cubit.changePassword(
-                                        password: text,
-                                      );
-                                    },
-                                    textEditingController:
-                                        passwordTextController,
-                                  ),
-                                  AppStyles.sizedBoxStyle(),
-                                  AppConfirmPasswordField(
-                                    icon: confirmPasswordIcon,
-                                    passwordEdittingController:
-                                        passwordTextController,
-                                    onChanged: (text) {
-                                      _cubit.changeConfirmPassword(
-                                        confirmPassword: text,
-                                      );
-                                    },
-                                    textEditingController:
-                                        confirmPasswordTextController,
-                                  ),
-                                ],
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Fashion(),
+                          const SubHeaderAuth(
+                            title: AppTexts.textSingUp,
+                            description: AppTexts.textCreateAccount,
+                          ),
+                          AppStyles.sizedBoxStyle(
+                            height: AppDimensions.d_40,
+                          ),
+                          Column(
+                            children: [
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    AppNameTextField(
+                                      icon: nameIcon,
+                                      onChanged: (text) {
+                                        _cubit.changeName(
+                                          name: text,
+                                        );
+                                      },
+                                      textEditingController: nameTextController,
+                                    ),
+                                    AppStyles.sizedBoxStyle(),
+                                    AppEmailTextField(
+                                      icon: emailIcon,
+                                      onChanged: (text) {
+                                        _cubit.changeEmail(
+                                          email: text,
+                                        );
+                                      },
+                                      textEditingController:
+                                          emailTextController,
+                                    ),
+                                    AppStyles.sizedBoxStyle(),
+                                    AppPasswordField(
+                                      isShowOrHide: state.isHideOrShowPassword,
+                                      showOrHideFun:
+                                          _cubit.onTabShowAndHidePassword,
+                                      iconShowOrHide: state.isHideOrShowPassword
+                                          ? const Icon(
+                                              Icons.remove_red_eye,
+                                            )
+                                          : const Icon(
+                                              Icons.visibility_off_outlined,
+                                            ),
+                                      icon: passwordIcon,
+                                      onChanged: (text) {
+                                        _cubit.changePassword(
+                                          password: text,
+                                        );
+                                      },
+                                      textEditingController:
+                                          passwordTextController,
+                                    ),
+                                    AppStyles.sizedBoxStyle(),
+                                    AppConfirmPasswordField(
+                                      isShowOrHide:
+                                          state.isHideOrShowConfirmPassword,
+                                      showAndHideFun: _cubit
+                                          .onTabShowAndHideConfirmPassword,
+                                      iconShowOrHide:
+                                          state.isHideOrShowConfirmPassword
+                                              ? const Icon(
+                                                  Icons.remove_red_eye,
+                                                )
+                                              : const Icon(
+                                                  Icons.visibility_off_outlined,
+                                                ),
+                                      icon: confirmPasswordIcon,
+                                      passwordEdittingController:
+                                          passwordTextController,
+                                      onChanged: (text) {
+                                        _cubit.changeConfirmPassword(
+                                          confirmPassword: text,
+                                        );
+                                      },
+                                      textEditingController:
+                                          confirmPasswordTextController,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            AppStyles.sizedBoxStyle(),
-                            CheckBoxProxy(
-                              isChecked: state.checkProxy,
-                              changStatusCheckbox: _cubit.switchCheckboxStatus,
-                            ),
-                            AppStyles.sizedBoxStyle(
-                              height: 15,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                if (!state.checkProxy) {
-                                  //nothing
-                                } else if (_formKey.currentState!.validate()) {
-                                  _cubit.singUp();
-                                }
-                              },
-                              child: AppButton(
-                                textButton: AppTexts.textSingUp,
-                                textColor: AppColors.primaryColor,
-                                backGroundColor: state.checkProxy
-                                    ? AppColors.secondaryColor
-                                    : AppColors.greyColor,
-                                icon: null,
-                                isHasBorder: false,
+                              AppStyles.sizedBoxStyle(),
+                              CheckBoxProxy(
+                                isChecked: state.checkProxy,
+                                changStatusCheckbox:
+                                    _cubit.switchCheckboxStatus,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              AppStyles.sizedBoxStyle(
+                                height: 15,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (!state.checkProxy) {
+                                    //nothing
+                                  } else if (_formKey.currentState!
+                                      .validate()) {
+                                    _cubit.singUp();
+                                  }
+                                },
+                                child: AppButton(
+                                  textButton: AppTexts.textSingUp,
+                                  textColor: AppColors.primaryColor,
+                                  backGroundColor: state.checkProxy
+                                      ? AppColors.secondaryColor
+                                      : AppColors.greyColor,
+                                  icon: null,
+                                  isHasBorder: false,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
           },

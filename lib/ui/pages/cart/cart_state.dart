@@ -19,7 +19,7 @@ class CartState extends Equatable {
         fetchCartStatus,
         totalPriceCart,
         updateCartStatus,
-      ];
+  ];
 
   CartState copyWith({
     List<CartEntity>? listCartEntity,

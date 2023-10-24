@@ -4,17 +4,17 @@ import 'package:newware_final_project/common/app_styles.dart';
 
 class AppButton extends StatelessWidget {
   final String textButton;
-  final Color backGroundColor;
+  final Color? backGroundColor;
   final Widget? icon;
   final Color textColor;
   final bool isHasBorder;
 
   const AppButton({
     super.key,
-    required this.textButton,
+    this.textButton='',
     this.backGroundColor = Colors.white,
-    required this.icon,
-    required this.textColor,
+    this.icon,
+    this.textColor =Colors.white,
     this.isHasBorder = false,
   });
 

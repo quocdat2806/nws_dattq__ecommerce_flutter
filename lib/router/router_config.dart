@@ -5,6 +5,8 @@ import 'package:newware_final_project/ui/pages/auth/signin/singin_page.dart';
 import 'package:newware_final_project/ui/pages/auth/signup/singup_page.dart';
 import 'package:newware_final_project/ui/pages/cart/cart_page.dart';
 import 'package:newware_final_project/ui/pages/home/home_page.dart';
+import 'package:newware_final_project/ui/pages/language/language_cubit.dart';
+import 'package:newware_final_project/ui/pages/language/language_page.dart';
 import 'package:newware_final_project/ui/pages/main/main_page.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_page.dart';
 import 'package:newware_final_project/ui/pages/onboarding/onboarding_page.dart';
@@ -20,6 +22,7 @@ class AppRouter {
 
   static final rootKey = GlobalKey<NavigatorState>();
   static final shellKey = GlobalKey<NavigatorState>();
+
   static final GoRouter router = GoRouter(
     navigatorKey: rootKey,
     initialLocation: '/',
@@ -40,26 +43,30 @@ class AppRouter {
   static const String productDetail = 'productDetail';
   static const String search = 'search';
   static const String notify = 'notify';
-
   static const String cart = 'cart';
   static const String success = 'success';
+  static const String language = "language";
 
   static final _routes = <RouteBase>[
     GoRoute(
-      parentNavigatorKey: rootKey,
       path: splash,
       builder: (context, state) => const SplashPage(),
     ),
-    GoRoute(
-      name: main,
-      parentNavigatorKey: rootKey,
-      path: "/$main",
-      builder: (context, state) => const MainPage(),
-    ),
+
     GoRoute(
       name: home,
       path: "/$home",
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      name: language,
+      path: "/$language",
+      builder: (context, state) => const LanguagePage(),
+    ),
+    GoRoute(
+      name: main,
+      path: "/$main",
+      builder: (context, state) => const MainPage(),
     ),
     GoRoute(
       name: cart,
@@ -88,6 +95,13 @@ class AppRouter {
         );
       },
     ),
+
+    // GoRoute(
+    //   name: main,
+    //   parentNavigatorKey: rootKey,
+    //   path: "/$main",
+    //   builder: (context, state) => const MainPage(),
+    // ),
 
     GoRoute(
       parentNavigatorKey: rootKey,

@@ -10,7 +10,6 @@ import 'package:newware_final_project/ui/pages/profile/profile_navigator.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/form_infomation.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/setting.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/upload_image.dart';
-import 'package:quickalert/quickalert.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -90,7 +89,7 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
                       ),
                     ),
                     AppStyles.sizedBoxStyle(height: 15),
-                    const Setting(),
+                    Setting(onTabLanguage: _cubit.openLanguagePage),
                     AppStyles.sizedBoxStyle(),
                     InkWell(
                       onTap: () {

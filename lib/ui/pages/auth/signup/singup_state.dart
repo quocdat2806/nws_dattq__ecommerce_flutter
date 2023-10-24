@@ -12,6 +12,8 @@ class  SingUpState  extends Equatable{
   final String? confirmPassword;
   final String? name;
   final bool checkProxy;
+  final bool isHideOrShowPassword;
+  final bool isHideOrShowConfirmPassword;
   const SingUpState({
     this.signUpStatus = LoadStatus.initial,
     this.emailStatus = StatusInput.initial,
@@ -23,6 +25,8 @@ class  SingUpState  extends Equatable{
     this.name='',
     this.confirmPassword='',
     this.checkProxy = false,
+    this.isHideOrShowPassword = true,
+    this.isHideOrShowConfirmPassword=true,
   });
 
   @override
@@ -37,6 +41,8 @@ class  SingUpState  extends Equatable{
     name,
     confirmPassword,
     checkProxy,
+    isHideOrShowPassword,
+    isHideOrShowConfirmPassword
   ];
 
   SingUpState copyWith({
@@ -50,6 +56,8 @@ class  SingUpState  extends Equatable{
     String? confirmPassword,
     String? name,
     bool? checkProxy,
+    bool? isHideOrShowPassword,
+    bool? isHideOrShowConfirmPassword,
   }) {
     return SingUpState(
       signUpStatus: signUpStatus ?? this.signUpStatus,
@@ -63,6 +71,9 @@ class  SingUpState  extends Equatable{
       confirmPassword: confirmPassword ?? this.confirmPassword,
       name: name ?? this.name,
       checkProxy: checkProxy ?? this.checkProxy,
+      isHideOrShowPassword: isHideOrShowPassword ?? this.isHideOrShowPassword,
+      isHideOrShowConfirmPassword:
+          isHideOrShowConfirmPassword ?? this.isHideOrShowConfirmPassword,
     );
   }
 }

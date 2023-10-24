@@ -6,22 +6,17 @@ import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/socket/socket_io.dart';
-import 'package:quickalert/quickalert.dart';
 
 class AddToCartProductDetail extends StatelessWidget {
   final state;
   final cubit;
-  final listSize;
-  final listColor;
 
   const AddToCartProductDetail({
     super.key,
     required this.state,
     required this.cubit,
-    required this.listSize,
-    required this.listColor,
   });
 
   @override
@@ -32,7 +27,7 @@ class AddToCartProductDetail extends StatelessWidget {
         Column(
           children: [
             Text(
-              'Total Price',
+              S.of(context).textTotalPrice,
               style: AppStyles.textStyle(
                 fontFamily: 'Regular',
                 fontSize: 14,
@@ -82,7 +77,7 @@ class AddToCartProductDetail extends StatelessWidget {
                       );
                     },
                     child: Text(
-                      'Add to card',
+                      S.of(context).textAddToCart,
                       style: AppStyles.textStyle(
                         color: AppColors.primaryColor,
                         fontFamily: 'Bold',

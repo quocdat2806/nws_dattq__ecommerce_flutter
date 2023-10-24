@@ -7,16 +7,20 @@ class NotificationEntity {
   String ?id;
   bool ?isRead;
   String ?createdAt;
+  String ?image;
+
   NotificationEntity({
     this.id,
     this.isRead,
     this.createdAt,
+    this.image,
   });
 
   factory NotificationEntity.fromJson(Map<String, dynamic> json) => NotificationEntity(
     id: json["id"],
     isRead: json["isRead"],
     createdAt:json["createdAt"],
+    image:json["image"],
 
   );
 
@@ -24,10 +28,12 @@ class NotificationEntity {
     "id": id,
     "isRead":isRead,
     "createdAt":createdAt,
+    "image":image,
+
   };
 
   @override
   String toString() {
-    return 'NotificationEntity{id: $id, isRead: $isRead, createdAt: $createdAt}';
+    return 'NotificationEntity{id: $id, isRead: $isRead, createdAt: $createdAt, image: $image}';
   }
 }

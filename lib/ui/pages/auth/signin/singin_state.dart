@@ -5,6 +5,7 @@ class SignInState extends Equatable {
   final LoadStatus signInStatus;
   final StatusInput emailStatus;
   final StatusInput passwordStatus;
+  final bool isShowOrHidePassword;
   final String? email;
   final String? password;
 
@@ -15,6 +16,7 @@ class SignInState extends Equatable {
     this.passwordStatus = StatusInput.initial,
     this.email,
     this.password,
+    this.isShowOrHidePassword = true,
 
   });
   @override
@@ -23,21 +25,24 @@ class SignInState extends Equatable {
     email,
     password,
     passwordStatus,
-    emailStatus
+    emailStatus,
+    isShowOrHidePassword
 
   ];
 
   SignInState copyWith({
     LoadStatus? signInStatus,
-    String? email,
-    String? password,
     StatusInput? emailStatus,
     StatusInput? passwordStatus,
+    bool? isShowOrHidePassword,
+    String? email,
+    String? password,
   }) {
     return SignInState(
       signInStatus: signInStatus ?? this.signInStatus,
       emailStatus: emailStatus ?? this.emailStatus,
       passwordStatus: passwordStatus ?? this.passwordStatus,
+      isShowOrHidePassword: isShowOrHidePassword ?? this.isShowOrHidePassword,
       email: email ?? this.email,
       password: password ?? this.password,
     );

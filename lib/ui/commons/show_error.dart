@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:quickalert/quickalert.dart';
 
 class ErrorAlert{
@@ -6,7 +7,7 @@ class ErrorAlert{
     QuickAlert.show(
       context: context,
       type: QuickAlertType.error,
-      text: 'Đơn hàng đã tồn tại trong giỏ hàng',
+      text: S.of(context).textAddToCartFail,
     );
   }
 }

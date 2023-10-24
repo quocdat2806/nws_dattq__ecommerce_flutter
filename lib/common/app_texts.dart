@@ -24,17 +24,14 @@ class AppTexts {
   static const String textLoginWithFacebook = 'Login with Facebook';
   static const String textLoginWithApple = 'Login with Apple';
   static const String textInvalid = 'Account or password is incorrect';
-  static const String textSuccess = 'Successful!';
-  static const String textDescriptionSuccess =
-      'You hava successfully registered'
-      ' in \n our app and start working in it.';
   static const String textStartShopping = 'Start Shopping';
   static const String textHintEmailLable = 'Your email';
   static const String textEmailLable = 'Email';
   static const String textPasswordLable = 'Password';
   static const String textValidateEmptyString = 'Please enter this field';
   static const String textHintPasswordLable = 'Your password';
-  static const String textErrorPasswordLable = 'Password inValidate';
+  static const String textErrorPasswordLable =
+      'Password must be 8-20 characters, including lowercase letters, uppercase letters, numbers and special characters';
   static const String textErrorEmailLable = 'Email inValidate';
   static const String textErrorConfirmPasswordLable =
       'Confirm Password inValidate';
@@ -45,4 +42,7 @@ class AppTexts {
   static const String textHintNameLabel = 'Your name';
   static const String textConfirmPassword = 'Confirm password';
   static const String textHintConfirmPassword = 'Your confirm password';
+  static const String textMinAgo = 'phút trước';
+  static const String textHourAgo = 'giờ trước';
+  static const String textDayAgo = 'ngày trước';
 }

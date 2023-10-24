@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/common/app_texts.dart';
-import 'package:newware_final_project/hooks/debounce.dart';
 import 'package:newware_final_project/utils/utils.dart';
 
 class AppPasswordField extends StatelessWidget {
@@ -11,13 +10,20 @@ class AppPasswordField extends StatelessWidget {
   final String? labelText;
   final String? hintText;
   final Widget? icon;
+  final Widget? iconShowOrHide;
+  final bool isShowOrHide;
+  final Function()? showOrHideFun;
+
   const AppPasswordField({
     Key? key,
     required this.textEditingController,
     this.onChanged,
     this.icon,
     this.labelText = AppTexts.textPasswordLable,
-    this.hintText =  AppTexts.textHintPasswordLable,
+    this.iconShowOrHide,
+    this.isShowOrHide = false,
+    this.showOrHideFun,
+    this.hintText = AppTexts.textHintPasswordLable,
   }) : super(key: key);
 
   @override
@@ -49,18 +55,19 @@ class AppPasswordField extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: (value) {
-                      Debouncer().run(() {
-                        onChanged!(value);
-                      });
+                      onChanged!(value);
                     },
-                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: isShowOrHide ? true : false,
+                    enableSuggestions: isShowOrHide ? true : false,
+                    obscuringCharacter: '*',
+                    maxLines: 1,
                     controller: textEditingController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return AppTexts.textValidateEmptyString;
                       }
                       if (!Utils.isPassword(value)) {
-                        return  AppTexts.textErrorPasswordLable;
+                        return AppTexts.textErrorPasswordLable;
                       }
                       return null;
                     },
@@ -72,6 +79,13 @@ class AppPasswordField extends StatelessWidget {
                       border: InputBorder.none,
                     ),
                   ),
+                ),
+                InkWell(
+                  onTap: showOrHideFun,
+                  child: iconShowOrHide ?? const SizedBox.shrink(),
+                ),
+                const SizedBox(
+                  width: 10,
                 ),
                 icon ?? const SizedBox.shrink(),
               ],

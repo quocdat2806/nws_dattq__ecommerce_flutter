@@ -7,14 +7,10 @@ class AuthNavigator extends AppNavigator {
   AuthNavigator({required BuildContext context}) : super(context: context);
 
   void openSingInPage() {
-    GoRouter.of(context).pushNamed(
-      AppRouter.signIn,
-    );
+    GoRouter.of(context).pushNamed(AppRouter.signIn);
   }
 
   void openSingUpPage() {
-    GoRouter.of(context).pushNamed(
-      AppRouter.singUp,
-    );
+    GoRouter.of(context).pushNamed(AppRouter.singUp);
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/common/app_texts.dart';
-import 'package:newware_final_project/hooks/debounce.dart';
 import 'package:newware_final_project/utils/utils.dart';
 class AppEmailTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -18,7 +17,7 @@ class AppEmailTextField extends StatelessWidget {
     this.onChanged,
     this.icon,
     this.labelText = AppTexts.textEmailLable,
-    this.hintText = AppTexts.textHintNameLabel,
+    this.hintText = AppTexts.textHintEmailLable,
   }) : super(key: key);
 
   @override
@@ -61,9 +60,7 @@ class AppEmailTextField extends StatelessWidget {
                     },
                     controller: textEditingController,
                     onChanged: (value) {
-                      Debouncer().run(() {
                         onChanged!(value);
-                      });
                     },
                     decoration: InputDecoration(
                       hintText: hintText!,

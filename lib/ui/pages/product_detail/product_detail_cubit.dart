@@ -21,7 +21,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     required this.userRepo,
   }) : super(const ProductDetailState());
 
-  void fetchData(int productId) async {
+  void fetchProductDetail(int productId) async {
     emit(
       state.copyWith(
         loadProductDetalStatus: LoadStatus.loading,
@@ -60,14 +60,14 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   void handleIncresementCouting({
     int? price,
   }) {
-    int quantity = state.defaultQuantity!;
+    int quantity = state.quantity!;
     if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
       return;
     }
     emit(
       state.copyWith(
-        defaultQuantity: ++quantity,
-        totalPrice: price! * state.defaultQuantity!,
+        quantity: ++quantity,
+        totalPrice: price! * state.quantity!,
       ),
     );
   }
@@ -99,7 +99,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       userEntity: userEntity!,
       productEntity: productEntity!,
       image: state.productEntity!.images![state.currentImage!],
-      quantity: state.defaultQuantity,
+      quantity: state.quantity,
       total: state.totalPrice,
     );
     emit(
@@ -133,15 +133,15 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
       return;
     }
-    int quantity = state.defaultQuantity!;
+    int quantity = state.quantity!;
     quantity = --quantity;
     if (quantity < 1) {
       quantity = 1;
     }
     emit(
       state.copyWith(
-        defaultQuantity: quantity,
-        totalPrice: price! * state.defaultQuantity!,
+        quantity: quantity,
+        totalPrice: price! * state.quantity!,
       ),
     );
   }
@@ -171,9 +171,9 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   num handleTotalPrice({int? price}) {
     emit(
       state.copyWith(
-        totalPrice: price! * state.defaultQuantity!,
+        totalPrice: price! * state.quantity!,
       ),
     );
-    return price * state.defaultQuantity!;
+    return price * state.quantity!;
   }
 }

@@ -42,7 +42,7 @@ class ValidateInput {
     }
     if (state.confirmPasswordStatus ==
         StatusInput.validConfirmPassword) {
-      icons['confirmPassword'] = AppStyles.iconSvgStyle(
+      icons['confirmPasswordIcon'] = AppStyles.iconSvgStyle(
         pathImage: AppImages.pathCheckImage,
       );
     }

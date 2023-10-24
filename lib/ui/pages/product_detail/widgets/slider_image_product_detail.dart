@@ -9,9 +9,14 @@ import 'package:newware_final_project/ui/widget/header_action/header_action.dart
 class SliderImageProductDetail extends StatelessWidget {
   final state;
   final cubit;
+  final int lengthCart;
 
-  SliderImageProductDetail(
-      {super.key, required this.cubit, required this.state});
+  SliderImageProductDetail({
+    super.key,
+    required this.cubit,
+    required this.state,
+    required this.lengthCart,
+  });
 
   final PageController pageController = PageController(initialPage: 0);
 
@@ -41,20 +46,37 @@ class SliderImageProductDetail extends StatelessWidget {
               onTabLeftIcon: cubit.backPage,
               onTabRightIcon: cubit.openCartPage,
               pathIconLeft: AppImages.pathBackImage,
-              childrenIconRight: Container(
-                constraints: const BoxConstraints(
-                  minWidth: 44,
-                  minHeight: 44,
-                ),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.primaryColor,
-                ),
-                child: AppStyles.iconSvgStyle(
-                  pathImage: AppImages.pathShoppingImage,
-                  width: 30.0,
-                  height: 30.0,
-                ),
+              iconRight: Stack(
+                children: [
+                  Container(
+                    constraints: const BoxConstraints(
+                      minWidth: 44,
+                      minHeight: 44,
+                    ),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primaryColor,
+                    ),
+                    child: AppStyles.iconSvgStyle(
+                      pathImage: AppImages.pathShoppingImage,
+                      width: 30.0,
+                      height: 30.0,
+                    ),
+                  ),
+                   lengthCart==0?const SizedBox.shrink():
+                   Positioned(
+                    right: 10,
+                    top: 4,
+                    child: Text(
+                      '$lengthCart',
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontFamily: 'Bold',
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -107,8 +129,8 @@ class SliderImageProductDetail extends StatelessWidget {
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
-                        width: state.currentImage == index ? 10 : 10,
-                        height: state.currentImage == index ? 10 : 10,
+                        width: 10,
+                        height: 10,
                       ),
                     ),
                   ),

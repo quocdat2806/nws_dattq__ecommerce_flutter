@@ -4,7 +4,7 @@ class ProductDetailState extends Equatable {
   final LoadStatus loadProductDetalStatus;
   final LoadStatus loadAddtoCartStatus;
   final ProductEntity? productEntity;
-  final int? defaultQuantity;
+  final int? quantity;
   final int? totalPrice;
   final int ?currentImage;
   final int ?currentSize;
@@ -13,7 +13,7 @@ class ProductDetailState extends Equatable {
     this.loadProductDetalStatus = LoadStatus.initial,
     this.loadAddtoCartStatus = LoadStatus.initial,
     this.productEntity,
-    this.defaultQuantity = 1,
+    this.quantity = 1,
     this.totalPrice=0 ,
     this.currentColor = 0,
     this.currentImage = 0,
@@ -25,7 +25,7 @@ class ProductDetailState extends Equatable {
   List<Object?> get props => [
         loadProductDetalStatus,
         productEntity,
-        defaultQuantity,
+        quantity,
         totalPrice,
         currentImage,
         currentColor,
@@ -37,7 +37,7 @@ class ProductDetailState extends Equatable {
     LoadStatus? loadProductDetalStatus,
     LoadStatus? loadAddtoCartStatus,
     ProductEntity? productEntity,
-    int? defaultQuantity,
+    int? quantity,
     int? totalPrice,
     int? currentImage,
     int? currentSize,
@@ -48,7 +48,7 @@ class ProductDetailState extends Equatable {
           loadProductDetalStatus ?? this.loadProductDetalStatus,
       loadAddtoCartStatus: loadAddtoCartStatus ?? this.loadAddtoCartStatus,
       productEntity: productEntity ?? this.productEntity,
-      defaultQuantity: defaultQuantity ?? this.defaultQuantity,
+      quantity: quantity ?? this.quantity,
       totalPrice: totalPrice ?? this.totalPrice,
       currentImage: currentImage ?? this.currentImage,
       currentSize: currentSize ?? this.currentSize,

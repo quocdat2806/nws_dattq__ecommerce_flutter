@@ -9,5 +9,8 @@ class ProfileNavigator extends AppNavigator {
   void openAuthPage() {
     GoRouter.of(context).pushReplacementNamed(AppRouter.auth);
   }
+  void openLanguagePage() {
+    GoRouter.of(context).pushNamed(AppRouter.language);
+  }
 
 }

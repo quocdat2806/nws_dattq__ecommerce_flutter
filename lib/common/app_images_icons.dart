@@ -23,6 +23,11 @@ class AppImages {
       'assets/images/check_image.png';
   static const String pathEditImage = 'assets/icons/ic_edit.svg';
   static const String pathLanguageImage = 'assets/icons/ic_language.svg';
+  static const String pathHomeIcon = 'assets/icons/homee.svg';
+  static const String pathCartIcon = 'assets/icons/c.svg';
+  static const String pathNotifyIcon = 'assets/icons/ic_notify.svg';
+  static const String pathProfileIcon = 'assets/icons/profile.svg';
+
   static const String pathNotificationImage =
       'assets/icons/ic_notification.svg';
   static const String pathMoonImage = 'assets/icons/ic_moon.svg';
@@ -31,6 +36,8 @@ class AppImages {
   static const String pathSearchImage = 'assets/icons/ic_search_short.svg';
   static const String pathCartBlack = 'assets/icons/cart_black.svg';
   static const String pathMoreIcon = 'assets/icons/more.svg';
+  static const String pathArrowNext = 'assets/icons/arrownext.svg';
+
 
   static const String pathErrorImage =
       'https://img.freepik.com/premium-vector/default-image-icon-vector'

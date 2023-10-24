@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/database/shared_preferences_helper.dart';
 import 'package:newware_final_project/ui/pages/onboarding/onboarding_navigator.dart';
 
@@ -19,6 +19,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
         activePage: currentIndex,
       ),
     );
+
   }
 
   void setTotalPage({required int totalPage}) {

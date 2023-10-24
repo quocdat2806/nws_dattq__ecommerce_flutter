@@ -62,11 +62,9 @@ class _SplashChildPageState extends State<SplashChildPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          decoration: AppStyles.boxDecorationAssetImageStyle(
-            pathAssetImage: AppImages.pathSplashPageImage,
-          ),
+      body: Container(
+        decoration: AppStyles.boxDecorationAssetImageStyle(
+          pathAssetImage: AppImages.pathSplashPageImage,
         ),
       ),
     );

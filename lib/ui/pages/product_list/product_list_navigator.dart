@@ -23,7 +23,6 @@ class ProductListNavigator extends AppNavigator {
         'nameSearch': nameSearch ?? '',
       },
     ).then((result) {
-      print(result);
       searchFunc!(result);
     });
   }

@@ -11,7 +11,7 @@ import 'package:newware_final_project/ui/pages/notification/notification_navigat
 import 'package:newware_final_project/ui/pages/notification/notification_state.dart';
 import 'package:newware_final_project/ui/pages/notification/widgets/notification_item.dart';
 import 'package:newware_final_project/ui/widget/header_action/header_action.dart';
-import 'package:newware_final_project/ui/widget/shimmer/app_shimmer.dart';
+import 'package:newware_final_project/ui/widget/loading/loading_status.dart';
 import 'package:newware_final_project/utils/app_date_utils.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -78,24 +78,24 @@ class _NotificationChildPageStateState
       onRefresh: () async {
         await Future.delayed(
           const Duration(seconds: 3),
-              () {
-           _cubit.fetchNotify(widget.userId!);
+          () {
+            _cubit.fetchNotify(widget.userId!);
           },
         );
       },
       child: BlocBuilder<NotificationCubit, NotificationState>(
         builder: (context, state) {
           return state.fetchNotifyStatus == LoadStatus.loading
-              ? const AppShimmer()
+              ? const LoadingStatus()
               : Column(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(20),
                       child: HeaderAction(
                         pathIconLeft: AppImages.pathBackImage,
-                         onTabRightIcon: null,
-                         onTabLeftIcon: _cubit.backPage,
-                         childrenIconRight: Container(
+                        onTabRightIcon: null,
+                        onTabLeftIcon: _cubit.backPage,
+                        iconRight: Container(
                           constraints: const BoxConstraints(
                             minHeight: 44,
                             minWidth: 44,
@@ -139,15 +139,20 @@ class _NotificationChildPageStateState
                     Expanded(
                       child: SizedBox(
                         child: ListView.builder(
-                          itemCount: state.notificationEntity.length,
+                          itemCount: state.listNotificationEntity.length,
                           itemBuilder: (context, index) {
-                            var date = state.notificationEntity[index].createdAt
+                            var dateFormatter = state
+                                .listNotificationEntity[index].createdAt
                                 .toString()
                                 .formattedTime;
-                            String diffTimeString = DateDiffrent().diffTime(date);
-                           return NotificationItem(
-                              idNotification:state.notificationEntity[index].id ,
-                              pathImageAvatar: widget.avatar,
+                            String diffTimeString =
+                                DateDifferent().diffTime(dateFormatter);
+                            return NotificationItem(
+                              idNotification:
+                                  state.listNotificationEntity[index].id,
+                              pathImageAvatar:
+                                  state.listNotificationEntity[index].image ??
+                                      widget.avatar,
                               timeDiff: diffTimeString,
                             );
                           },

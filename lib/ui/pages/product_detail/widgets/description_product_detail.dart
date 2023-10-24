@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class DescriptionProductDetail extends StatelessWidget {
   final String description;
@@ -16,7 +17,7 @@ class DescriptionProductDetail extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            'Description',
+            S.of(context).textDescription,
             textAlign: TextAlign.start,
             style: AppStyles.textStyle(
               fontSize: 20,

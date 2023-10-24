@@ -17,4 +17,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     await appCubit.signOut();
     navigator.openAuthPage();
   }
+  void openLanguagePage() {
+    navigator.openLanguagePage();
+  }
 }

@@ -23,7 +23,7 @@ class NotificationCubit extends Cubit<NotificationState> {
         emit(
           state.copyWith(
             fetchNotifyStatus: LoadStatus.success,
-            notificationEntity: listNotify,
+            listNotificationEntity: listNotify,
           ),
         );
       } else {
