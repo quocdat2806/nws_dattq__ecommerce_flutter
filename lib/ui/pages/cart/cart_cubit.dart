@@ -33,7 +33,9 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void backPage(BuildContext context){
-    GoRouter.of(context).pop();
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
   }
   Future<int> fetchLengthCart(int userId) async {
     emit(

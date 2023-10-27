@@ -81,7 +81,7 @@ class _MainPageChildStateState extends State<MainPageChildState> {
             ),
           ),
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 0),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(40),
@@ -97,7 +97,7 @@ class _MainPageChildStateState extends State<MainPageChildState> {
                 ),
               ],
             ),
-            height: 70,
+            height: 60,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
