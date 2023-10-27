@@ -1,10 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/entities/cart/cart_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/user_responsitory.dart';
+import 'package:newware_final_project/router/router_config.dart';
 import 'package:newware_final_project/socket/socket_io.dart';
 import 'package:newware_final_project/ui/commons/show_success.dart';
 
@@ -29,6 +31,10 @@ class CartCubit extends Cubit<CartState> {
       });
     }
   }
+
+  void backPage(BuildContext context){
+    GoRouter.of(context).pop();
+  }
   Future<int> fetchLengthCart(int userId) async {
     emit(
       state.copyWith(
@@ -40,17 +46,12 @@ class CartCubit extends Cubit<CartState> {
       final listCartEntity = await userRepo.getCart(userId);
 
       if (listCartEntity != null) {
-      await  Future.delayed(
-          const Duration(seconds: 1),
-          () {
-            emit(
-              state.copyWith(
-                fetchCartStatus: LoadStatus.success,
-                listCartEntity: listCartEntity,
-                updateCartStatus: LoadStatus.success,
-              ),
-            );
-          },
+        emit(
+          state.copyWith(
+            fetchCartStatus: LoadStatus.success,
+            listCartEntity: listCartEntity,
+            updateCartStatus: LoadStatus.success,
+          ),
         );
         return state.listCartEntity.length;
       } else {

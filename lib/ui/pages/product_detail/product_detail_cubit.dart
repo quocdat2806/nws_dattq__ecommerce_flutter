@@ -19,6 +19,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   final ProductDetailNavigator navigator;
   final ProductResponsitory proRepo;
   final UserResponsitory userRepo;
+
   ProductDetailCubit({
     required this.navigator,
     required this.proRepo,
@@ -65,9 +66,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     int? price,
   }) {
     int quantity = state.quantity!;
-    if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
-      return;
-    }
+
     emit(
       state.copyWith(
         quantity: ++quantity,
@@ -77,9 +76,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   }
 
   void handleChangImage(int indexImage) {
-    if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
-      return;
-    }
+
     emit(
       state.copyWith(
         currentImage: indexImage,
@@ -115,42 +112,52 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       cartEntity,
     );
     if (result != null) {
-        var socket = SocketIoConnect().connectAndListen();
-        if (socket.connected) {
-          socket.emit('addToCart');
-        }
-        emit(
-          state.copyWith(
-            loadAddtoCartStatus: LoadStatus.successAddToCart,
-          ),
-        );
+      var socket = SocketIoConnect().connectAndListen();
+      if (socket.connected) {
+        socket.emit('addToCart');
+      }
+      emit(
+        state.copyWith(
+          loadAddtoCartStatus: LoadStatus.successAddToCart,
+        ),
+      );
     } else {
       emit(
         state.copyWith(loadAddtoCartStatus: LoadStatus.failure),
       );
     }
   }
- void handleShowSuccessAddToCart(BuildContext context){
-   if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-       SuccessAlert().showSuccessAlert(
-         context,
-         S.current.textAddToCartSuccess,
-       );
-     });
-   }
-   if (state.loadAddtoCartStatus == LoadStatus.failure) {
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-       ErrorAlert().showError(context);
-     });
-   }
- }
+  void handleDeleteAddToCartStatus(){
+    emit(
+      state.copyWith(
+        loadAddtoCartStatus: LoadStatus.loading,
+      ),
+    );
+  }
+  void handleShowSuccessAddToCart(BuildContext context) {
+    if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          SuccessAlert().showSuccessAlert(
+            context,
+            S.current.textAddToCartSuccess,
+          );
+        },
+      );
+      handleDeleteAddToCartStatus();
+
+    }
+    if (state.loadAddtoCartStatus == LoadStatus.failure) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ErrorAlert().showError(context);
+      });
+    }
+  }
+
   void handleDecresementCouting({
     int? price,
   }) {
-    if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
-      return;
-    }
+
     int quantity = state.quantity!;
     quantity = --quantity;
     if (quantity < 1) {
@@ -165,9 +172,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   }
 
   void handleChangeSize(int indexSize) {
-    if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
-      return;
-    }
+
     emit(
       state.copyWith(
         currentSize: indexSize,
@@ -176,9 +181,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   }
 
   void handleChangeColor(int indexSize) {
-    if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
-      return;
-    }
+
     emit(
       state.copyWith(
         currentColor: indexSize,

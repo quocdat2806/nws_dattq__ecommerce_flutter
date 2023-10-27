@@ -15,8 +15,7 @@ class CheckOutCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20,left: 20,right: 20,bottom: 0),
-
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -24,7 +23,9 @@ class CheckOutCart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${S.of(context).textTotal} ${state.listCartEntity.length} ${S.of(context).textTotal}',
+                '${S.of(context).textTotal}'
+                 ' ${state.listCartEntity.length}'
+                  ' ${S.of(context).textItem}',
               ),
               Text('${cubit.handleTotalPrice()}.00')
             ],

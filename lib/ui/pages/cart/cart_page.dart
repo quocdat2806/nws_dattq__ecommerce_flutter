@@ -83,7 +83,7 @@ class _CartChildPageStateState extends State<CartChildPageState>
         buildWhen: (previous, current) =>
             previous.updateCartStatus != current.updateCartStatus,
         builder: (context, state) {
-        _cubit.handleCheckOutCartSuccess(context);
+          _cubit.handleCheckOutCartSuccess(context);
           return state.fetchCartStatus == LoadStatus.loading
               ? const LoadingStatus()
               : Scaffold(
@@ -97,7 +97,10 @@ class _CartChildPageStateState extends State<CartChildPageState>
                             bottom: 10,
                             top: 20,
                           ),
-                          child: const HeaderAction(
+                          child: HeaderAction(
+                            onTabLeftIcon: () {
+                              _cubit.backPage(context);
+                            },
                             pathIconLeft: AppImages.pathBackImage,
                           ),
                         ),

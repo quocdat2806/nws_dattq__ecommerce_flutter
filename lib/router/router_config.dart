@@ -43,9 +43,6 @@ class AppRouter {
   static const String success = 'success';
   static const String language = "language";
   static final _routes = <RouteBase>[
-    ShellRoute(routes: [
-
-    ]),
     GoRoute(
       path: splash,
       builder: (context, state) => const SplashPage(),

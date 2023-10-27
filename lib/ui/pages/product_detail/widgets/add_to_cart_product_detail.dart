@@ -68,10 +68,6 @@ class AddToCartProductDetail extends StatelessWidget {
                 builder: (context, stateUser) {
                   return InkWell(
                     onTap: () {
-                      if (state.loadAddtoCartStatus ==
-                          LoadStatus.successAddToCart) {
-                        return;
-                      }
                       cubit.handleAddToCart(
                         userEntity: stateUser.user,
                         productEntity: state.productEntity,

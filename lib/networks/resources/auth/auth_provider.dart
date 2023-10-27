@@ -8,7 +8,6 @@ import 'package:newware_final_project/networks/api/auth/api_auth.dart';
 import 'package:newware_final_project/networks/config/config_header_request_api.dart';
 
 class AuthProvider {
-
   Future<UserEntity?> singUp(
     String name,
     String email,
@@ -18,7 +17,8 @@ class AuthProvider {
       "name": name,
       "email": email,
       "password": password,
-      "avatar": AppImages.pathDefaultImage,
+      "avatar":
+          "https://vienthammydiva.vn/wp-content/uploads/2022/05/gai-xinh-han-quoc-2-1.jpg",
     };
     var endcodedUserInfo = jsonEncode(userInfo);
 
