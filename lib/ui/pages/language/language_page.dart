@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/bloc/setting/app_setting_cubit.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/ui/pages/language/language_cubit.dart';
-
-import '../../../bloc/app_cubit.dart';
+import 'package:newware_final_project/ui/pages/language/widgets/language_item.dart';
+import 'package:newware_final_project/ui/pages/language/widgets/save_language.dart';
 
 class LanguagePage extends StatefulWidget {
   const LanguagePage({super.key});
@@ -48,87 +51,48 @@ class _LanguagePageStateState extends State<LanguagePageState> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.navigate_before_outlined),
-        title: const Text('Đổi ngôn ngũ'),
+        leading: iconBack(
+          onTabBackIcon: (){
+            GoRouter.of(context).pop();
+          }
+        ),
+        title:  Text(S.of(context).textChangeLanguage),
       ),
       body: SafeArea(
         child: BlocBuilder<AppSettingCubit, AppSettingState>(
           builder: (context, state) {
             return Column(
               children: [
-                InkWell(
-                  onTap: (){
-                    _cubit.changeEnLanguage();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      children: [
-                        const Text('Tiêng Anh'),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text('Tiêng Anh'),
-                        (state.language == 'en')
-                            ? const Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(Icons.check))
-                            : const SizedBox.shrink()
-                      ],
-                    ),
-                  ),
+                LanguageItem(
+                  state: state,
+                  languageText: 'English',
+                  onTabLanguage: _cubit.changeEnLanguage,
+                  symboliclanguage: 'en',
                 ),
                 const Divider(),
-                InkWell(
-                  onTap: (){
-                    _cubit.changeViLanguage();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    child:  Row(
-                      children: [
-                        const Text('Tiêng Viet'),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text('Tiêng Viet'),
-                        (state.language == 'vi')
-                            ? const Align(
-                            alignment: Alignment.centerRight,
-                            child: Icon(Icons.check))
-                            : const SizedBox.shrink()
-                      ],
-                    ),
-                  ),
+                LanguageItem(
+                  state: state,
+                  languageText: 'VietNam',
+                  onTabLanguage: _cubit.changeViLanguage,
+                  symboliclanguage: 'vi',
                 ),
                 const Divider(),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: state.isChange? Colors.blue:Colors.grey,
-                  ),
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 30,
-                    horizontal: 30,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      _cubit.saveSetting(
-                        language: state.language,
-                      );
-                    },
-                    child: const Text(
-                      'Lưu',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
+                SaveLanguage(
+                  state: state,
+                  cubit: _cubit,
+                )
               ],
             );
           },
         ),
+      ),
+    );
+  }
+  Widget iconBack({Function()?onTabBackIcon}){
+    return InkWell(
+      onTap: onTabBackIcon,
+      child: const Icon(
+        Icons.navigate_before_outlined,
       ),
     );
   }

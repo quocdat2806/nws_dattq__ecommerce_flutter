@@ -5,10 +5,8 @@ import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/ui/pages/success/success_navigator.dart';
 import 'package:newware_final_project/ui/widget/button/app_button.dart';
-
 class SuccessPage extends StatefulWidget {
   const SuccessPage({super.key});
-
   @override
   State<SuccessPage> createState() => _SuccessPageState();
 }
@@ -55,17 +53,13 @@ class _SuccessPageState extends State<SuccessPage> {
               AppStyles.sizedBoxStyle(height: 250),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: InkWell(
-                  onTap: () {
-                    successNavigator.openMainPage();
-                  },
-                  child: AppButton(
-                    textButton: S.of(context).textStartShopping,
-                    textColor: AppColors.primaryColor,
-                    backGroundColor: AppColors.secondaryColor,
-                    icon: null,
-                    isHasBorder: false,
-                  ),
+                child: AppButton(
+                  onTabButton: successNavigator.openMainPage,
+                  textButton: S.of(context).textStartShopping,
+                  textColor: AppColors.primaryColor,
+                  backGroundColor: AppColors.secondaryColor,
+                  icon: null,
+                  isHasBorder: false,
                 ),
               ),
             ],

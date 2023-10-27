@@ -36,7 +36,12 @@ class AppImages {
   static const String pathSearchImage = 'assets/icons/ic_search_short.svg';
   static const String pathCartBlack = 'assets/icons/cart_black.svg';
   static const String pathMoreIcon = 'assets/icons/more.svg';
+  static const String pathLogoutIcon = 'assets/icons/ic_logout.svg';
+  static const String pathEditIcon = 'assets/icons/pen.svg';
+
   static const String pathArrowNext = 'assets/icons/arrownext.svg';
+  static const String pathDefaultImage = 'assets/images/avatar.jpg';
+
 
 
   static const String pathErrorImage =

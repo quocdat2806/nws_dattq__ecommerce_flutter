@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/utils/utils.dart';
 class AppEmailTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -16,8 +16,8 @@ class AppEmailTextField extends StatelessWidget {
     required this.textEditingController,
     this.onChanged,
     this.icon,
-    this.labelText = AppTexts.textEmailLable,
-    this.hintText = AppTexts.textHintEmailLable,
+    this.labelText ,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -51,10 +51,10 @@ class AppEmailTextField extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return AppTexts.textValidateEmptyString;
+                        return S.current.textValidateEmptyString;
                       }
                       if (!Utils.isEmail(value)) {
-                        return AppTexts.textErrorEmailLable;
+                        return S.current.textErrorEmail;
                       }
                       return null;
                     },

@@ -6,6 +6,7 @@ class SuccessAlert{
     QuickAlert.show(
       context: context,
       type: QuickAlertType.success,
+
       text: title,
     );
   }

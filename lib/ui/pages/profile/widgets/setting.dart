@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newware_final_project/bloc/setting/app_setting_cubit.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/form_setting.dart';
 
 class Setting extends StatelessWidget {
-  final Function()? onTabLanguage;
-  const Setting({super.key, this.onTabLanguage});
+  final Function()? onTab;
+
+  const Setting({super.key, this.onTab});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,17 +31,23 @@ class Setting extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: FormSetting(
-                lableText: 'Language',
+                lableText: S.of(context).textLanguage,
                 pathIcon: AppImages.pathLanguageImage,
                 children: InkWell(
                   onTap: () {
-                    (onTabLanguage!=null) ? onTabLanguage!():null;
+                    (onTab != null) ? onTab!() : null;
                   },
-                  child: const Row(
-                    children: [
-                      Text('English'),
-                      Icon(Icons.navigate_next),
-                    ],
+                  child: BlocBuilder<AppSettingCubit, AppSettingState>(
+                    builder: (context, state) {
+                      return Row(
+                        children: [
+                          Text(
+                            (state.language == 'en') ? 'English' : 'VietNamese',
+                          ),
+                          const Icon(Icons.navigate_next),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -44,7 +55,7 @@ class Setting extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: FormSetting(
-                lableText: 'Notification',
+                lableText: S.of(context).textNotification,
                 pathIcon: AppImages.pathNotificationImage,
                 children: CupertinoSwitch(
                   activeColor: Colors.black,
@@ -56,11 +67,11 @@ class Setting extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: FormSetting(
-                lableText: 'Dark Mood',
+                lableText: S.of(context).textDarkMood,
                 pathIcon: AppImages.pathMoonImage,
                 children: Row(
                   children: [
-                    const Text('off'),
+                    Text(S.of(context).textOn),
                     CupertinoSwitch(
                       activeColor: Colors.black,
                       value: true,
@@ -72,10 +83,10 @@ class Setting extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: const FormSetting(
-                lableText: 'Help Center',
+              child: FormSetting(
+                lableText: S.of(context).textHelpCenter,
                 pathIcon: AppImages.pathQuestionImage,
-                children: Icon(
+                children: const Icon(
                   Icons.navigate_next,
                 ),
               ),

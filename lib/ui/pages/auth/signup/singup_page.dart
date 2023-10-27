@@ -5,6 +5,7 @@ import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_dimensions.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/hooks/validate_input.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/auth_responsitory.dart';
@@ -93,13 +94,15 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: BlocBuilder<SingUpCubit, SingUpState>(
           bloc: _cubit,
           builder: (context, state) {
-            Map<String, Widget> icons =
-                ValidateInput().checkValidateSingUp(state: state);
+            final Map<String, Widget> icons =
+                ValidateInput().checkValidateSingUp(
+              state: state,
+            );
+
             emailIcon = icons['emailIcon'];
             passwordIcon = icons['passwordIcon'];
             nameIcon = icons['nameIcon'];
@@ -116,9 +119,9 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Fashion(),
-                          const SubHeaderAuth(
-                            title: AppTexts.textSingUp,
-                            description: AppTexts.textCreateAccount,
+                          SubHeaderAuth(
+                            title: S.current.textSingUp,
+                            description: S.current.textCreateAccount,
                           ),
                           AppStyles.sizedBoxStyle(
                             height: AppDimensions.d_40,
@@ -130,6 +133,8 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                 child: Column(
                                   children: [
                                     AppNameTextField(
+                                      labelText: S.current.textName,
+                                      hintText: S.current.textNameLable,
                                       icon: nameIcon,
                                       onChanged: (text) {
                                         _cubit.changeName(
@@ -140,6 +145,8 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                     ),
                                     AppStyles.sizedBoxStyle(),
                                     AppEmailTextField(
+                                      labelText: S.current.textEmail,
+                                      hintText: S.current.textEmailLable,
                                       icon: emailIcon,
                                       onChanged: (text) {
                                         _cubit.changeEmail(
@@ -151,8 +158,10 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                     ),
                                     AppStyles.sizedBoxStyle(),
                                     AppPasswordField(
+                                      labelText: S.current.textPassword,
+                                      hintText: S.current.textPasswordLable,
                                       isShowOrHide: state.isHideOrShowPassword,
-                                      showOrHideFun:
+                                      handleShowOrHide:
                                           _cubit.onTabShowAndHidePassword,
                                       iconShowOrHide: state.isHideOrShowPassword
                                           ? const Icon(
@@ -172,6 +181,9 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                     ),
                                     AppStyles.sizedBoxStyle(),
                                     AppConfirmPasswordField(
+                                      labelText: S.current.textConfirmPassword,
+                                      hintText:
+                                          S.current.textConfirmPasswordLable,
                                       isShowOrHide:
                                           state.isHideOrShowConfirmPassword,
                                       showAndHideFun: _cubit
@@ -207,24 +219,19 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                               AppStyles.sizedBoxStyle(
                                 height: 15,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  if (!state.checkProxy) {
-                                    //nothing
-                                  } else if (_formKey.currentState!
-                                      .validate()) {
-                                    _cubit.singUp();
-                                  }
+                              AppButton(
+                                onTabButton: () {
+                                  _cubit.singUp(
+                                    _formKey.currentState!.validate(),
+                                  );
                                 },
-                                child: AppButton(
-                                  textButton: AppTexts.textSingUp,
-                                  textColor: AppColors.primaryColor,
-                                  backGroundColor: state.checkProxy
-                                      ? AppColors.secondaryColor
-                                      : AppColors.greyColor,
-                                  icon: null,
-                                  isHasBorder: false,
-                                ),
+                                textButton: AppTexts.textSingUp,
+                                textColor: AppColors.primaryColor,
+                                backGroundColor: state.checkProxy
+                                    ? AppColors.secondaryColor
+                                    : AppColors.greyColor,
+                                icon: null,
+                                isHasBorder: false,
                               ),
                             ],
                           ),

@@ -11,8 +11,8 @@ import 'package:newware_final_project/ui/pages/main/main_cubit.dart';
 import 'package:newware_final_project/ui/pages/main/widgets/bottomnavigation_item.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_page.dart';
 import 'package:newware_final_project/ui/pages/profile/profile_page.dart';
-class MainPage extends StatefulWidget {
 
+class MainPage extends StatefulWidget {
   const MainPage({
     super.key,
   });
@@ -47,20 +47,14 @@ class MainPageChildState extends StatefulWidget {
 
 class _MainPageChildStateState extends State<MainPageChildState> {
   var socket;
-  final tabs = [
-    const HomePage(),
-    const CartPage(),
-    const NotificationPage(),
-    const ProfilePage(),
-  ];
   late MainCubit _cubit;
 
   @override
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<MainCubit>(context);
-      socket = SocketIoConnect(mainCubit: _cubit, userId: widget.userId)
-          .connectAndListen();
+    socket = SocketIoConnect(mainCubit: _cubit, userId: widget.userId)
+        .connectAndListen();
   }
 
   @override
@@ -74,14 +68,19 @@ class _MainPageChildStateState extends State<MainPageChildState> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return Scaffold(
-          body: IndexedStack(
-            // index:state.selectedIndex,
-            children: [SafeArea(
-              child: tabs[state.selectedIndex],
-            )],
+          body: SafeArea(
+            child: IndexedStack(
+              index: state.selectedIndex,
+              children: const [
+                HomePage(),
+                CartPage(),
+                NotificationPage(),
+                ProfilePage(),
+              ],
+            ),
           ),
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25,vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(40),
@@ -97,7 +96,7 @@ class _MainPageChildStateState extends State<MainPageChildState> {
                 ),
               ],
             ),
-            height: 80,
+            height: 70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

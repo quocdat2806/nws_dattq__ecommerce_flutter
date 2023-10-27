@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
@@ -31,17 +30,15 @@ class _SearchCategoryState extends State<SearchCategory> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            AppImages.pathSearchImage,
-            width: 20,
-            height: 20,
+          AppStyles.iconSvgStyle(
+            pathImage: AppImages.pathSearchImage
           ),
           const SizedBox(width: 10,),
           Expanded(
             child: TextFormField(
               controller: searchTextController,
               onChanged: (value) {
-                Debouncer(milliseconds: 500).run(() {
+                UseDebouncer(milliseconds: 500).run(() {
                   widget.searchFun(value);
                 });
               },

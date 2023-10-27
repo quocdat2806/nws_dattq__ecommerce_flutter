@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/user_responsitory.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_navigator.dart';

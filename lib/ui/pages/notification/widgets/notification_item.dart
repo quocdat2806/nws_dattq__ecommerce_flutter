@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class NotificationItem extends StatelessWidget {
   final String? pathImageAvatar;
@@ -49,7 +50,7 @@ class NotificationItem extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Bạn vừa đặt thành công đơn hàng  $idNotification',
+                      '${S.of(context).textDescNotify}  $idNotification',
                     ),
                     AppStyles.sizedBoxStyle(height: 20),
                     Text(timeDiff!),

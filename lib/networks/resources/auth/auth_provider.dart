@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/models/entities/token/token_entity.dart';
 import 'package:newware_final_project/models/entities/user/user_entity.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +18,7 @@ class AuthProvider {
       "name": name,
       "email": email,
       "password": password,
-      "avatar": "https://api.lorem.space/image/face?w=640&h=480",
+      "avatar": AppImages.pathDefaultImage,
     };
     var endcodedUserInfo = jsonEncode(userInfo);
 
@@ -29,12 +30,12 @@ class AuthProvider {
         body: endcodedUserInfo,
         headers: ConfigHeaderRequestApi.requestHeaders,
       );
-      if (response.statusCode == HttpStatus.CREATED ||
+      if (response.statusCode == HttpStatus.created ||
           response.statusCode == 200 ||
           response.statusCode == 201) {
         final userEntity = UserEntity.fromJson(jsonDecode(response.body));
         return userEntity;
-      } else if (response.statusCode == HttpStatus.NOT_FOUND) {
+      } else if (response.statusCode == HttpStatus.notFound) {
         throw (Exception("Sing up failed"));
       } else {
         throw (Exception(''));
@@ -61,12 +62,12 @@ class AuthProvider {
         headers: ConfigHeaderRequestApi.requestHeaders,
         body: endcodedUserInfor,
       );
-      if (response.statusCode == HttpStatus.CREATED ||
+      if (response.statusCode == HttpStatus.created ||
           response.statusCode == 200 ||
           response.statusCode == 201) {
         final tokenEntity = TokenEntity.fromJson(jsonDecode(response.body));
         return tokenEntity;
-      } else if (response.statusCode == HttpStatus.NOT_FOUND) {
+      } else if (response.statusCode == HttpStatus.notFound) {
         throw (Exception("Can't find the user with id:"));
       } else {
         throw (Exception(''));

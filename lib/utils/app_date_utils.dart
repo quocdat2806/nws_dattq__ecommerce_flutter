@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:newware_final_project/common/app_texts.dart';
-
+import 'package:newware_final_project/generated/l10n.dart';
 extension StringExtension on String {
   String get formattedTime {
     DateTime time = DateTime.parse(this);
@@ -10,19 +9,17 @@ extension StringExtension on String {
     return formattedTime;
   }
 }
-
 class DateDifferent {
 String formatDuration(Duration duration) {
   if (duration.inHours < 1) {
-    return '${duration.inMinutes} ${AppTexts.textMinAgo}';
+    return '${duration.inMinutes} ${S.current.textMinAgo}';
   } else if (duration.inHours < 24) {
-    return '${duration.inHours} ${AppTexts.textHourAgo}';
+    return '${duration.inHours} ${S.current.textHourAgo}';
   } else {
-    return '${duration.inDays} ${AppTexts.textDayAgo}';
+    return '${duration.inDays} ${S.current.textDayAgo}';
   }
 }
-
-  String diffTime(String dateTime) {
+  String diffTime(String dateTime) { 
     DateTime now = DateTime.now();
     DateFormat(
       'HH:mm dd/MM/yyyy',

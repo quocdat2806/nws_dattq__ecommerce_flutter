@@ -3,6 +3,7 @@ import 'package:shimmer/shimmer.dart';
 
 class AppShimmer extends StatelessWidget {
   const AppShimmer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +27,7 @@ class AppShimmer extends StatelessWidget {
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -39,10 +40,9 @@ class AppShimmer extends StatelessWidget {
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       child: Container(
-
         margin: const EdgeInsets.symmetric(vertical: 16),
-        width: MediaQuery.of(context).size.width ,
-        height:  MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           color: Colors.grey,
           borderRadius: BorderRadius.circular(8),

@@ -4,12 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/product_responsitory.dart';
 import 'package:newware_final_project/repositories/user_responsitory.dart';
-import 'package:newware_final_project/ui/commons/show_error.dart';
-import 'package:newware_final_project/ui/commons/show_success.dart';
 import 'package:newware_final_project/ui/pages/cart/cart_cubit.dart';
 import 'package:newware_final_project/ui/pages/product_detail/product_detail_cubit.dart';
 import 'package:newware_final_project/ui/pages/product_detail/product_detail_navigator.dart';
@@ -19,7 +16,6 @@ import 'package:newware_final_project/ui/pages/product_detail/widgets/info_produ
 import 'package:newware_final_project/ui/pages/product_detail/widgets/size_color_product_detail.dart';
 import 'package:newware_final_project/ui/pages/product_detail/widgets/slider_image_product_detail.dart';
 import 'package:newware_final_project/ui/widget/loading/loading_status.dart';
-
 class ProductDetailPage extends StatefulWidget {
   static const router = 'productDetail';
   final int? productId;
@@ -54,7 +50,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
           int? userId = state.user!.id;
-
           return ProductPageChildState(
             productId: widget.productId!,
             userId: userId,
@@ -86,9 +81,9 @@ class _ProductPageChildStateState extends State<ProductPageChildState> {
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<ProductDetailCubit>(context);
-    cubit = BlocProvider.of<CartCubit>(context);
     _cubit.fetchProductDetail(widget.productId!);
-    cubit.fetchCart(widget.userId!).then((value) {
+    cubit = BlocProvider.of<CartCubit>(context);
+    cubit.fetchLengthCart(widget.userId!).then((value) {
       lengthCart = value;
     });
     _listSize = ['S', 'M', 'L', 'XL', 'XXL'];
@@ -111,19 +106,7 @@ class _ProductPageChildStateState extends State<ProductPageChildState> {
     return BlocBuilder<ProductDetailCubit, ProductDetailState>(
       bloc: _cubit,
       builder: (context, state) {
-        if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            SuccessAlert().showSuccessAlert(
-              context,
-              S.of(context).textAddToCartSuccess,
-            );
-          });
-        }
-        if (state.loadAddtoCartStatus == LoadStatus.failure) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            ErrorAlert().showError(context);
-          });
-        }
+        _cubit.handleShowSuccessAddToCart(context);
         return state.loadProductDetalStatus == LoadStatus.loading
             ? const LoadingStatus()
             : Scaffold(

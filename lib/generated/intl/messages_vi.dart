@@ -25,81 +25,102 @@ class MessageLookup extends MessageLookupByLibrary {
         "descOnbroadingPage": MessageLookupByLibrary.simpleMessage(
             "Đăng ảnh selfie của bạn để khiến mình đẹp hơn với ứng dụng này"),
         "textAddToCart":
-            MessageLookupByLibrary.simpleMessage("Thêm vào giỏ hàng"),
-        "textAddToCartFail":
-            MessageLookupByLibrary.simpleMessage("Bạn đã đặt hàng thất bại"),
+            MessageLookupByLibrary.simpleMessage("Thêm Vào Giỏ Hàng"),
+        "textAddToCartFail": MessageLookupByLibrary.simpleMessage(
+            "Đơn hàng của bạn đã thất bại"),
         "textAddToCartSuccess":
             MessageLookupByLibrary.simpleMessage("Bạn đã đặt hàng thành công"),
-        "textCart": MessageLookupByLibrary.simpleMessage("Giỏ hàng"),
+        "textAge": MessageLookupByLibrary.simpleMessage("Tuổi"),
+        "textCart": MessageLookupByLibrary.simpleMessage("Giỏ Hàng"),
         "textCartEmpty": MessageLookupByLibrary.simpleMessage(
-            "giỏ hàng của bạn đang trống vui lòng thêm giỏ hàng"),
+            "Giỏ hàng của bạn đang trống! Vui lòng thêm sản phẩm vào giỏ hàng"),
+        "textChangeLanguage":
+            MessageLookupByLibrary.simpleMessage("Thay Đổi Ngôn Ngữ"),
         "textCheckoutCart":
-            MessageLookupByLibrary.simpleMessage("Quá trình thanh toán"),
+            MessageLookupByLibrary.simpleMessage("Tiến Hành Thanh Toán"),
+        "textCheckoutCartSuccess": MessageLookupByLibrary.simpleMessage(
+            "Bạn đã thanh toán thành công"),
         "textConfirmPassword":
-            MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+            MessageLookupByLibrary.simpleMessage("Xác Nhận Mật Khẩu"),
+        "textConfirmPasswordLable":
+            MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu của bạn"),
         "textCouterInStock":
-            MessageLookupByLibrary.simpleMessage("Khả thi trong giỏ hàng"),
+            MessageLookupByLibrary.simpleMessage("Còn hàng trong kho"),
         "textCreateAccount":
             MessageLookupByLibrary.simpleMessage("Tạo tài khoản mới"),
+        "textDarkMood": MessageLookupByLibrary.simpleMessage("Chế Độ "),
         "textDayAgo": MessageLookupByLibrary.simpleMessage("ngày trước"),
-        "textDescription": MessageLookupByLibrary.simpleMessage("Mô tả"),
-        "textEmailLable": MessageLookupByLibrary.simpleMessage("Email"),
-        "textErrorConfirmPasswordLable": MessageLookupByLibrary.simpleMessage(
-            "Xác nhận Mật khẩu không được xác thực"),
-        "textErrorEmailLable":
-            MessageLookupByLibrary.simpleMessage("Email không đúng định dạng"),
-        "textErrorNameLable":
-            MessageLookupByLibrary.simpleMessage("Tên phải ít nhất 4 ký tự"),
-        "textErrorNotEqualConfirmPasswordLable":
+        "textDescNotify": MessageLookupByLibrary.simpleMessage(
+            "Bạn đã đặt hàng thành công đơn hàng"),
+        "textDescription": MessageLookupByLibrary.simpleMessage("Mô Tả"),
+        "textEmail": MessageLookupByLibrary.simpleMessage("Email"),
+        "textEmailLable": MessageLookupByLibrary.simpleMessage("Email của bạn"),
+        "textErrorConfirmPassword": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu xác nhận phải chứa ít nhất 4 ký tự"),
+        "textErrorEmail":
+            MessageLookupByLibrary.simpleMessage("Email không hợp lệ"),
+        "textErrorName": MessageLookupByLibrary.simpleMessage(
+            "Tên phải chứa ít nhất 4 ký tự"),
+        "textErrorNotEqualConfirmPassword":
             MessageLookupByLibrary.simpleMessage(
-                "Xác nhận mật khẩu không bằng mật khẩu"),
-        "textErrorPasswordLable": MessageLookupByLibrary.simpleMessage(
-            "Mật khẩu không được xác thực"),
-        "textHintConfirmPassword":
-            MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu của bạn"),
-        "textHintEmailLable":
-            MessageLookupByLibrary.simpleMessage("Email của bạn"),
-        "textHintNameLabel":
-            MessageLookupByLibrary.simpleMessage("Tên của bạn"),
-        "textHintPasswordLable":
-            MessageLookupByLibrary.simpleMessage("Mật khẩu của bạn"),
-        "textHome": MessageLookupByLibrary.simpleMessage("Trang chủ"),
+                "Mật khẩu xác nhận không trùng khớp với mật khẩu"),
+        "textErrorPassword": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu phải chứa ít nhất 4 ký tự"),
+        "textHelpCenter":
+            MessageLookupByLibrary.simpleMessage("Trung Tâm Trợ Giúp"),
+        "textHome": MessageLookupByLibrary.simpleMessage("Trang Chủ"),
         "textHourAgo": MessageLookupByLibrary.simpleMessage("giờ trước"),
-        "textInvalid": MessageLookupByLibrary.simpleMessage(
+        "textInvalidAccount": MessageLookupByLibrary.simpleMessage(
             "Tài khoản hoặc mật khẩu không đúng"),
         "textItem": MessageLookupByLibrary.simpleMessage("sản phẩm"),
-        "textLogin": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "textLanguage": MessageLookupByLibrary.simpleMessage("Ngôn Ngữ"),
+        "textLogOut": MessageLookupByLibrary.simpleMessage("Đăng Xuất"),
+        "textLogin": MessageLookupByLibrary.simpleMessage("Đăng Nhập"),
         "textLoginNote": MessageLookupByLibrary.simpleMessage(
-            "Vui lòng đăng nhập hoặc hát lên để tiếp tục ứng dụng của chúng tôi"),
+            "Vui lòng đăng nhập hoặc đăng ký để tiếp tục ứng dụng của chúng tôi"),
         "textLoginWithApple":
-            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng Apple"),
+            MessageLookupByLibrary.simpleMessage("Đăng Nhập Bằng Apple"),
         "textLoginWithFacebook":
-            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng Facebook"),
+            MessageLookupByLibrary.simpleMessage("Đăng Nhập Bằng Facebook"),
         "textLoginWithGoogle":
-            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng Google"),
+            MessageLookupByLibrary.simpleMessage("Đăng Nhập Bằng Google"),
         "textMinAgo": MessageLookupByLibrary.simpleMessage("phút trước"),
-        "textMyCart": MessageLookupByLibrary.simpleMessage("Giỏ hàng của tôi"),
-        "textNameLabel": MessageLookupByLibrary.simpleMessage("Tên"),
-        "textNotify": MessageLookupByLibrary.simpleMessage("Thông báo"),
-        "textPasswordLable": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "textMyCart": MessageLookupByLibrary.simpleMessage("Giỏ Hàng Của Tôi"),
+        "textName": MessageLookupByLibrary.simpleMessage("Tên"),
+        "textNameLable": MessageLookupByLibrary.simpleMessage("Tên của bạn"),
+        "textNotification": MessageLookupByLibrary.simpleMessage("Thông Báo"),
+        "textNotify": MessageLookupByLibrary.simpleMessage("Thông Báo"),
+        "textOkay": MessageLookupByLibrary.simpleMessage("Được"),
+        "textOn": MessageLookupByLibrary.simpleMessage("bật"),
+        "textOr": MessageLookupByLibrary.simpleMessage("hoặc"),
+        "textPassword": MessageLookupByLibrary.simpleMessage("Mật Khẩu"),
+        "textPasswordLable":
+            MessageLookupByLibrary.simpleMessage("Mật khẩu của bạn"),
         "textProduct": MessageLookupByLibrary.simpleMessage("sản phẩm"),
-        "textProfile": MessageLookupByLibrary.simpleMessage("Cá nhân"),
+        "textProfile": MessageLookupByLibrary.simpleMessage("Hồ Sơ"),
         "textProxy": MessageLookupByLibrary.simpleMessage(
-            "Bằng cách tạo một tài khoản, bạn phải đồng ý với chúng và điều kiện của chúng tôi"),
-        "textReview": MessageLookupByLibrary.simpleMessage("Đánh giá"),
-        "textSearch": MessageLookupByLibrary.simpleMessage("Tìm kiếm danh mục"),
-        "textSingUp": MessageLookupByLibrary.simpleMessage("Đăng kí"),
-        "textSize": MessageLookupByLibrary.simpleMessage("Kích cỡ"),
+            "Bằng cách tạo tài khoản, bạn đã đồng ý với điều khoản và điều kiện của chúng tôi"),
+        "textReview": MessageLookupByLibrary.simpleMessage("Đánh Giá"),
+        "textSave": MessageLookupByLibrary.simpleMessage("Lưu"),
+        "textSearch": MessageLookupByLibrary.simpleMessage("Tìm Kiếm Danh Mục"),
+        "textSearchPage": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
+        "textSearchProduct":
+            MessageLookupByLibrary.simpleMessage("Tìm kiếm sản phẩm"),
+        "textSetting": MessageLookupByLibrary.simpleMessage("Cài Đặt"),
+        "textSingUp": MessageLookupByLibrary.simpleMessage("Đăng Ký"),
+        "textSize": MessageLookupByLibrary.simpleMessage("Kích Cỡ"),
         "textStartShopping":
-            MessageLookupByLibrary.simpleMessage("Bắt đầu mua sắm"),
-        "textSuccessFully": MessageLookupByLibrary.simpleMessage("Thành công"),
+            MessageLookupByLibrary.simpleMessage("Bắt đầu Mua Sắm"),
+        "textSuccess": MessageLookupByLibrary.simpleMessage("Thành Công"),
+        "textSuccessFully": MessageLookupByLibrary.simpleMessage("Thành Công"),
         "textSuccessFullyDesc": MessageLookupByLibrary.simpleMessage(
-            "Bạn đã đăng ký thành công trong ứng dụng của chúng tôi và bắt đầu làm việc trong đó"),
-        "textTotal": MessageLookupByLibrary.simpleMessage("Tổng"),
-        "textTotalPrice": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
+            "Bạn đã đăng ký thành công trong ứng dụng của chúng tôi và có thể bắt đầu sử dụng nó"),
+        "textTotal": MessageLookupByLibrary.simpleMessage("Tổng Cộng"),
+        "textTotalPrice": MessageLookupByLibrary.simpleMessage("Tổng Giá"),
+        "textUploadImage": MessageLookupByLibrary.simpleMessage("Tải Hình Lên"),
         "textValidateEmptyString":
             MessageLookupByLibrary.simpleMessage("Vui lòng nhập trường này"),
-        "textWelcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "textWelcome": MessageLookupByLibrary.simpleMessage("Chào mừng"),
         "titleOnbroadingPage_1": MessageLookupByLibrary.simpleMessage(
             "Giảm giá 20%\nSản phẩm mới đến"),
         "titleOnbroadingPage_2": MessageLookupByLibrary.simpleMessage(

@@ -81,14 +81,17 @@ class BottomNavigationItem extends StatelessWidget {
                     ),
                     child: Stack(
                       children: [
-                        SvgPicture.asset(
-                          pathIcon!,
-                          width: 20,
-                          height: 20,
-                          // ignore: deprecated_member_use
-                          color: state.selectedIndex == index
-                              ? Colors.white
-                              : Colors.black,
+                        Container(
+                          padding: const EdgeInsets.all(3),
+                          child: SvgPicture.asset(
+                            pathIcon!,
+                            width: 20,
+                            height: 20,
+                            // ignore: deprecated_member_use
+                            color: state.selectedIndex == index
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
                       ],
                     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class UploadImage extends StatelessWidget {
   final String? pathImage;
@@ -10,8 +10,7 @@ class UploadImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String defaultAvatar = 'https://t4.ftcdn.net/jpg/05/49/98/39/360_F'
-        '_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg';
+    String defaultAvatar = AppImages.pathDefaultImage;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -19,6 +18,7 @@ class UploadImage extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
+              onError: (exception, stackTrace) =>const CircularProgressIndicator() ,
               fit: BoxFit.cover,
               image: NetworkImage(
                 pathImage ?? defaultAvatar,
@@ -51,10 +51,10 @@ class UploadImage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
-                  child: SvgPicture.asset(
-                    'assets/icons/pen.svg',
-                    width: 16,
-                    height: 16,
+                  child: AppStyles.iconSvgStyle(
+                    pathImage: AppImages.pathEditIcon,
+                    width: 16.0,
+                    height: 16.0,
                   ),
                 ),
               ),
@@ -62,7 +62,7 @@ class UploadImage extends StatelessWidget {
           ),
         ),
         Text(
-          'Upload Image',
+          S.of(context).textUploadImage,
           style: AppStyles.textStyle(
             fontFamily: 'ExtraBold',
             fontWeight: FontWeight.w700,

@@ -23,7 +23,7 @@ class LanguageCubit extends Cubit<LanguageState> {
     settingCubit.changeEnLanguage();
   }
   void saveSetting({language='en'}){
-    settingCubit.saveSetting();
+    settingCubit.saveLanguage();
     SharedPreferencesHelper.setDefaultLanguage(language:language );
   }
 

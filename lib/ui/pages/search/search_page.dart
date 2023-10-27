@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class SearchPage extends StatefulWidget {
   final String? nameSearch;
@@ -27,26 +28,19 @@ class _SearchPageState extends State<SearchPage> {
         elevation: 0,
         backgroundColor: const Color(0xFFe35c49),
         title: Text(
-          'Search',
+          S.current.textSearchPage,
           style: AppStyles.textStyle(
             fontSize: 18,
             color: AppColors.secondaryColor,
           ),
         ),
         centerTitle: true,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(
-              context,
-              searchEdittingController.text,
-            );
-          },
-          child: const Icon(
-            Icons.navigate_before_outlined,
-            size: 30,
-            color: AppColors.greyColor,
-          ),
-        ),
+        leading: iconBack(onTabBackIcon: () {
+          Navigator.pop(
+            context,
+            searchEdittingController.text,
+          );
+        }),
         actions: [
           AppStyles.iconSvgStyle(
             pathImage: AppImages.pathQuestionImage,
@@ -87,21 +81,16 @@ class _SearchPageState extends State<SearchPage> {
                             fontFamily: 'Regular',
                             fontSize: 17,
                           ),
-                          hintText: 'Search Product',
+                          hintText: S.current.textSearchProduct,
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(
-                          context,
-                          searchEdittingController.text,
-                        );
-                      },
-                      child: AppStyles.iconSvgStyle(
-                        pathImage: AppImages.pathSearchImage,
-                      ),
-                    ),
+                    iconSearch(onTabSearchIcon: () {
+                      Navigator.pop(
+                        context,
+                        searchEdittingController.text,
+                      );
+                    }),
                     const SizedBox(width: 10),
                   ],
                 ),
@@ -109,6 +98,24 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+  Widget iconBack({Function()? onTabBackIcon}) {
+    return InkWell(
+      onTap: onTabBackIcon,
+      child: const Icon(
+        Icons.navigate_before_outlined,
+        size: 30,
+        color: AppColors.greyColor,
+      ),
+    );
+  }
+  Widget iconSearch({Function()? onTabSearchIcon}) {
+    return InkWell(
+      onTap: onTabSearchIcon,
+      child: AppStyles.iconSvgStyle(
+        pathImage: AppImages.pathSearchImage,
       ),
     );
   }

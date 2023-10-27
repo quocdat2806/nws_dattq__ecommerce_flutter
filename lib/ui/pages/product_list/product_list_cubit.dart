@@ -85,9 +85,9 @@ class ProductListCubit extends Cubit<ProductListState> {
     try {
       emit(
         state.copyWith(
-            listFilterProduct: state.listProduct,
-            loadMoreStatus: LoadStatus.loadingMore,
-            offset: 0,
+          listFilterProduct: state.listProduct,
+          loadMoreStatus: LoadStatus.loadingMore,
+          offset: 0,
         ),
       );
     } catch (error) {
@@ -101,7 +101,7 @@ class ProductListCubit extends Cubit<ProductListState> {
 
   void openSearchPage() {
     navigator.openSearchPage(
-      searchFunc: searchProduct,
+      handleSearch: searchProduct,
       nameSearch: state.nameSearchProduct,
     );
   }
@@ -110,7 +110,7 @@ class ProductListCubit extends Cubit<ProductListState> {
     navigator.pop();
   }
 
-  void openProductDetailPage({productId}) {
+  void openProductDetailPage(int productId) {
     navigator.openProductDetailPage(productId);
   }
 

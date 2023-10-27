@@ -1,9 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/entities/cart/cart_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/user_responsitory.dart';
 import 'package:newware_final_project/socket/socket_io.dart';
+import 'package:newware_final_project/ui/commons/show_success.dart';
 
 part 'cart_state.dart';
 
@@ -14,24 +17,41 @@ class CartCubit extends Cubit<CartState> {
     required this.userRepo,
   }) : super(const CartState());
 
-  Future<int> fetchCart(int userId) async {
+
+  handleCheckOutCartSuccess(BuildContext context){
+    if (state.updateCartStatus == LoadStatus.successCheckout) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        SuccessAlert().showSuccessAlert(
+          context,
+          S.current.textCheckoutCartSuccess,
+        );
+        handleDeleteUpdateCartStatus();
+      });
+    }
+  }
+  Future<int> fetchLengthCart(int userId) async {
     emit(
-      state.copyWith(fetchCartStatus: LoadStatus.loading),
+      state.copyWith(
+        fetchCartStatus: LoadStatus.loading,
+        updateCartStatus: LoadStatus.loading,
+      ),
     );
     try {
       final listCartEntity = await userRepo.getCart(userId);
 
       if (listCartEntity != null) {
-        Future.delayed(const Duration(seconds: 3),(){
-          emit(
-            state.copyWith(
-              fetchCartStatus: LoadStatus.success,
-              listCartEntity: listCartEntity,
-              updateCartStatus: LoadStatus.success,
-            ),
-          );
-        });
-
+      await  Future.delayed(
+          const Duration(seconds: 1),
+          () {
+            emit(
+              state.copyWith(
+                fetchCartStatus: LoadStatus.success,
+                listCartEntity: listCartEntity,
+                updateCartStatus: LoadStatus.success,
+              ),
+            );
+          },
+        );
         return state.listCartEntity.length;
       } else {
         emit(
@@ -61,7 +81,13 @@ class CartCubit extends Cubit<CartState> {
       rethrow;
     }
   }
-
+  void handleDeleteUpdateCartStatus(){
+    emit(
+      state.copyWith(
+        updateCartStatus: LoadStatus.loading,
+      ),
+    );
+  }
   void handleCheckout() async {
     if (state.listCartEntity.isEmpty) {
       return;

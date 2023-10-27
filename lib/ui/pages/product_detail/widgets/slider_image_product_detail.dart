@@ -63,19 +63,20 @@ class SliderImageProductDetail extends StatelessWidget {
                       height: 30.0,
                     ),
                   ),
-                   lengthCart==0?const SizedBox.shrink():
-                   Positioned(
-                    right: 10,
-                    top: 4,
-                    child: Text(
-                      '$lengthCart',
-                      style: const TextStyle(
-                        color: Colors.red,
-                        fontFamily: 'Bold',
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
+                  lengthCart == 0
+                      ? const SizedBox.shrink()
+                      : Positioned(
+                          right: 10,
+                          top: 4,
+                          child: Text(
+                            '$lengthCart',
+                            style: const TextStyle(
+                              color: Colors.red,
+                              fontFamily: 'Bold',
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),
@@ -137,7 +138,7 @@ class SliderImageProductDetail extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

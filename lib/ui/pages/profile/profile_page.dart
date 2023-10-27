@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newware_final_project/bloc/app_cubit.dart';
-import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/ui/commons/show_confirm.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/ui/pages/profile/profile_cubit.dart';
 import 'package:newware_final_project/ui/pages/profile/profile_navigator.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/form_infomation.dart';
+import 'package:newware_final_project/ui/pages/profile/widgets/logout.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/setting.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/upload_image.dart';
 
@@ -57,7 +56,12 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
         child: BlocBuilder<AppCubit, AppState>(
           builder: (context, state) {
             return Container(
-              padding: const EdgeInsets.all(25),
+              padding: const EdgeInsets.only(
+                left: 25,
+                right: 25,
+                top: 25,
+                bottom: 0,
+              ),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -65,22 +69,22 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
                       pathImage: state.user?.avatar,
                     ),
                     Information(
-                      labelText: 'Name',
+                      labelText: S.of(context).textName,
                       textHint: state.user?.name,
                     ),
-                    const Information(
-                      labelText: 'Age',
+                     Information(
+                      labelText: S.of(context).textAge,
                       textHint: '22',
                     ),
                     Information(
-                      labelText: 'Email',
+                      labelText: S.of(context).textEmail,
                       textHint: state.user?.email,
                     ),
                     AppStyles.sizedBoxStyle(height: 25),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Setting',
+                        S.of(context).textSetting,
                         style: AppStyles.textStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -89,42 +93,9 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
                       ),
                     ),
                     AppStyles.sizedBoxStyle(height: 15),
-                    Setting(onTabLanguage: _cubit.openLanguagePage),
+                    Setting(onTab: _cubit.openLanguagePage),
                     AppStyles.sizedBoxStyle(),
-                    InkWell(
-                      onTap: () {
-                        ConfirmAlert().showLogoutAlert(context, _cubit.singOut);
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: AppColors.secondaryColor,
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/ic_logout.svg',
-                              width: 20,
-                              height: 20,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              'Log Out',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    Logout(onTabLogout: _cubit.singOut),
                   ],
                 ),
               ),
@@ -134,6 +105,4 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
       ),
     );
   }
-
-
 }

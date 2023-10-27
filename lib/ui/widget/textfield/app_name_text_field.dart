@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 
 class AppNameTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -15,8 +15,8 @@ class AppNameTextField extends StatelessWidget {
     required this.textEditingController,
     this.onChanged,
     this.icon,
-    this.labelText = AppTexts.textNameLabel,
-    this.hintText =  AppTexts.textHintNameLabel,
+    this.labelText,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -52,10 +52,10 @@ class AppNameTextField extends StatelessWidget {
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return AppTexts.textValidateEmptyString;
+                        return S.current.textValidateEmptyString;
                       }
                       if (value.length < 4) {
-                        return AppTexts.textErrorNameLable;
+                        return S.current.textErrorName;
                       }
                       return null;
                     },

@@ -11,7 +11,7 @@ class CategoryProvider {
           ApiCategory.getAllCategory,
         ),
       );
-      if (response.statusCode == HttpStatus.CREATED ||
+      if (response.statusCode == HttpStatus.created ||
           response.statusCode == 200 ||
           response.statusCode == 201) {
         Iterable iter = jsonDecode(response.body);
@@ -45,11 +45,11 @@ class CategoryProvider {
           ApiCategory.getLengthProductsInCategory(id),
         ),
       );
-      if (response.statusCode == HttpStatus.CREATED ||
+      if (response.statusCode == HttpStatus.created ||
           response.statusCode == 200 ||
           response.statusCode == 201) {
         return jsonDecode(response.body).length;
-      } else if (response.statusCode == HttpStatus.NOT_FOUND) {
+      } else if (response.statusCode == HttpStatus.notFound) {
         throw (Exception("err"),);
       } else {
         throw (Exception(''),);

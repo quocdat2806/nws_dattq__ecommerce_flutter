@@ -5,7 +5,6 @@ class Utils {
     final RegExp regex = RegExp(emailRegex);
     return regex.hasMatch(input);
   }
-
   static bool isPassword(String input) {
     return input.length > 4;
   }

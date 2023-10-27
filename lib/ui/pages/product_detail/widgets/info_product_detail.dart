@@ -10,12 +10,12 @@ class InfoProductDetail extends StatelessWidget {
   final state;
   final cubit;
 
-
-  const InfoProductDetail({super.key,  required this.state, required this.cubit});
+  const InfoProductDetail(
+      {super.key, required this.state, required this.cubit});
 
   @override
   Widget build(BuildContext context) {
-    return   Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
@@ -42,19 +42,24 @@ class InfoProductDetail extends StatelessWidget {
                 maxLines: 1,
               ),
               AppStyles.sizedBoxStyle(),
-               Row(
+              Row(
                 children: [
-                  ...List.generate(5, (index) =>
-                  const Image(
-                    width: 16,
-                    height: 16,
-                    image: AssetImage(
-                      AppImages.pathStarImage,
+                  ...List.generate(
+                    5,
+                    (index) => const Image(
+                      width: 16,
+                      height: 16,
+                      image: AssetImage(
+                        AppImages.pathStarImage,
+                      ),
                     ),
                   ),
+                  const SizedBox(
+                    width: 6,
                   ),
-                  const SizedBox(width: 6,),
-                   Text('(320 ${S.of(context).textReview})'),
+                  Text(
+                    '(320 ${S.of(context).textReview})',
+                  ),
                 ],
               ),
             ],
@@ -68,7 +73,7 @@ class InfoProductDetail extends StatelessWidget {
                 vertical: 10,
               ),
               decoration: BoxDecoration(
-                color:const Color(0xFFEEEEEE),
+                color: const Color(0xFFEEEEEE),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Row(
@@ -129,7 +134,7 @@ class InfoProductDetail extends StatelessWidget {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }

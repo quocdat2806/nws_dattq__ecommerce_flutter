@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/database/shared_preferences_helper.dart';
 import 'package:newware_final_project/ui/pages/onboarding/onboarding_navigator.dart';
-
 part 'onboarding_state.dart';
-
 class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingNavigator navigator;
 

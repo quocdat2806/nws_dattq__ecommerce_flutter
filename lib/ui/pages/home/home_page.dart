@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
+import 'package:newware_final_project/repositories/category_responsitory.dart';
 import 'package:newware_final_project/ui/pages/home/home_cubit.dart';
+import 'package:newware_final_project/ui/pages/home/home_navigator.dart';
 import 'package:newware_final_project/ui/pages/home/home_state.dart';
 import 'package:newware_final_project/ui/pages/home/widgets/category_item.dart';
 import 'package:newware_final_project/ui/pages/home/widgets/search_category.dart';
@@ -32,7 +34,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-  return  const HomePageChildState();
+  return  BlocProvider<HomeCubit>(
+      create: (context) {
+        final cateRepo =
+        RepositoryProvider.of<CategoryResponsitory>(context);
+        final navigator = HomeNavigator(context: context);
+        return HomeCubit(navigator: navigator, cateRepo: cateRepo);
+      },
+      child:  const HomePageChildState(),
+    );
   }
 }
 
@@ -50,6 +60,7 @@ class _HomePageChildStateState extends State<HomePageChildState> {
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<HomeCubit>(context);
+    _cubit.fetchCategory();
   }
 
   @override
@@ -69,9 +80,9 @@ class _HomePageChildStateState extends State<HomePageChildState> {
                 body: SafeArea(
                   child: Container(
                     padding: const EdgeInsets.only(
-                      top: 10,
-                      right: 10,
-                      left: 10,
+                      top: 20,
+                      right: 20,
+                      left: 20,
                       bottom: 0,
                     ),
                     child: Column(
@@ -102,23 +113,21 @@ class _HomePageChildStateState extends State<HomePageChildState> {
                             ),
                             itemCount: listCategoryLength,
                             itemBuilder: (BuildContext ctx, index) {
-                              return GestureDetector(
-                                onTap: () {
+                              return CategoryItem(
+                                onTab: (){
                                   _cubit.gotoProductListPage(
                                     categoryName:
-                                        state.listFilterCategory[index].name!,
+                                    state.listFilterCategory[index].name!,
                                     categoryId:
-                                        state.listFilterCategory[index].id!,
+                                    state.listFilterCategory[index].id!,
                                   );
                                 },
-                                child: CategoryItem(
-                                  pathImage:
-                                      state.listFilterCategory[index].image ??
-                                          AppImages.pathErrorImage,
-                                  name: state.listFilterCategory[index].name!,
-                                  totalProduct: state
-                                      .listFilterCategory[index].totalProduct!,
-                                ),
+                                pathImage:
+                                    state.listFilterCategory[index].image ??
+                                        AppImages.pathErrorImage,
+                                name: state.listFilterCategory[index].name!,
+                                totalProduct: state
+                                    .listFilterCategory[index].totalProduct!,
                               );
                             },
                           ),

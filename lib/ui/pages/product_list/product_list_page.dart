@@ -9,7 +9,6 @@ import 'package:newware_final_project/ui/pages/product_list/product_list_navigat
 import 'package:newware_final_project/ui/pages/product_list/widgets/product_item.dart';
 import 'package:newware_final_project/ui/widget/header_action/header_action.dart';
 import 'package:newware_final_project/ui/widget/shimmer/app_shimmer.dart';
-
 class ProductListPage extends StatefulWidget {
   static const router = 'productList';
   final int? categoryId;
@@ -130,23 +129,9 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
                             ),
                             itemCount: state.listFilterProduct.length,
                             itemBuilder: (BuildContext ctx, index) {
-                              return InkWell(
-                                onTap: () {
-                                  _cubit.openProductDetailPage(
-                                    productId:
-                                        state.listFilterProduct[index].id ?? 0,
-                                  );
-                                },
-                                child: ProductItem(
-                                  pathImage:
-                                      state.listFilterProduct[index].images![0],
-                                  title: state.listFilterProduct[index].title ??
-                                      '',
-                                  description: state
-                                      .listFilterProduct[index].description!,
-                                  price:
-                                      state.listFilterProduct[index].price ?? 0,
-                                ),
+                              return ProductItem(
+                                onTabItem: _cubit.openProductDetailPage,
+                                productEntity: state.listFilterProduct[index],
                               );
                             },
                           ),

@@ -144,7 +144,13 @@ class SingUpCubit extends Cubit<SingUpState> {
     );
   }
 
-  void singUp() async {
+  void singUp(bool isValidate) async {
+    if(!state.checkProxy){
+      return;
+    }
+    if(!isValidate){
+      return;
+    }
     String email = state.email ?? '';
     String password = state.password ?? '';
     String name = state.name ?? '';

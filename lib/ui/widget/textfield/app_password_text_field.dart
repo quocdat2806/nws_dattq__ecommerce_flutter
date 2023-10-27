@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/utils/utils.dart';
 
 class AppPasswordField extends StatelessWidget {
@@ -12,18 +12,17 @@ class AppPasswordField extends StatelessWidget {
   final Widget? icon;
   final Widget? iconShowOrHide;
   final bool isShowOrHide;
-  final Function()? showOrHideFun;
-
+  final Function()? handleShowOrHide;
   const AppPasswordField({
     Key? key,
     required this.textEditingController,
     this.onChanged,
     this.icon,
-    this.labelText = AppTexts.textPasswordLable,
+    this.labelText ,
     this.iconShowOrHide,
     this.isShowOrHide = false,
-    this.showOrHideFun,
-    this.hintText = AppTexts.textHintPasswordLable,
+    this.handleShowOrHide,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -64,10 +63,10 @@ class AppPasswordField extends StatelessWidget {
                     controller: textEditingController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return AppTexts.textValidateEmptyString;
+                        return S.current.textValidateEmptyString;
                       }
                       if (!Utils.isPassword(value)) {
-                        return AppTexts.textErrorPasswordLable;
+                        return S.current.textErrorPassword;
                       }
                       return null;
                     },
@@ -81,12 +80,10 @@ class AppPasswordField extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: showOrHideFun,
+                  onTap: handleShowOrHide,
                   child: iconShowOrHide ?? const SizedBox.shrink(),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10),
                 icon ?? const SizedBox.shrink(),
               ],
             ),

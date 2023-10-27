@@ -5,7 +5,6 @@ import 'package:newware_final_project/ui/pages/auth/signin/singin_page.dart';
 import 'package:newware_final_project/ui/pages/auth/signup/singup_page.dart';
 import 'package:newware_final_project/ui/pages/cart/cart_page.dart';
 import 'package:newware_final_project/ui/pages/home/home_page.dart';
-import 'package:newware_final_project/ui/pages/language/language_cubit.dart';
 import 'package:newware_final_project/ui/pages/language/language_page.dart';
 import 'package:newware_final_project/ui/pages/main/main_page.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_page.dart';
@@ -16,7 +15,6 @@ import 'package:newware_final_project/ui/pages/profile/profile_page.dart';
 import 'package:newware_final_project/ui/pages/search/search_page.dart';
 import 'package:newware_final_project/ui/pages/splash/splash_page.dart';
 import 'package:newware_final_project/ui/pages/success/success_page.dart';
-
 class AppRouter {
   AppRouter._();
 
@@ -95,14 +93,6 @@ class AppRouter {
         );
       },
     ),
-
-    // GoRoute(
-    //   name: main,
-    //   parentNavigatorKey: rootKey,
-    //   path: "/$main",
-    //   builder: (context, state) => const MainPage(),
-    // ),
-
     GoRoute(
       parentNavigatorKey: rootKey,
       name: onBoarding,
@@ -115,11 +105,6 @@ class AppRouter {
       path: "/$auth",
       builder: (context, state) => const AuthPage(),
     ),
-    // GoRoute(
-    //   name: notify,
-    //   path: "/$notify",
-    //   builder: (context, state) => const NotificationPage(),
-    // ),
     GoRoute(
       parentNavigatorKey: rootKey,
       name: signIn,
@@ -138,19 +123,6 @@ class AppRouter {
       path: "/$success",
       builder: (context, state) => const SuccessPage(),
     ),
-    // GoRoute(
-    //   name: main,
-    //   path: "/$main",
-    //   builder: (context, state) {
-    //     return const MainPage();
-    //   },
-    // ),
-    // GoRoute(
-    //   name: home,
-    //   path: "/$home",
-    //   builder: (context, state) => const HomePage(),
-    // ),
-
     GoRoute(
       parentNavigatorKey: rootKey,
       name: search,
@@ -162,16 +134,6 @@ class AppRouter {
         );
       },
     ),
-    // GoRoute(
-    //   name: cart,
-    //   path: "/$cart",
-    //   builder: (context, state) => const CartPage(),
-    // ),
-    // GoRoute(
-    //   name: profile,
-    //   path: "/$profile",
-    //   builder: (context, state) => const ProfilePage(),
-    // ),
     GoRoute(
       parentNavigatorKey: rootKey,
       name: productDetail,

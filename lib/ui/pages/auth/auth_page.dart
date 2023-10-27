@@ -27,32 +27,24 @@ class AuthPage extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.all(10),
-              child: InkWell(
-                onTap: () {
-                  authNavigator.openSingInPage();
-                },
-                child:  AppButton(
-                  textButton:  S.of(context).textLogin,
-                  backGroundColor: AppColors.primaryColor,
-                  textColor: AppColors.secondaryColor,
-                  icon: null,
-                  isHasBorder: false,
-                ),
+              child: AppButton(
+                onTabButton: authNavigator.openSingInPage,
+                textButton:  S.of(context).textLogin,
+                backGroundColor: AppColors.primaryColor,
+                textColor: AppColors.secondaryColor,
+                icon: null,
+                isHasBorder: false,
               ),
             ),
             Container(
               margin: const EdgeInsets.all(10),
-              child: InkWell(
-                onTap: () {
-                  authNavigator.openSingUpPage();
-                },
-                child:  AppButton(
-                  textButton: S.of(context).textSingUp,
-                  backGroundColor: Colors.transparent,
-                  textColor: AppColors.primaryColor,
-                  icon: null,
-                  isHasBorder: true,
-                ),
+              child: AppButton(
+                onTabButton: authNavigator.openSingUpPage,
+                textButton: S.of(context).textSingUp,
+                backGroundColor: Colors.transparent,
+                textColor: AppColors.primaryColor,
+                icon: null,
+                isHasBorder: true,
               ),
             ),
           ],

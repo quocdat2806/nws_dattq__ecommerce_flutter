@@ -26,14 +26,14 @@ class SplashCubit extends Cubit<SplashState> {
     if (tokenEntity == null) {
       if (await SharedPreferencesHelper.isOnboardCompleted()) {
         Future.delayed(
-          const Duration(seconds: 3),
+          const Duration(seconds: 2),
           () {
             navigator.openAuthPage();
           },
         );
       } else {
         Future.delayed(
-          const Duration(seconds: 3),
+          const Duration(seconds: 2),
           () {
             navigator.openOnboardingPage();
           },
@@ -49,14 +49,14 @@ class SplashCubit extends Cubit<SplashState> {
         } else {
           if (await SharedPreferencesHelper.isOnboardCompleted()) {
             Future.delayed(
-              const Duration(seconds: 3),
+              const Duration(seconds: 2),
               () {
                 navigator.openAuthPage();
               },
             );
           } else {
             Future.delayed(
-              const Duration(seconds: 3),
+              const Duration(seconds: 2),
               () {
                 navigator.openOnboardingPage();
               },

@@ -6,7 +6,6 @@ import 'package:newware_final_project/common/app_styles.dart';
 
 class CartItem extends StatelessWidget {
   final state;
-
   final int? index;
   final cubit;
 
@@ -16,7 +15,7 @@ class CartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -55,7 +54,7 @@ class CartItem extends StatelessWidget {
               children: [
                 const SizedBox(height: 6),
                 Text(
-                  state.listCartEntity[index].productEntity!.title!,
+                  state.listCartEntity[index].productEntity!?.title??'',
                   style: AppStyles.textStyle(
                     fontFamily: 'Bold',
                     fontWeight: FontWeight.w500,
@@ -64,7 +63,7 @@ class CartItem extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Text(
-                  state.listCartEntity[index].productEntity!.title ??
+                  state.listCartEntity[index].productEntity!?.description ??
                       'Vlado Odelle',
                   style: AppStyles.textStyle(
                     fontSize: 14,

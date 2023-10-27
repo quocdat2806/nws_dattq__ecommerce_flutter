@@ -6,16 +6,11 @@ import 'package:newware_final_project/repositories/auth_responsitory.dart';
 import 'package:newware_final_project/repositories/category_responsitory.dart';
 import 'package:newware_final_project/repositories/product_responsitory.dart';
 import 'package:newware_final_project/repositories/user_responsitory.dart';
-import 'package:newware_final_project/ui/pages/cart/cart_cubit.dart';
-import 'package:newware_final_project/ui/pages/home/home_cubit.dart';
-import 'package:newware_final_project/ui/pages/home/home_navigator.dart';
 import 'bloc/setting/app_setting_cubit.dart';
 import 'generated/l10n.dart';
 import 'router/router_config.dart';
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -25,7 +20,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -58,36 +52,6 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<AppSettingCubit>(create: (context) {
             return AppSettingCubit();
           }),
-          BlocProvider<HomeCubit>(
-            create: (context) {
-              final cateRepo =
-                  RepositoryProvider.of<CategoryResponsitory>(context);
-              final navigator = HomeNavigator(context: context);
-
-              return HomeCubit(navigator: navigator, cateRepo: cateRepo)
-                ..fetchCategory();
-            },
-          ),
-          // BlocProvider<CartCubit>(
-          //   create: (context) {
-          //     final userRepo =
-          //     RepositoryProvider.of<UserResponsitory>(context);
-          //     final navigator = HomeNavigator(context: context);
-          //
-          //     return CartCubit( userRepo: userRepo)
-          //       ..fetchCart();
-          //   },
-          // ),
-          BlocProvider<HomeCubit>(
-            create: (context) {
-              final cateRepo =
-              RepositoryProvider.of<CategoryResponsitory>(context);
-              final navigator = HomeNavigator(context: context);
-
-              return HomeCubit(navigator: navigator, cateRepo: cateRepo)
-                ..fetchCategory();
-            },
-          ),
         ],
         child: const MyAppChildPageState(),
       ),
@@ -115,7 +79,8 @@ class _MyAppChildPageStateState extends State<MyAppChildPageState> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppSettingCubit, AppSettingState>(
-      buildWhen: (previous, current) => previous.isSave != current.isSave,
+      buildWhen: (previous, current) =>
+          previous.isSaveLanguage != current.isSaveLanguage,
       builder: (context, state) {
         return GestureDetector(
           onTap: () {

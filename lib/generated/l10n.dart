@@ -90,26 +90,6 @@ class S {
     );
   }
 
-  /// `Welcome`
-  String get textWelcome {
-    return Intl.message(
-      'Welcome',
-      name: 'textWelcome',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please login or sing up to continue our app`
-  String get textLoginNote {
-    return Intl.message(
-      'Please login or sing up to continue our app',
-      name: 'textLoginNote',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Sing Up`
   String get textSingUp {
     return Intl.message(
@@ -130,41 +110,71 @@ class S {
     );
   }
 
-  /// `Create an new account`
-  String get textCreateAccount {
+  /// `Welcome`
+  String get textWelcome {
     return Intl.message(
-      'Create an new account',
-      name: 'textCreateAccount',
+      'Welcome',
+      name: 'textWelcome',
       desc: '',
       args: [],
     );
   }
 
-  /// `By create an account you have to agree with our them & condication`
-  String get textProxy {
+  /// `Please login or sing up to continue our app`
+  String get textLoginNote {
     return Intl.message(
-      'By create an account you have to agree with our them & condication',
-      name: 'textProxy',
+      'Please login or sing up to continue our app',
+      name: 'textLoginNote',
       desc: '',
       args: [],
     );
   }
 
-  /// `Successfully`
-  String get textSuccessFully {
+  /// `Email`
+  String get textEmail {
     return Intl.message(
-      'Successfully',
-      name: 'textSuccessFully',
+      'Email',
+      name: 'textEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `You have successfully registered in our app and start working in it`
-  String get textSuccessFullyDesc {
+  /// `Password`
+  String get textPassword {
     return Intl.message(
-      'You have successfully registered in our app and start working in it',
-      name: 'textSuccessFullyDesc',
+      'Password',
+      name: 'textPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your email`
+  String get textEmailLable {
+    return Intl.message(
+      'Your email',
+      name: 'textEmailLable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password`
+  String get textPasswordLable {
+    return Intl.message(
+      'Your password',
+      name: 'textPasswordLable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or`
+  String get textOr {
+    return Intl.message(
+      'or',
+      name: 'textOr',
       desc: '',
       args: [],
     );
@@ -200,141 +210,31 @@ class S {
     );
   }
 
-  /// `Account or password is incorrect`
-  String get textInvalid {
+  /// `Create an new account`
+  String get textCreateAccount {
     return Intl.message(
-      'Account or password is incorrect',
-      name: 'textInvalid',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Start Shopping`
-  String get textStartShopping {
-    return Intl.message(
-      'Start Shopping',
-      name: 'textStartShopping',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your email`
-  String get textHintEmailLable {
-    return Intl.message(
-      'Your email',
-      name: 'textHintEmailLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email`
-  String get textEmailLable {
-    return Intl.message(
-      'Email',
-      name: 'textEmailLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password`
-  String get textPasswordLable {
-    return Intl.message(
-      'Password',
-      name: 'textPasswordLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your password`
-  String get textHintPasswordLable {
-    return Intl.message(
-      'Your password',
-      name: 'textHintPasswordLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please enter this field`
-  String get textValidateEmptyString {
-    return Intl.message(
-      'Please enter this field',
-      name: 'textValidateEmptyString',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password inValidate`
-  String get textErrorPasswordLable {
-    return Intl.message(
-      'Password inValidate',
-      name: 'textErrorPasswordLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email inValidate`
-  String get textErrorEmailLable {
-    return Intl.message(
-      'Email inValidate',
-      name: 'textErrorEmailLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Confirm Password inValidate`
-  String get textErrorConfirmPasswordLable {
-    return Intl.message(
-      'Confirm Password inValidate',
-      name: 'textErrorConfirmPasswordLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Confirm Password not equal password`
-  String get textErrorNotEqualConfirmPasswordLable {
-    return Intl.message(
-      'Confirm Password not equal password',
-      name: 'textErrorNotEqualConfirmPasswordLable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Name must least 4 characters`
-  String get textErrorNameLable {
-    return Intl.message(
-      'Name must least 4 characters',
-      name: 'textErrorNameLable',
+      'Create an new account',
+      name: 'textCreateAccount',
       desc: '',
       args: [],
     );
   }
 
   /// `Name`
-  String get textNameLabel {
+  String get textName {
     return Intl.message(
       'Name',
-      name: 'textNameLabel',
+      name: 'textName',
       desc: '',
       args: [],
     );
   }
 
   /// `Your name`
-  String get textHintNameLabel {
+  String get textNameLable {
     return Intl.message(
       'Your name',
-      name: 'textHintNameLabel',
+      name: 'textNameLable',
       desc: '',
       args: [],
     );
@@ -351,40 +251,120 @@ class S {
   }
 
   /// `Your confirm password`
-  String get textHintConfirmPassword {
+  String get textConfirmPasswordLable {
     return Intl.message(
       'Your confirm password',
-      name: 'textHintConfirmPassword',
+      name: 'textConfirmPasswordLable',
       desc: '',
       args: [],
     );
   }
 
-  /// `min ago`
-  String get textMinAgo {
+  /// `By create an account you have to agree with our them & condication`
+  String get textProxy {
     return Intl.message(
-      'min ago',
-      name: 'textMinAgo',
+      'By create an account you have to agree with our them & condication',
+      name: 'textProxy',
       desc: '',
       args: [],
     );
   }
 
-  /// `hour ago`
-  String get textHourAgo {
+  /// `Successfully`
+  String get textSuccessFully {
     return Intl.message(
-      'hour ago',
-      name: 'textHourAgo',
+      'Successfully',
+      name: 'textSuccessFully',
       desc: '',
       args: [],
     );
   }
 
-  /// `day ago`
-  String get textDayAgo {
+  /// `You have successfully registered in our app and start working in it`
+  String get textSuccessFullyDesc {
     return Intl.message(
-      'day ago',
-      name: 'textDayAgo',
+      'You have successfully registered in our app and start working in it',
+      name: 'textSuccessFullyDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Shopping`
+  String get textStartShopping {
+    return Intl.message(
+      'Start Shopping',
+      name: 'textStartShopping',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account or password is incorrect`
+  String get textInvalidAccount {
+    return Intl.message(
+      'Account or password is incorrect',
+      name: 'textInvalidAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter this field`
+  String get textValidateEmptyString {
+    return Intl.message(
+      'Please enter this field',
+      name: 'textValidateEmptyString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must least 4 characters`
+  String get textErrorPassword {
+    return Intl.message(
+      'Password must least 4 characters',
+      name: 'textErrorPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email inValidate`
+  String get textErrorEmail {
+    return Intl.message(
+      'Email inValidate',
+      name: 'textErrorEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password must least 4 characters`
+  String get textErrorConfirmPassword {
+    return Intl.message(
+      'Confirm Password must least 4 characters',
+      name: 'textErrorConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password not equal password`
+  String get textErrorNotEqualConfirmPassword {
+    return Intl.message(
+      'Confirm Password not equal password',
+      name: 'textErrorNotEqualConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name must least 4 characters`
+  String get textErrorName {
+    return Intl.message(
+      'Name must least 4 characters',
+      name: 'textErrorName',
       desc: '',
       args: [],
     );
@@ -530,6 +510,26 @@ class S {
     );
   }
 
+  /// `Success`
+  String get textSuccess {
+    return Intl.message(
+      'Success',
+      name: 'textSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Okay`
+  String get textOkay {
+    return Intl.message(
+      'Okay',
+      name: 'textOkay',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `My Cart`
   String get textMyCart {
     return Intl.message(
@@ -575,6 +575,186 @@ class S {
     return Intl.message(
       'Your Cart is empty! Please Add To Cart',
       name: 'textCartEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You checkout success`
+  String get textCheckoutCartSuccess {
+    return Intl.message(
+      'You checkout success',
+      name: 'textCheckoutCartSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have successfully installed your order`
+  String get textDescNotify {
+    return Intl.message(
+      'You have successfully installed your order',
+      name: 'textDescNotify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Language`
+  String get textChangeLanguage {
+    return Intl.message(
+      'Change Language',
+      name: 'textChangeLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get textSave {
+    return Intl.message(
+      'Save',
+      name: 'textSave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `min ago`
+  String get textMinAgo {
+    return Intl.message(
+      'min ago',
+      name: 'textMinAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hour ago`
+  String get textHourAgo {
+    return Intl.message(
+      'hour ago',
+      name: 'textHourAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `day ago`
+  String get textDayAgo {
+    return Intl.message(
+      'day ago',
+      name: 'textDayAgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age`
+  String get textAge {
+    return Intl.message(
+      'Age',
+      name: 'textAge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get textLanguage {
+    return Intl.message(
+      'Language',
+      name: 'textLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get textNotification {
+    return Intl.message(
+      'Notification',
+      name: 'textNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mood`
+  String get textDarkMood {
+    return Intl.message(
+      'Dark Mood',
+      name: 'textDarkMood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `on`
+  String get textOn {
+    return Intl.message(
+      'on',
+      name: 'textOn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help Center`
+  String get textHelpCenter {
+    return Intl.message(
+      'Help Center',
+      name: 'textHelpCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Out`
+  String get textLogOut {
+    return Intl.message(
+      'Log Out',
+      name: 'textLogOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Image`
+  String get textUploadImage {
+    return Intl.message(
+      'Upload Image',
+      name: 'textUploadImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setting`
+  String get textSetting {
+    return Intl.message(
+      'Setting',
+      name: 'textSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get textSearchPage {
+    return Intl.message(
+      'Search',
+      name: 'textSearchPage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Product`
+  String get textSearchProduct {
+    return Intl.message(
+      'Search Product',
+      name: 'textSearchProduct',
       desc: '',
       args: [],
     );

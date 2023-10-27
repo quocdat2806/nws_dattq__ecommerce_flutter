@@ -4,6 +4,7 @@ import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/user_responsitory.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_cubit.dart';
@@ -16,11 +17,9 @@ import 'package:newware_final_project/utils/app_date_utils.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
-
   @override
   State<NotificationPage> createState() => _NotificationPageState();
 }
-
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
@@ -33,8 +32,8 @@ class _NotificationPageState extends State<NotificationPage> {
         );
       },
       child: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
-        int? userId = state.user!.id;
-        String? avatar = state.user!.avatar;
+        int? userId = state.user?.id;
+        String? avatar = state.user?.avatar;
         return NotificationChildPageState(
           userId: userId,
           avatar: avatar,
@@ -113,11 +112,8 @@ class _NotificationChildPageStateState
                               ),
                             ],
                           ),
-                          child: InkWell(
-                            onTap: null,
-                            child: AppStyles.iconSvgStyle(
-                              pathImage: AppImages.pathMoreIcon,
-                            ),
+                          child: AppStyles.iconSvgStyle(
+                            pathImage: AppImages.pathMoreIcon,
                           ),
                         ),
                       ),
@@ -127,7 +123,7 @@ class _NotificationChildPageStateState
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Notification',
+                          S.of(context).textNotify,
                           style: AppStyles.textStyle(
                             fontFamily: 'ExtraBold',
                             fontWeight: FontWeight.w900,
@@ -137,26 +133,24 @@ class _NotificationChildPageStateState
                       ),
                     ),
                     Expanded(
-                      child: SizedBox(
-                        child: ListView.builder(
-                          itemCount: state.listNotificationEntity.length,
-                          itemBuilder: (context, index) {
-                            var dateFormatter = state
-                                .listNotificationEntity[index].createdAt
-                                .toString()
-                                .formattedTime;
-                            String diffTimeString =
-                                DateDifferent().diffTime(dateFormatter);
-                            return NotificationItem(
-                              idNotification:
-                                  state.listNotificationEntity[index].id,
-                              pathImageAvatar:
-                                  state.listNotificationEntity[index].image ??
-                                      widget.avatar,
-                              timeDiff: diffTimeString,
-                            );
-                          },
-                        ),
+                      child: ListView.builder(
+                        itemCount: state.listNotificationEntity.length,
+                        itemBuilder: (context, index) {
+                          var dateFormatter = state
+                              .listNotificationEntity[index].createdAt
+                              .toString()
+                              .formattedTime;
+                          String diffTimeString =
+                              DateDifferent().diffTime(dateFormatter);
+                          return NotificationItem(
+                            idNotification:
+                                state.listNotificationEntity[index].id,
+                            pathImageAvatar:
+                                state.listNotificationEntity[index].image ??
+                                    widget.avatar,
+                            timeDiff: diffTimeString,
+                          );
+                        },
                       ),
                     ),
                   ],

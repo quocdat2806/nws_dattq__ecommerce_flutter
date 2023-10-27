@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/entities/cart/cart_entity.dart';
 import 'package:newware_final_project/models/entities/product/product_entity.dart';
 import 'package:newware_final_project/models/entities/user/user_entity.dart';
@@ -7,6 +9,8 @@ import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/product_responsitory.dart';
 import 'package:newware_final_project/repositories/user_responsitory.dart';
 import 'package:newware_final_project/socket/socket_io.dart';
+import 'package:newware_final_project/ui/commons/show_error.dart';
+import 'package:newware_final_project/ui/commons/show_success.dart';
 import 'package:newware_final_project/ui/pages/product_detail/product_detail_navigator.dart';
 
 part 'product_detail_state.dart';
@@ -126,7 +130,21 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       );
     }
   }
-
+ void handleShowSuccessAddToCart(BuildContext context){
+   if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+       SuccessAlert().showSuccessAlert(
+         context,
+         S.current.textAddToCartSuccess,
+       );
+     });
+   }
+   if (state.loadAddtoCartStatus == LoadStatus.failure) {
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+       ErrorAlert().showError(context);
+     });
+   }
+ }
   void handleDecresementCouting({
     int? price,
   }) {

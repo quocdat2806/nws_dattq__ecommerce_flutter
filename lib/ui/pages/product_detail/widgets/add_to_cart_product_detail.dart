@@ -68,7 +68,8 @@ class AddToCartProductDetail extends StatelessWidget {
                 builder: (context, stateUser) {
                   return InkWell(
                     onTap: () {
-                      if (state.loadAddtoCartStatus == LoadStatus.success) {
+                      if (state.loadAddtoCartStatus ==
+                          LoadStatus.successAddToCart) {
                         return;
                       }
                       cubit.handleAddToCart(
@@ -87,10 +88,10 @@ class AddToCartProductDetail extends StatelessWidget {
                     ),
                   );
                 },
-              )
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

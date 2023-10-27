@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/utils/utils.dart';
 
 class AppConfirmPasswordField extends StatelessWidget {
@@ -23,8 +23,8 @@ class AppConfirmPasswordField extends StatelessWidget {
     this.iconShowOrHide,
     this.isShowOrHide = false,
     this.showAndHideFun,
-    this.labelText = AppTexts.textConfirmPassword,
-    this.hintText = AppTexts.textHintConfirmPassword,
+    this.labelText ,
+    this.hintText ,
     this.passwordEdittingController,
   }) : super(key: key);
 
@@ -61,13 +61,13 @@ class AppConfirmPasswordField extends StatelessWidget {
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return AppTexts.textValidateEmptyString;
+                        return S.current.textValidateEmptyString;
                       }
-                      if (value != passwordEdittingController!.text) {
-                        return AppTexts.textErrorNotEqualConfirmPasswordLable;
+                      if (value != passwordEdittingController?.text) {
+                        return S.current.textErrorNotEqualConfirmPassword;
                       }
                       if (!Utils.isPassword(value)) {
-                        return AppTexts.textErrorConfirmPasswordLable;
+                        return S.current.textErrorConfirmPassword;
                       }
                       return null;
                     },

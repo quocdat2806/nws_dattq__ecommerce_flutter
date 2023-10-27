@@ -85,7 +85,10 @@ class SignInCubit extends Cubit<SignInState> {
     bool isHide = !state.isShowOrHidePassword;
     emit(state.copyWith(isShowOrHidePassword: isHide));
   }
-  void signIn() async {
+  void signIn(bool isValidate) async {
+    if(!isValidate){
+      return;
+    }
     String email = state.email ?? '';
     String password = state.password ?? '';
     emit(

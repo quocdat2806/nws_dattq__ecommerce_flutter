@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:newware_final_project/common/app_styles.dart';
 
 class FormSetting extends StatelessWidget {
   final String? lableText;
@@ -25,10 +25,8 @@ class FormSetting extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 color: const Color(0xFFDDDDDD),
               ),
-              child: SvgPicture.asset(
-                pathIcon!,
-                width: 20,
-                height: 20,
+              child: AppStyles.iconSvgStyle(
+                pathImage: pathIcon,
               ),
             ),
             const SizedBox(width: 10),

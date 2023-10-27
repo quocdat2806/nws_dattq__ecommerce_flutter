@@ -13,12 +13,12 @@ class ProductProvider {
           ApiProduct.getProductsInCategory(categoryId, offset: offset),
         ),
       );
-      if (response.statusCode == HttpStatus.CREATED ||
+      if (response.statusCode == HttpStatus.created ||
           response.statusCode == 200 ||
           response.statusCode == 201) {
         List<ProductEntity> productList = parseProducts(response.body);
         return productList;
-      } else if (response.statusCode == HttpStatus.NOT_FOUND) {
+      } else if (response.statusCode == HttpStatus.notFound) {
         throw (Exception("err"),);
       } else {
         throw (Exception(''),);
@@ -35,14 +35,14 @@ class ProductProvider {
           ApiProduct.getProductById(productId),
         ),
       );
-      if (response.statusCode == HttpStatus.CREATED ||
+      if (response.statusCode == HttpStatus.created ||
           response.statusCode == 200 ||
           response.statusCode == 201) {
         ProductEntity productEntity = ProductEntity.fromJson(
           jsonDecode(response.body),
         );
         return productEntity;
-      } else if (response.statusCode == HttpStatus.NOT_FOUND) {
+      } else if (response.statusCode == HttpStatus.notFound) {
         throw (Exception("err"),);
       } else {
         throw (Exception(''),);

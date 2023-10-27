@@ -16,14 +16,14 @@ class ProductListNavigator extends AppNavigator {
     );
   }
 
-  void openSearchPage({Function? searchFunc, String? nameSearch}) {
+  void openSearchPage({Function? handleSearch, String? nameSearch}) {
     GoRouter.of(context).pushNamed(
       AppRouter.search,
       queryParameters: {
         'nameSearch': nameSearch ?? '',
       },
     ).then((result) {
-      searchFunc!(result);
+      handleSearch!(result);
     });
   }
 }

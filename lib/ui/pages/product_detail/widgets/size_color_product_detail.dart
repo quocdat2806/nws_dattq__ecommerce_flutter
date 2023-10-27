@@ -79,7 +79,7 @@ class SizeColorProductDetail extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
         Container(
@@ -134,7 +134,7 @@ class SizeColorProductDetail extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

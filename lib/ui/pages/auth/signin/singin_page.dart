@@ -6,6 +6,7 @@ import 'package:newware_final_project/common/app_dimensions.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/common/app_texts.dart';
+import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/hooks/validate_input.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 import 'package:newware_final_project/repositories/auth_responsitory.dart';
@@ -104,8 +105,8 @@ class _SingInChildPageState extends State<SingInChildPage> {
                       child: Column(
                         children: [
                           const Fashion(),
-                          const SubHeaderAuth(
-                            title: AppTexts.textWelcome,
+                           SubHeaderAuth(
+                            title: S.current.textWelcome,
                             description: AppTexts.textLoginNote,
                           ),
                           const SizedBox(
@@ -132,7 +133,7 @@ class _SingInChildPageState extends State<SingInChildPage> {
                                     ),
                                     AppPasswordField(
                                       isShowOrHide: state.isShowOrHidePassword,
-                                      showOrHideFun:
+                                      handleShowOrHide:
                                           _cubit.onTabShowAndHideIcon,
                                       icon: passwordIcon,
                                       iconShowOrHide: state.isShowOrHidePassword
@@ -165,59 +166,49 @@ class _SingInChildPageState extends State<SingInChildPage> {
                               AppStyles.sizedBoxStyle(
                                 height: 20,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    _cubit.signIn();
-                                  }
+                              AppButton(
+                                onTabButton: (){
+                                  _cubit.signIn(_formKey.currentState!.validate());
                                 },
-                                child: const AppButton(
-                                  textButton: AppTexts.textLogin,
-                                  textColor: AppColors.primaryColor,
-                                  backGroundColor: AppColors.secondaryColor,
-                                  icon: null,
-                                  isHasBorder: false,
-                                ),
+                                textButton: AppTexts.textLogin,
+                                textColor: AppColors.primaryColor,
+                                backGroundColor: AppColors.secondaryColor,
+                                icon: null,
+                                isHasBorder: false,
                               ),
                             ],
                           ),
                           AppStyles.sizedBoxStyle(),
                           const DeviderLine(),
                           AppStyles.sizedBoxStyle(),
-                          InkWell(
-                            child: AppButton(
-                              textButton: AppTexts.textLoginWithFacebook,
-                              textColor: AppColors.primaryColor,
-                              backGroundColor: AppColors.blueColor,
-                              icon: AppStyles.iconSvgStyle(
-                                pathImage: AppImages.pathFacebookImage,
-                              ),
-                              isHasBorder: false,
+                          AppButton(
+                            textButton: AppTexts.textLoginWithFacebook,
+                            textColor: AppColors.primaryColor,
+                            backGroundColor: AppColors.blueColor,
+                            icon: AppStyles.iconSvgStyle(
+                              pathImage: AppImages.pathFacebookImage,
                             ),
+                            isHasBorder: false,
                           ),
                           AppStyles.sizedBoxStyle(),
-                          InkWell(
-                            child: AppButton(
-                              textButton: AppTexts.textLoginWithGoogle,
-                              textColor: AppColors.greyColor_1,
-                              backGroundColor: Colors.transparent,
-                              icon: AppStyles.iconSvgStyle(
-                                pathImage: AppImages.pathGoogleImage,
-                              ),
-                              isHasBorder: true,
+                          AppButton(
+                            textButton: AppTexts.textLoginWithGoogle,
+                            textColor: AppColors.greyColor_1,
+                            backGroundColor: Colors.transparent,
+                            icon: AppStyles.iconSvgStyle(
+                              pathImage: AppImages.pathGoogleImage,
                             ),
+                            isHasBorder: true,
                           ),
                           AppStyles.sizedBoxStyle(),
-                          InkWell(
-                            child: AppButton(
-                              textButton: AppTexts.textLoginWithApple,
-                              textColor: AppColors.greyColor_1,
-                              backGroundColor: Colors.transparent,
-                              icon: AppStyles.iconSvgStyle(
-                                pathImage: AppImages.pathAppleImage,
-                              ),
-                              isHasBorder: true,
+                          AppButton(
+                            textButton: AppTexts.textLoginWithApple,
+                            textColor: AppColors.greyColor_1,
+                            backGroundColor: Colors.transparent,
+                            icon: AppStyles.iconSvgStyle(
+                              pathImage: AppImages.pathAppleImage,
                             ),
+                            isHasBorder: true,
                           ),
                         ],
                       ),
