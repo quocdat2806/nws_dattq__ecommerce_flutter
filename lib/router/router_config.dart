@@ -17,10 +17,8 @@ import 'package:newware_final_project/ui/pages/splash/splash_page.dart';
 import 'package:newware_final_project/ui/pages/success/success_page.dart';
 class AppRouter {
   AppRouter._();
-
   static final rootKey = GlobalKey<NavigatorState>();
   static final shellKey = GlobalKey<NavigatorState>();
-
   static final GoRouter router = GoRouter(
     navigatorKey: rootKey,
     initialLocation: '/',
@@ -44,13 +42,14 @@ class AppRouter {
   static const String cart = 'cart';
   static const String success = 'success';
   static const String language = "language";
-
   static final _routes = <RouteBase>[
+    ShellRoute(routes: [
+
+    ]),
     GoRoute(
       path: splash,
       builder: (context, state) => const SplashPage(),
     ),
-
     GoRoute(
       name: home,
       path: "/$home",

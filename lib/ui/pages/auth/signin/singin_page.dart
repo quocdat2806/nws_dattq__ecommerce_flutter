@@ -119,6 +119,8 @@ class _SingInChildPageState extends State<SingInChildPage> {
                                 child: Column(
                                   children: [
                                     AppEmailTextField(
+                                      labelText: S.current.textEmail,
+                                      hintText: S.current.textEmailLable,
                                       icon: emailIcon,
                                       onChanged: (text) {
                                         _cubit.changeEmail(
@@ -132,6 +134,8 @@ class _SingInChildPageState extends State<SingInChildPage> {
                                       height: 20,
                                     ),
                                     AppPasswordField(
+                                      labelText: S.current.textPassword,
+                                      hintText: S.current.textPasswordLable,
                                       isShowOrHide: state.isShowOrHidePassword,
                                       handleShowOrHide:
                                           _cubit.onTabShowAndHideIcon,
