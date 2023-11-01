@@ -6,12 +6,9 @@ import 'package:newware_final_project/ui/pages/onboarding/onboarding_cubit.dart'
 import 'package:newware_final_project/ui/pages/onboarding/onboarding_navigator.dart';
 import 'package:newware_final_project/ui/pages/onboarding/widgets/next_button.dart';
 import 'package:newware_final_project/ui/pages/onboarding/widgets/onboarding_sub_page.dart';
-
 import 'widgets/dot_indicator.dart';
-
 class OnboardingPage extends StatefulWidget {
   static const router = 'onBoarding';
-
   const OnboardingPage({super.key});
 
   @override
@@ -44,7 +41,7 @@ class OnboardingChildPage extends StatefulWidget {
 class _OnboardingChildPageState extends State<OnboardingChildPage> {
   List<Widget> _onboardingPages = [];
   late OnboardingCubit _cubit;
-  final PageController _pageViewController = PageController(initialPage: 0);
+  final _pageViewController = PageController(initialPage: 0);
 
   @override
   void initState() {
@@ -75,7 +72,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 26),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 24),
         child: BlocBuilder<OnboardingCubit, OnboardingState>(
           builder: (context, state) {
             return Column(
@@ -108,9 +105,9 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                     ),
                     const Spacer(),
                     NextButton(
-                      state: state,
-                      cubit: _cubit,
-                      pageController: _pageViewController,
+                      onNextPage: (){
+                        nextPage(state);
+                      },
                     ),
                   ],
                 ),
@@ -119,6 +116,21 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
           },
         ),
       ),
+    );
+  }
+
+  void nextPage(OnboardingState state){
+    int nextPage = state.activePage + 1;
+    _pageViewController.animateToPage(
+      nextPage,
+      duration: const Duration(
+        milliseconds: 250,
+      ),
+      curve: Curves.linear,
+    );
+    _cubit.onNextPage(
+      nextPage: nextPage,
+      context: context,
     );
   }
 }

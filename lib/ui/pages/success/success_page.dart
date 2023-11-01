@@ -10,7 +10,6 @@ class SuccessPage extends StatefulWidget {
   @override
   State<SuccessPage> createState() => _SuccessPageState();
 }
-
 class _SuccessPageState extends State<SuccessPage> {
   @override
   Widget build(BuildContext context) {
@@ -18,52 +17,48 @@ class _SuccessPageState extends State<SuccessPage> {
         SuccessNavigator(context: context);
     return Scaffold(
       body: SafeArea(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              AppStyles.sizedBoxStyle(height: 70),
-              const Image(
-                width: 75,
-                height: 75,
-                image: AssetImage(
-                  AppImages.pathCheckSuccessImage,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AppStyles.sizedBoxStyle(height: 70),
+            const Image(
+              width: 75,
+              height: 75,
+              image: AssetImage(
+                AppImages.pathCheckSuccessImage,
               ),
-              Text(
-                S.of(context).textSuccessFully,
-                style: AppStyles.textStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                  fontFamily: 'ExtraBold',
-                ),
+            ),
+            Text(
+              S.of(context).textSuccessFully,
+              style: AppStyles.textStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                fontFamily: 'ExtraBold',
               ),
-              AppStyles.sizedBoxStyle(),
-              Text(
-                S.of(context).textSuccessFullyDesc,
-                style: AppStyles.textStyle(
-                  fontSize: 16,
-                  color: AppColors.greyColor_1,
-                ),
-                textAlign: TextAlign.center,
+            ),
+            AppStyles.sizedBoxStyle(),
+            Text(
+              S.of(context).textSuccessFullyDesc,
+              style: AppStyles.textStyle(
+                fontSize: 16,
+                color: AppColors.greyColor_1,
               ),
-              AppStyles.sizedBoxStyle(height: 250),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: AppButton(
-                  onTabButton: successNavigator.openMainPage,
-                  textButton: S.of(context).textStartShopping,
-                  textColor: AppColors.primaryColor,
-                  backGroundColor: AppColors.secondaryColor,
-                  icon: null,
-                  isHasBorder: false,
-                ),
+              textAlign: TextAlign.center,
+            ),
+            AppStyles.sizedBoxStyle(height: 250),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: AppButton(
+                onTabButton: successNavigator.openMainPage,
+                textButton: S.of(context).textStartShopping,
+                textColor: AppColors.primaryColor,
+                backGroundColor: AppColors.secondaryColor,
+                icon: null,
+                isHasBorder: false,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

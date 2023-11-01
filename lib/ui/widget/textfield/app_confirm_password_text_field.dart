@@ -13,7 +13,7 @@ class AppConfirmPasswordField extends StatelessWidget {
   final Widget? icon;
   final Widget? iconShowOrHide;
   final bool isShowOrHide;
-  final Function()? showAndHideFun;
+  final Function()? handleShowAndHide;
 
   const AppConfirmPasswordField({
     Key? key,
@@ -21,10 +21,10 @@ class AppConfirmPasswordField extends StatelessWidget {
     this.onChanged,
     this.icon,
     this.iconShowOrHide,
-    this.isShowOrHide = false,
-    this.showAndHideFun,
-    this.labelText ,
-    this.hintText ,
+    this.isShowOrHide=false,
+    this.handleShowAndHide,
+    this.labelText,
+    this.hintText,
     this.passwordEdittingController,
   }) : super(key: key);
 
@@ -36,7 +36,7 @@ class AppConfirmPasswordField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            labelText!,
+            labelText??'',
             style: AppStyles.textStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -57,7 +57,7 @@ class AppConfirmPasswordField extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: (value) {
-                      onChanged!(value);
+                      onChanged!=null? onChanged!(value):null;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -77,7 +77,7 @@ class AppConfirmPasswordField extends StatelessWidget {
                     controller: textEditingController,
                     obscuringCharacter: '*',
                     decoration: InputDecoration(
-                      hintText: hintText!,
+                      hintText: hintText??'',
                       hintStyle: AppStyles.textStyle(
                         color: AppColors.greyColor_1,
                       ),
@@ -86,12 +86,10 @@ class AppConfirmPasswordField extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: showAndHideFun,
+                  onTap: handleShowAndHide,
                   child: iconShowOrHide ?? const SizedBox.shrink(),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                const SizedBox(width: 10),
                 icon ?? const SizedBox.shrink(),
               ],
             ),

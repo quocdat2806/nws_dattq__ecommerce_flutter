@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/bloc/setting/app_setting_cubit.dart';
 import 'package:newware_final_project/generated/l10n.dart';
-import 'package:newware_final_project/ui/pages/language/language_cubit.dart';
-import 'package:newware_final_project/ui/pages/language/widgets/language_item.dart';
-import 'package:newware_final_project/ui/pages/language/widgets/save_language.dart';
+import 'package:newware_final_project/ui/pages/change_language/language_cubit.dart';
+import 'package:newware_final_project/ui/pages/change_language/widgets/language_item.dart';
+import 'package:newware_final_project/ui/pages/change_language/widgets/save_language.dart';
 
 class LanguagePage extends StatefulWidget {
   const LanguagePage({super.key});
@@ -43,7 +43,6 @@ class _LanguagePageStateState extends State<LanguagePageState> {
   @override
   void initState() {
     _cubit = BlocProvider.of<LanguageCubit>(context);
-
     super.initState();
   }
 
@@ -64,23 +63,23 @@ class _LanguagePageStateState extends State<LanguagePageState> {
             return Column(
               children: [
                 LanguageItem(
-                  state: state,
+                  currentLanguage: state.language,
                   languageText: 'English',
                   onTabLanguage: _cubit.changeEnLanguage,
                   symboliclanguage: 'en',
                 ),
                 const Divider(),
                 LanguageItem(
-                  state: state,
+                  currentLanguage: state.language,
                   languageText: 'VietNam',
                   onTabLanguage: _cubit.changeViLanguage,
                   symboliclanguage: 'vi',
                 ),
                 const Divider(),
                 SaveLanguage(
-                  state: state,
-                  cubit: _cubit,
-                )
+                  isChangeLanguage: state.isChangeLanguage,
+                 handleSaveLanguage: _cubit.saveSetting,
+                ),
               ],
             );
           },

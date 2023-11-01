@@ -52,6 +52,8 @@
   "textItem": "sản phẩm",
   "textCheckoutCart": "Tiến Hành Thanh Toán",
   "textCartEmpty": "Giỏ hàng của bạn đang trống! Vui lòng thêm sản phẩm vào giỏ hàng",
+  "textNotifyEmpty": "Chưa có thông báo mới nhất",
+
   "textCheckoutCartSuccess": "Bạn đã thanh toán thành công",
   "textDescNotify": "Bạn đã đặt hàng thành công đơn hàng",
   "textChangeLanguage": "Thay Đổi Ngôn Ngữ",
@@ -69,6 +71,10 @@
   "textUploadImage": "Tải Hình Lên",
   "textSetting": "Cài Đặt",
   "textSearchPage": "Tìm kiếm",
-  "textSearchProduct": "Tìm kiếm sản phẩm"
+  "textSearchProduct": "Tìm kiếm sản phẩm",
+  "textYouWantToLogOut": "Bạn có muốn đăng xuất không ?",
+  "textYes": "Có",
+  "textNo": "Không"
+
 
 }

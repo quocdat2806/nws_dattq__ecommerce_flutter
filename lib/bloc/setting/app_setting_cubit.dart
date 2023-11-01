@@ -14,19 +14,13 @@ class AppSettingCubit extends Cubit<AppSettingState> {
 
   void changeViLanguage() {
     emit(
-      state.copyWith(
-        language: 'vi',
-        isChangeLanguage: true,
-      ),
+      state.copyWith(language: 'vi', isChangeLanguage: true),
     );
   }
 
   void changeEnLanguage() {
     emit(
-      state.copyWith(
-        language: 'en',
-        isChangeLanguage: true,
-      ),
+      state.copyWith(language: 'en', isChangeLanguage: true),
     );
   }
 
@@ -40,18 +34,22 @@ class AppSettingCubit extends Cubit<AppSettingState> {
     );
   }
 
-  void saveLanguage() {
-    emit(state.copyWith(isSaveLanguage: false));
-    Future.delayed(
-      const Duration(seconds: 1),
-      () {
-        emit(
-          state.copyWith(
-            isSaveLanguage: true,
-            isChangeLanguage: false,
-          ),
-        );
-      },
+  void saveLanguage() async {
+    String language = await SharedPreferencesHelper.getDefaultLanguage();
+    if (language == state.language) {
+      return;
+    }
+    await SharedPreferencesHelper.setDefaultLanguage(language: state.language);
+    emit(
+      state.copyWith(
+        isSaveLanguage: false,
+      ),
+    );
+    emit(
+      state.copyWith(
+        isSaveLanguage: true,
+        isChangeLanguage: false,
+      ),
     );
   }
 }

@@ -6,16 +6,20 @@ import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/ui/widget/header_action/header_action.dart';
 
-class SliderImageProductDetail extends StatelessWidget {
-  final state;
-  final cubit;
-  final int lengthCart;
+class SlideImageProduct extends StatelessWidget {
+  final List<String>?images;
+  final Function(int value)?onChangeImage;
+  final Function ()?onTabBackIcon;
+  final Function ()?onTabCartIcon;
+  final int ?currentImage;
 
-  SliderImageProductDetail({
+  SlideImageProduct({
     super.key,
-    required this.cubit,
-    required this.state,
-    required this.lengthCart,
+    this.images,
+    this.onChangeImage,
+    this.onTabBackIcon,
+    this.onTabCartIcon,
+    this.currentImage
   });
 
   final PageController pageController = PageController(initialPage: 0);
@@ -28,23 +32,23 @@ class SliderImageProductDetail extends StatelessWidget {
         children: [
           PageView.builder(
             controller: pageController,
-            itemCount: state.productEntity?.images.length,
+            itemCount: images?.length,
             itemBuilder: (context, index) => Container(
               decoration: AppStyles.boxDecorationNetworkImageStyle(
-                pathNetworkImage: state.productEntity.images[index],
+                pathNetworkImage: images?[index],
               ),
             ),
             onPageChanged: (value) {
-              cubit.handleChangImage(value);
+              onChangeImage!(value);
             },
           ),
           Positioned(
             left: 20,
             right: 20,
-            top: 20,
+            top: 40,
             child: HeaderAction(
-              onTabLeftIcon: cubit.backPage,
-              onTabRightIcon: cubit.openCartPage,
+              onTabLeftIcon:onTabBackIcon,
+              onTabRightIcon: onTabCartIcon,
               pathIconLeft: AppImages.pathBackImage,
               iconRight: Stack(
                 children: [
@@ -63,20 +67,7 @@ class SliderImageProductDetail extends StatelessWidget {
                       height: 30.0,
                     ),
                   ),
-                  lengthCart == 0
-                      ? const SizedBox.shrink()
-                      : Positioned(
-                          right: 10,
-                          top: 4,
-                          child: Text(
-                            '$lengthCart',
-                            style: const TextStyle(
-                              color: Colors.red,
-                              fontFamily: 'Bold',
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
+
                 ],
               ),
             ),
@@ -109,16 +100,16 @@ class SliderImageProductDetail extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ...List.generate(
-                  state.productEntity.images.length,
+                  images!.length,
                   (index) => Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
-                      padding: state.currentImage == index
+                      padding: currentImage == index
                           ? const EdgeInsets.all(3)
                           : EdgeInsets.zero,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: state.currentImage == index
+                        border: currentImage == index
                             ? Border.all(
                                 width: 1.5,
                                 color: AppColors.primaryColor,

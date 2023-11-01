@@ -2,25 +2,25 @@ part of 'main_cubit.dart';
 
 class  MainState extends Equatable {
   final int selectedIndex;
-  final int couterNotify;
+  final int quantityNotify;
   const MainState({
     this.selectedIndex = 0,
-    this.couterNotify = 0 ,
+    this.quantityNotify = 0 ,
   });
 
   MainState copyWith({
     int? selectedIndex,
-    int? couterNotify,
+    int? quantityNotify,
   }) {
     return MainState(
       selectedIndex: selectedIndex ?? this.selectedIndex,
-      couterNotify: couterNotify ?? this.couterNotify,
+      quantityNotify: quantityNotify ?? this.quantityNotify,
     );
   }
 
   @override
   List<Object?> get props => [
     selectedIndex,
-    couterNotify,
+    quantityNotify,
   ];
 }

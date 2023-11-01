@@ -50,59 +50,60 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child: BlocBuilder<AppCubit, AppState>(
-          builder: (context, state) {
-            return Container(
-              padding: const EdgeInsets.only(
-                left: 25,
-                right: 25,
-                top: 25,
-                bottom: 0,
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    UploadImage(
-                      pathImage: state.user?.avatar,
-                    ),
-                    Information(
-                      labelText: S.of(context).textName,
-                      textHint: state.user?.name,
-                    ),
-                     Information(
-                      labelText: S.of(context).textAge,
-                      textHint: '22',
-                    ),
-                    Information(
-                      labelText: S.of(context).textEmail,
-                      textHint: state.user?.email,
-                    ),
-                    AppStyles.sizedBoxStyle(height: 25),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        S.of(context).textSetting,
-                        style: AppStyles.textStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'ExtraBold',
-                        ),
-                      ),
-                    ),
-                    AppStyles.sizedBoxStyle(height: 15),
-                    Setting(onTab: _cubit.openLanguagePage),
-                    AppStyles.sizedBoxStyle(),
-                    Logout(onTabLogout: _cubit.singOut),
-                  ],
+    return  BlocBuilder<AppCubit, AppState>(
+      builder: (context, state) {
+        return Container(
+          padding: const EdgeInsets.only(
+            left: 24,
+            right: 24,
+            bottom: 0,
+            top: 0
+          ),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              bottom: 24,
+            ),
+            child: Column(
+
+              children: [
+                const SizedBox(height: 24),
+                UploadImage(
+                  pathImage: state.user?.avatar,
                 ),
-              ),
-            );
-          },
-        ),
-      ),
+                Information(
+                  labelText: S.of(context).textName,
+                  textHint: state.user?.name,
+                ),
+                 Information(
+                  labelText: S.of(context).textAge,
+                  textHint: '22',
+                ),
+                Information(
+                  labelText: S.of(context).textEmail,
+                  textHint: state.user?.email,
+                ),
+                AppStyles.sizedBoxStyle(height: 25),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    S.of(context).textSetting,
+                    style: AppStyles.textStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'ExtraBold',
+                    ),
+                  ),
+                ),
+                AppStyles.sizedBoxStyle(height: 15),
+                Setting(onTab: _cubit.openLanguagePage),
+                AppStyles.sizedBoxStyle(),
+                Logout(onTabLogout: _cubit.singOut),
+              ],
+            ),
+          ),
+        );
+      },
     );
+
   }
 }

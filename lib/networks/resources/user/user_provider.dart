@@ -11,17 +11,14 @@ class UserProvider {
   Future<UserEntity?> getProfile(
     String token,
   ) async {
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token'
-    };
     try {
       var response = await http.get(
         Uri.parse(
           ApiUser.getProfile,
         ),
-        headers: requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(
+          token: token
+        ),
       );
       // ignore: deprecated_member_use
       if (response.statusCode == HttpStatus.CREATED ||
@@ -47,7 +44,7 @@ class UserProvider {
           Uri.parse(
             ApiUser.addToCart,
           ),
-          headers: ConfigHeaderRequestApi.requestHeaders,
+          headers: ConfigHeaderRequestApi.requestHeaders(),
           body: endcodedCartEntity);
       var responseStatus = jsonDecode(response.body);
       if (responseStatus['statusCode'] == 200) {
@@ -70,7 +67,7 @@ class UserProvider {
         Uri.parse(
           ApiUser.checkOutCart,
         ),
-        headers: ConfigHeaderRequestApi.requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(),
         body: endcodedCartEntity,
       );
       var responseStatus = jsonDecode(response.body);
@@ -93,7 +90,7 @@ class UserProvider {
         Uri.parse(
           ApiUser.updateCart,
         ),
-        headers: ConfigHeaderRequestApi.requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(),
         body: endcodedCartEntity,
       );
       var responseStatus = jsonDecode(response.body);
@@ -116,7 +113,7 @@ class UserProvider {
         Uri.parse(
           ApiUser.getCart(userId),
         ),
-        headers: ConfigHeaderRequestApi.requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(),
       );
       List<CartEntity> cartList = parseCart(response.body);
       return cartList;
@@ -132,7 +129,7 @@ class UserProvider {
         Uri.parse(
           ApiUser.getNotify(userId),
         ),
-        headers: ConfigHeaderRequestApi.requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(),
       );
       List<NotificationEntity> cartNotify = parseNotification(response.body);
       return cartNotify;
@@ -143,17 +140,14 @@ class UserProvider {
   }
 
   Future<UserEntity?> updateProfile(String token) async {
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token'
-    };
     try {
       var response = await http.get(
         Uri.parse(
           ApiUser.getProfile,
         ),
-        headers: requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(
+          token: token
+        ),
       );
       // ignore: deprecated_member_use
       if (response.statusCode == HttpStatus.CREATED ||

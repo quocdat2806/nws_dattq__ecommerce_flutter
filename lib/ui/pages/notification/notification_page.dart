@@ -6,20 +6,21 @@ import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_cubit.dart';
-import 'package:newware_final_project/ui/pages/notification/notification_navigator.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_state.dart';
 import 'package:newware_final_project/ui/pages/notification/widgets/notification_item.dart';
 import 'package:newware_final_project/ui/widget/header_action/header_action.dart';
-import 'package:newware_final_project/ui/widget/loading/loading_status.dart';
+import 'package:newware_final_project/ui/widget/loading/circular_loading.dart';
 import 'package:newware_final_project/utils/app_date_utils.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
+
   @override
   State<NotificationPage> createState() => _NotificationPageState();
 }
+
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
@@ -27,11 +28,13 @@ class _NotificationPageState extends State<NotificationPage> {
       create: (con) {
         final userRepo = RepositoryProvider.of<UserResponsitory>(context);
         return NotificationCubit(
-          navigator: NotificationNavigator(context: context),
           userRepo: userRepo,
         );
       },
       child: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
+        // chỗ này em sử lí ở node js . và ở client
+        // nếu cái cart ma > 2 thì hiển thị avatar ng dùng
+        // nếu cart < 2 thì hiển thị hàng mua
         int? userId = state.user?.id;
         String? avatar = state.user?.avatar;
         return NotificationChildPageState(
@@ -62,7 +65,7 @@ class _NotificationChildPageStateState
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<NotificationCubit>(context);
-    _cubit.fetchNotify(widget.userId!);
+    _cubit.fetchNotify(widget.userId ?? 0);
   }
 
   @override
@@ -78,22 +81,19 @@ class _NotificationChildPageStateState
         await Future.delayed(
           const Duration(seconds: 3),
           () {
-            _cubit.fetchNotify(widget.userId!);
+            _cubit.fetchNotify(widget.userId ?? 0);
           },
         );
       },
       child: BlocBuilder<NotificationCubit, NotificationState>(
         builder: (context, state) {
           return state.fetchNotifyStatus == LoadStatus.loading
-              ? const LoadingStatus()
+              ? const CircularLoading()
               : Column(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(20),
                       child: HeaderAction(
-                        pathIconLeft: AppImages.pathBackImage,
-                        onTabRightIcon: null,
-                        onTabLeftIcon: _cubit.backPage,
                         iconRight: Container(
                           constraints: const BoxConstraints(
                             minHeight: 44,
@@ -132,6 +132,13 @@ class _NotificationChildPageStateState
                         ),
                       ),
                     ),
+                    state.listNotificationEntity.isNotEmpty
+                        ? const SizedBox.shrink()
+                        : Center(
+                            child: Text(
+                              S.current.textNotifyEmpty,
+                            ),
+                          ),
                     Expanded(
                       child: ListView.builder(
                         itemCount: state.listNotificationEntity.length,
@@ -142,12 +149,13 @@ class _NotificationChildPageStateState
                               .formattedTime;
                           String diffTimeString =
                               DateDifferent().diffTime(dateFormatter);
+                          String? id = state.listNotificationEntity[index].id;
+                          String? pathImage =
+                              state.listNotificationEntity[index].image ??
+                                  widget.avatar;
                           return NotificationItem(
-                            idNotification:
-                                state.listNotificationEntity[index].id,
-                            pathImageAvatar:
-                                state.listNotificationEntity[index].image ??
-                                    widget.avatar,
+                            idNotification: id,
+                            pathImage: pathImage,
                             timeDiff: diffTimeString,
                           );
                         },

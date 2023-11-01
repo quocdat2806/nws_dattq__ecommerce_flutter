@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:newware_final_project/ui/pages/auth/auth_page.dart';
-import 'package:newware_final_project/ui/pages/auth/signin/singin_page.dart';
-import 'package:newware_final_project/ui/pages/auth/signup/singup_page.dart';
-import 'package:newware_final_project/ui/pages/cart/cart_page.dart';
+import 'package:newware_final_project/ui/pages/auth/signin/signin_page.dart';
+import 'package:newware_final_project/ui/pages/auth/signup/signup_page.dart';
+import 'package:newware_final_project/ui/pages/change_language/language_page.dart';
 import 'package:newware_final_project/ui/pages/home/home_page.dart';
-import 'package:newware_final_project/ui/pages/language/language_page.dart';
 import 'package:newware_final_project/ui/pages/main/main_page.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_page.dart';
 import 'package:newware_final_project/ui/pages/onboarding/onboarding_page.dart';
@@ -13,6 +12,7 @@ import 'package:newware_final_project/ui/pages/product_detail/product_detail_pag
 import 'package:newware_final_project/ui/pages/product_list/product_list_page.dart';
 import 'package:newware_final_project/ui/pages/profile/profile_page.dart';
 import 'package:newware_final_project/ui/pages/search/search_page.dart';
+import 'package:newware_final_project/ui/pages/shop_cart/cart_page.dart';
 import 'package:newware_final_project/ui/pages/splash/splash_page.dart';
 import 'package:newware_final_project/ui/pages/success/success_page.dart';
 class AppRouter {
@@ -32,7 +32,7 @@ class AppRouter {
   static const String home = "home";
   static const String auth = "auth";
   static const String signIn = "signIn";
-  static const String singUp = "singUp";
+  static const String signUp = "signUp";
   static const String onBoarding = 'onBoarding';
   static const String profile = 'profile';
   static const String productList = 'productList';
@@ -109,8 +109,8 @@ class AppRouter {
     ),
     GoRoute(
       parentNavigatorKey: rootKey,
-      name: singUp,
-      path: "/$singUp",
+      name: signUp,
+      path: "/$signUp",
       builder: (context, state) => const SingUpPage(),
     ),
     GoRoute(

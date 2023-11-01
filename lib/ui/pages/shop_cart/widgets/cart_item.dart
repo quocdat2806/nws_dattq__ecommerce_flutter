@@ -3,13 +3,19 @@
 import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
+import 'package:newware_final_project/models/entities/cart/cart_entity.dart';
 
 class CartItem extends StatelessWidget {
-  final state;
-  final int? index;
-  final cubit;
+  final CartEntity cartEntity;
+  final Function()? handleDecreseQuantity;
+  final Function()? handleIncreseQuantity;
 
-  const CartItem({super.key, required this.state, this.index, this.cubit});
+  const CartItem({
+    super.key,
+    required this.cartEntity,
+    this.handleDecreseQuantity,
+    this.handleIncreseQuantity,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +43,7 @@ class CartItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(
-                  state.listCartEntity[index].image!,
-                ),
+                image: NetworkImage(cartEntity.image ?? ''),
               ),
             ),
           ),
@@ -54,7 +58,7 @@ class CartItem extends StatelessWidget {
               children: [
                 const SizedBox(height: 6),
                 Text(
-                  state.listCartEntity[index].productEntity!?.title??'',
+                  cartEntity.productEntity?.title ?? '',
                   style: AppStyles.textStyle(
                     fontFamily: 'Bold',
                     fontWeight: FontWeight.w500,
@@ -63,8 +67,9 @@ class CartItem extends StatelessWidget {
                   maxLines: 1,
                 ),
                 Text(
-                  state.listCartEntity[index].productEntity!?.description ??
-                      'Vlado Odelle',
+                  cartEntity.productEntity?.description ??
+                      ''
+                          'Vlado Odelle',
                   style: AppStyles.textStyle(
                     fontSize: 14,
                     color: AppColors.greyColor_1,
@@ -73,7 +78,7 @@ class CartItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 22),
                 Text(
-                  '\$${state.listCartEntity[index].total!}.00',
+                  '\$${cartEntity.total}.00',
                   style: AppStyles.textStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -93,6 +98,7 @@ class CartItem extends StatelessWidget {
             child: Row(
               children: [
                 InkWell(
+                  onTap: handleDecreseQuantity,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 6,
@@ -105,18 +111,12 @@ class CartItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onTap: () {
-                    cubit.handleDecreseQuantity(
-                      index,
-                      state.listCartEntity[index].productEntity?.price,
-                    );
-                  },
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 Text(
-                  '${state.listCartEntity[index].quantity!}',
+                  '${cartEntity.quantity}',
                   style: AppStyles.textStyle(
                     fontSize: 18,
                   ),
@@ -125,12 +125,7 @@ class CartItem extends StatelessWidget {
                   width: 10,
                 ),
                 InkWell(
-                  onTap: () {
-                    cubit.handleIncreseQuantity(
-                      index,
-                      state.listCartEntity[index].productEntity?.price,
-                    );
-                  },
+                  onTap: handleIncreseQuantity,
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     child: InkWell(

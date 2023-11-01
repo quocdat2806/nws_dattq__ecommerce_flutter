@@ -6,11 +6,10 @@ import 'package:newware_final_project/router/router_config.dart';
 class AuthNavigator extends AppNavigator {
   AuthNavigator({required BuildContext context}) : super(context: context);
 
-  void openSingInPage() {
+  void openSignInPage() {
     GoRouter.of(context).pushNamed(AppRouter.signIn);
   }
-
-  void openSingUpPage() {
-    GoRouter.of(context).pushNamed(AppRouter.singUp);
+  void openSignUpPage() {
+    GoRouter.of(context).pushNamed(AppRouter.signUp);
   }
 }

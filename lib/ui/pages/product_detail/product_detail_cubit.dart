@@ -6,8 +6,8 @@ import 'package:newware_final_project/models/entities/cart/cart_entity.dart';
 import 'package:newware_final_project/models/entities/product/product_entity.dart';
 import 'package:newware_final_project/models/entities/user/user_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/product_responsitory.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
+import 'package:newware_final_project/responsitories/product_responsitory.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
 import 'package:newware_final_project/socket/socket_io.dart';
 import 'package:newware_final_project/ui/commons/show_error.dart';
 import 'package:newware_final_project/ui/commons/show_success.dart';
@@ -32,18 +32,17 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
         loadProductDetalStatus: LoadStatus.loading,
       ),
     );
-    await proRepo.getProductById(
-      productId,
-    );
     try {
       final productEntity = await proRepo.getProductById(
         productId,
       );
       if (productEntity != null) {
+        int ?totalPrice = productEntity.price??0 * state.quantity!;
         emit(
           state.copyWith(
-            productEntity: productEntity,
-            loadProductDetalStatus: LoadStatus.success,
+              productEntity: productEntity,
+              loadProductDetalStatus: LoadStatus.success,
+              totalPrice: totalPrice
           ),
         );
       } else {
@@ -66,23 +65,36 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     int? price,
   }) {
     int quantity = state.quantity!;
-
+    int total = state.totalPrice! ;
+    total += price!;
     emit(
       state.copyWith(
         quantity: ++quantity,
-        totalPrice: price! * state.quantity!,
+        totalPrice: total,
       ),
     );
   }
 
-  void handleChangImage(int indexImage) {
-
+//decresement quantity
+  void handleDecresementCouting({
+    int? price,
+  }) {
+    int quantity = state.quantity!;
+    quantity = --quantity;
+    if (quantity < 1) {
+      quantity = 1;
+      return;
+    }
+    int total = state.totalPrice! ;
+    total -= price!;
     emit(
       state.copyWith(
-        currentImage: indexImage,
+        quantity: quantity,
+        totalPrice: total,
       ),
     );
   }
+
 
   void openCartPage() {
     navigator.openCartPage();
@@ -103,11 +115,6 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       quantity: state.quantity,
       total: state.totalPrice,
     );
-    emit(
-      state.copyWith(
-        loadAddtoCartStatus: LoadStatus.loading,
-      ),
-    );
     Map<String, dynamic>? result = await userRepo.addToCart(
       cartEntity,
     );
@@ -119,6 +126,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       emit(
         state.copyWith(
           loadAddtoCartStatus: LoadStatus.successAddToCart,
+          quantity: 1,
         ),
       );
     } else {
@@ -127,25 +135,26 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       );
     }
   }
-  void handleDeleteAddToCartStatus(){
+
+  void deleteAddToCartStatus() {
     emit(
       state.copyWith(
-        loadAddtoCartStatus: LoadStatus.loading,
+        loadAddtoCartStatus: LoadStatus.initial,
       ),
     );
   }
-  void handleShowSuccessAddToCart(BuildContext context) {
+
+  void showSuccessAddToCart(BuildContext context) {
     if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
       WidgetsBinding.instance.addPostFrameCallback(
-        (_) {
+            (_) {
           SuccessAlert().showSuccessAlert(
             context,
             S.current.textAddToCartSuccess,
           );
         },
       );
-      handleDeleteAddToCartStatus();
-
+      deleteAddToCartStatus();
     }
     if (state.loadAddtoCartStatus == LoadStatus.failure) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -154,25 +163,8 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     }
   }
 
-  void handleDecresementCouting({
-    int? price,
-  }) {
-
-    int quantity = state.quantity!;
-    quantity = --quantity;
-    if (quantity < 1) {
-      quantity = 1;
-    }
-    emit(
-      state.copyWith(
-        quantity: quantity,
-        totalPrice: price! * state.quantity!,
-      ),
-    );
-  }
-
+//change size
   void handleChangeSize(int indexSize) {
-
     emit(
       state.copyWith(
         currentSize: indexSize,
@@ -180,21 +172,21 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     );
   }
 
-  void handleChangeColor(int indexSize) {
+  // change image
+  void handleChangImage(int indexImage) {
+    emit(
+      state.copyWith(
+        currentImage: indexImage,
+      ),
+    );
+  }
 
+//change color
+  void handleChangeColor(int indexSize) {
     emit(
       state.copyWith(
         currentColor: indexSize,
       ),
     );
-  }
-
-  num handleTotalPrice({int? price}) {
-    emit(
-      state.copyWith(
-        totalPrice: price! * state.quantity!,
-      ),
-    );
-    return price * state.quantity!;
   }
 }

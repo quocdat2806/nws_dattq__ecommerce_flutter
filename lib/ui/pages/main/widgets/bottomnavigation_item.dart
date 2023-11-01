@@ -6,24 +6,24 @@ import 'package:newware_final_project/common/app_styles.dart';
 
 class BottomNavigationItem extends StatelessWidget {
   final Function(int index)? onTabItem;
-  final Function? clearNotifyFun;
-  final state;
+  final Function? handleClearNotify;
   final int? index;
   final String? title;
-  final String? pathIcon;
+  final String? pathIconNavigation;
   final bool hasNotify;
   final int? quantityNotify;
+  final bool? isActivePage;
 
   const BottomNavigationItem({
     super.key,
     this.index,
     this.onTabItem,
-    this.state,
     this.title,
-    this.pathIcon,
+    this.pathIconNavigation,
     this.hasNotify = false,
     this.quantityNotify,
-    this.clearNotifyFun,
+    this.handleClearNotify,
+    this.isActivePage = false,
   });
 
   @override
@@ -31,8 +31,8 @@ class BottomNavigationItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         onTabItem!(index!);
-        if (clearNotifyFun != null) {
-          clearNotifyFun!();
+        if (handleClearNotify != null) {
+          handleClearNotify!();
         }
       },
       child: Stack(
@@ -54,14 +54,14 @@ class BottomNavigationItem extends StatelessWidget {
           AnimatedContainer(
             duration: const Duration(seconds: 2),
             child: Container(
-              padding: state.selectedIndex == index
+              padding: isActivePage??false
                   ? const EdgeInsets.only(right: 8)
                   : null,
               decoration: BoxDecoration(
-                borderRadius: state.selectedIndex == index
+                borderRadius: isActivePage??false
                     ? BorderRadius.circular(16)
                     : null,
-                color: state.selectedIndex == index
+                color: isActivePage??false
                     ? const Color(
                         0xFFEEEEEE,
                       )
@@ -70,12 +70,12 @@ class BottomNavigationItem extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    padding: state.selectedIndex == index
+                    padding: isActivePage??false
                         ? const EdgeInsets.all(10)
                         : null,
                     decoration: BoxDecoration(
-                      color: state.selectedIndex == index ? Colors.black : null,
-                      shape: state.selectedIndex == index
+                      color: isActivePage??false ? Colors.black : null,
+                      shape: isActivePage??false
                           ? BoxShape.circle
                           : BoxShape.rectangle,
                     ),
@@ -84,11 +84,11 @@ class BottomNavigationItem extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(3),
                           child: SvgPicture.asset(
-                            pathIcon!,
+                            pathIconNavigation!,
                             width: 20,
                             height: 20,
                             // ignore: deprecated_member_use
-                            color: state.selectedIndex == index
+                            color: isActivePage??false
                                 ? Colors.white
                                 : Colors.black,
                           ),
@@ -98,7 +98,7 @@ class BottomNavigationItem extends StatelessWidget {
                   ),
                   const SizedBox(width: 7),
                   Text(
-                    state.selectedIndex == index ? title ?? '' : '',
+                    isActivePage??false ? title ?? '' : '',
                     style: AppStyles.textStyle(
                       fontWeight: FontWeight.w700,
                     ),

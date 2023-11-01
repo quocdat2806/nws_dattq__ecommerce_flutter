@@ -4,12 +4,9 @@ import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/database/shared_preferences_helper.dart';
 import 'package:newware_final_project/models/entities/user/user_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/auth_responsitory.dart';
-
+import 'package:newware_final_project/responsitories/auth_responsitory.dart';
 import 'splash_navigator.dart';
-
 part 'splash_state.dart';
-
 class SplashCubit extends Cubit<SplashState> {
   final SplashNavigator navigator;
   final AuthResponsitory authRepo;
@@ -22,22 +19,18 @@ class SplashCubit extends Cubit<SplashState> {
   }) : super(const SplashState());
 
   void checkLogin() async {
+    Future.delayed(
+      const Duration(seconds: 1),
+      null,
+    );
     final tokenEntity = await authRepo.getToken();
     if (tokenEntity == null) {
-      if (await SharedPreferencesHelper.isOnboardCompleted()) {
-        Future.delayed(
-          const Duration(seconds: 2),
-          () {
-            navigator.openAuthPage();
-          },
-        );
+      bool isOnboardCompleted =
+          await SharedPreferencesHelper.isOnboardCompleted();
+      if (isOnboardCompleted) {
+        navigator.openAuthPage();
       } else {
-        Future.delayed(
-          const Duration(seconds: 2),
-          () {
-            navigator.openOnboardingPage();
-          },
-        );
+        navigator.openOnboardingPage();
       }
     } else {
       try {
@@ -46,22 +39,6 @@ class SplashCubit extends Cubit<SplashState> {
         if (userEntity != null) {
           await appCubit.updateProfile(userEntity);
           navigator.openMainPage();
-        } else {
-          if (await SharedPreferencesHelper.isOnboardCompleted()) {
-            Future.delayed(
-              const Duration(seconds: 2),
-              () {
-                navigator.openAuthPage();
-              },
-            );
-          } else {
-            Future.delayed(
-              const Duration(seconds: 2),
-              () {
-                navigator.openOnboardingPage();
-              },
-            );
-          }
         }
       } catch (error, s) {
         throw (error, s);

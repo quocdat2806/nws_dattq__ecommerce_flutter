@@ -9,11 +9,11 @@ class ProductListState extends Equatable {
   final int offset;
   const ProductListState({
     this.fetchProductStatus = LoadStatus.initial,
+    this.loadMoreStatus = LoadStatus.initial,
     this.nameSearchProduct = '',
     this.listProduct=const[],
     this.listFilterProduct=const[],
     this.offset = 0,
-    this.loadMoreStatus = LoadStatus.initial
   });
   @override
   List<Object?> get props =>[

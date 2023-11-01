@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
 class SaveLanguage extends StatelessWidget {
-  final cubit;
-  final state;
-
-  const SaveLanguage({super.key, this.cubit, this.state});
+  final Function()? handleSaveLanguage;
+  final bool isChangeLanguage;
+  const SaveLanguage({
+    super.key,
+    this.handleSaveLanguage,
+    this.isChangeLanguage = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +19,14 @@ class SaveLanguage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: state.isChangeLanguage ? Colors.blue : Colors.grey,
+        color: isChangeLanguage ? Colors.blue : Colors.grey,
       ),
       margin: const EdgeInsets.symmetric(
         vertical: 30,
         horizontal: 30,
       ),
       child: InkWell(
-        onTap: () {
-          cubit.saveSetting(
-            language: state.language,
-          );
-        },
+        onTap: handleSaveLanguage,
         child: Text(
           S.of(context).textSave,
           textAlign: TextAlign.center,

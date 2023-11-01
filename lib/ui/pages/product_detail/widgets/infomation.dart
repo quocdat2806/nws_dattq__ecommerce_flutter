@@ -6,12 +6,20 @@ import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
-class InfoProductDetail extends StatelessWidget {
-  final state;
-  final cubit;
-
-  const InfoProductDetail(
-      {super.key, required this.state, required this.cubit});
+class InformationProduct extends StatelessWidget {
+  final String? title;
+  final String? description;
+  final Function()? handleDecreseQuantity;
+  final Function()? handleIncreseQuantity;
+  final int ?quantity;
+  const InformationProduct({
+    super.key,
+    this.title,
+    this.description,
+    this.handleDecreseQuantity,
+    this.handleIncreseQuantity,
+    this.quantity
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +31,7 @@ class InfoProductDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                state.productEntity?.title ?? '',
+                title ?? '',
                 style: AppStyles.textStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.w700,
@@ -33,7 +41,7 @@ class InfoProductDetail extends StatelessWidget {
               ),
               AppStyles.sizedBoxStyle(),
               Text(
-                state.productEntity?.title ?? '',
+               description ?? '',
                 style: AppStyles.textStyle(
                   fontSize: 15,
                   color: AppColors.greyColor_1,
@@ -79,6 +87,7 @@ class InfoProductDetail extends StatelessWidget {
               child: Row(
                 children: [
                   InkWell(
+                    onTap: handleDecreseQuantity,
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       child: Text(
@@ -88,17 +97,12 @@ class InfoProductDetail extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onTap: () {
-                      cubit.handleDecresementCouting(
-                        price: state.productEntity!.price,
-                      );
-                    },
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   Text(
-                    '${state.quantity!}',
+                    '${quantity!}',
                     style: AppStyles.textStyle(
                       fontSize: 18,
                     ),
@@ -107,11 +111,7 @@ class InfoProductDetail extends StatelessWidget {
                     width: 10,
                   ),
                   InkWell(
-                    onTap: () {
-                      cubit.handleIncresementCouting(
-                        price: state.productEntity!.price,
-                      );
-                    },
+                    onTap: handleIncreseQuantity,
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       child: Text(

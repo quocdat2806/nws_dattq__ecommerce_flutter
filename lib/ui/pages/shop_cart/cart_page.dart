@@ -4,13 +4,14 @@ import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
+import 'package:newware_final_project/models/entities/cart/cart_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
-import 'package:newware_final_project/ui/pages/cart/cart_cubit.dart';
-import 'package:newware_final_project/ui/pages/cart/widgets/cart_item.dart';
-import 'package:newware_final_project/ui/pages/cart/widgets/checkout_cart.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
+import 'package:newware_final_project/ui/pages/shop_cart/cart_cubit.dart';
+import 'package:newware_final_project/ui/pages/shop_cart/widgets/cart_item.dart';
+import 'package:newware_final_project/ui/pages/shop_cart/widgets/checkout_cart.dart';
 import 'package:newware_final_project/ui/widget/header_action/header_action.dart';
-import 'package:newware_final_project/ui/widget/loading/loading_status.dart';
+import 'package:newware_final_project/ui/widget/loading/circular_loading.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -30,7 +31,7 @@ class _CartPageState extends State<CartPage> {
         );
       },
       child: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
-        int? userId = state.user!.id;
+        int? userId = state.user?.id;
         return CartChildPageState(
           userId: userId,
         );
@@ -48,47 +49,48 @@ class CartChildPageState extends StatefulWidget {
   State<CartChildPageState> createState() => _CartChildPageStateState();
 }
 
-class _CartChildPageStateState extends State<CartChildPageState>
-    with AutomaticKeepAliveClientMixin {
+class _CartChildPageStateState extends State<CartChildPageState> {
   late CartCubit _cubit;
 
   @override
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<CartCubit>(context);
-    _cubit.fetchLengthCart(widget.userId!);
+    _cubit.fetchCart(widget.userId ?? 0);
   }
 
   @override
   void dispose() {
-    _cubit.updateCart();
+    _cubit.updateCartWhenClose();
     _cubit.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    // ignore: invalid_use_of_protected_member
+    final hasActiveRouteBelow = ModalRoute.of(context)?.hasActiveRouteBelow;
+
     return RefreshIndicator(
       onRefresh: () async {
         await Future.delayed(
           const Duration(seconds: 3),
           () {
-            _cubit.fetchLengthCart(widget.userId!);
+            _cubit.fetchCart(widget.userId!);
           },
         );
       },
-      child: BlocBuilder<CartCubit, CartState>(
-        bloc: _cubit,
-        buildWhen: (previous, current) =>
-            previous.updateCartStatus != current.updateCartStatus,
-        builder: (context, state) {
-          _cubit.handleCheckOutCartSuccess(context);
-          return state.fetchCartStatus == LoadStatus.loading
-              ? const LoadingStatus()
-              : Scaffold(
-                  body: SafeArea(
-                    child: Column(
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocBuilder<CartCubit, CartState>(
+            bloc: _cubit,
+            buildWhen: (previous, current) =>
+                previous.updateCartStatus != current.updateCartStatus,
+            builder: (context, state) {
+              _cubit.handleCheckOutCartSuccess(context);
+              return state.fetchCartStatus == LoadStatus.loading
+                  ? const CircularLoading()
+                  : Column(
                       children: [
                         Container(
                           padding: const EdgeInsets.only(
@@ -101,7 +103,9 @@ class _CartChildPageStateState extends State<CartChildPageState>
                             onTabLeftIcon: () {
                               _cubit.backPage(context);
                             },
-                            pathIconLeft: AppImages.pathBackImage,
+                            pathIconLeft: hasActiveRouteBelow == true
+                                ? AppImages.pathBackImage
+                                : null,
                           ),
                         ),
                         Container(
@@ -118,16 +122,31 @@ class _CartChildPageStateState extends State<CartChildPageState>
                             ),
                           ),
                         ),
+                        state.listCartEntity.isNotEmpty
+                            ? const SizedBox.shrink()
+                            : Center(
+                                child: Text(
+                                  S.current.textCartEmpty,
+                                ),
+                              ),
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: ListView.builder(
                               itemCount: state.listCartEntity.length,
                               itemBuilder: (context, index) {
+                                CartEntity cartEntity =
+                                    state.listCartEntity[index];
+                                int? price = state
+                                    .listCartEntity[index].productEntity?.price;
                                 return CartItem(
-                                  state: state,
-                                  index: index,
-                                  cubit: _cubit,
+                                  handleDecreseQuantity: () {
+                                    _cubit.handleDecreseQuantity(index, price);
+                                  },
+                                  handleIncreseQuantity: () {
+                                    _cubit.handleIncreseQuantity(index, price);
+                                  },
+                                  cartEntity: cartEntity,
                                 );
                               },
                             ),
@@ -135,19 +154,17 @@ class _CartChildPageStateState extends State<CartChildPageState>
                         ),
                         state.listCartEntity.isNotEmpty
                             ? CheckOutCart(
-                                state: state,
-                                cubit: _cubit,
+                                lengthItem: state.listCartEntity.length,
+                                totalPrice: state.totalPriceCart,
+                                handleCheckoutCart: _cubit.handleCheckout,
                               )
                             : const SizedBox.shrink(),
                       ],
-                    ),
-                  ),
-                );
-        },
+                    );
+            },
+          ),
+        ),
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

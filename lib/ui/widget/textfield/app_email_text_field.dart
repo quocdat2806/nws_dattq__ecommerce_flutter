@@ -28,7 +28,7 @@ class AppEmailTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            labelText!,
+            labelText??'',
             style: AppStyles.textStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -60,10 +60,10 @@ class AppEmailTextField extends StatelessWidget {
                     },
                     controller: textEditingController,
                     onChanged: (value) {
-                        onChanged!(value);
+                      onChanged!=null? onChanged!(value):null;
                     },
                     decoration: InputDecoration(
-                      hintText: hintText!,
+                      hintText: hintText??'',
                       hintStyle: AppStyles.textStyle(
                         color: AppColors.greyColor_1,
                       ),

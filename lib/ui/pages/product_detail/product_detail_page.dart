@@ -5,17 +5,17 @@ import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/product_responsitory.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
-import 'package:newware_final_project/ui/pages/cart/cart_cubit.dart';
+import 'package:newware_final_project/responsitories/product_responsitory.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
 import 'package:newware_final_project/ui/pages/product_detail/product_detail_cubit.dart';
 import 'package:newware_final_project/ui/pages/product_detail/product_detail_navigator.dart';
-import 'package:newware_final_project/ui/pages/product_detail/widgets/add_to_cart_product_detail.dart';
-import 'package:newware_final_project/ui/pages/product_detail/widgets/description_product_detail.dart';
-import 'package:newware_final_project/ui/pages/product_detail/widgets/info_product_detail.dart';
-import 'package:newware_final_project/ui/pages/product_detail/widgets/size_color_product_detail.dart';
-import 'package:newware_final_project/ui/pages/product_detail/widgets/slider_image_product_detail.dart';
-import 'package:newware_final_project/ui/widget/loading/loading_status.dart';
+import 'package:newware_final_project/ui/pages/product_detail/widgets/add_to_cart.dart';
+import 'package:newware_final_project/ui/pages/product_detail/widgets/description.dart';
+import 'package:newware_final_project/ui/pages/product_detail/widgets/infomation.dart';
+import 'package:newware_final_project/ui/pages/product_detail/widgets/size_color.dart';
+import 'package:newware_final_project/ui/pages/product_detail/widgets/slider_image.dart';
+import 'package:newware_final_project/ui/widget/loading/circular_loading.dart';
+
 class ProductDetailPage extends StatefulWidget {
   static const router = 'productDetail';
   final int? productId;
@@ -30,29 +30,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     final userRepo = RepositoryProvider.of<UserResponsitory>(context);
-
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (con) {
-            final proRepo = RepositoryProvider.of<ProductResponsitory>(context);
-            return ProductDetailCubit(
-              navigator: ProductDetailNavigator(context: context),
-              proRepo: proRepo,
-              userRepo: userRepo,
-            );
-          },
-        ),
-        BlocProvider(
-          create: (context) => CartCubit(userRepo: userRepo),
-        ),
-      ],
+    return BlocProvider(
+      create: (con) {
+        final proRepo = RepositoryProvider.of<ProductResponsitory>(context);
+        return ProductDetailCubit(
+          navigator: ProductDetailNavigator(context: context),
+          proRepo: proRepo,
+          userRepo: userRepo,
+        );
+      },
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
-          int? userId = state.user!.id;
           return ProductPageChildState(
-            productId: widget.productId!,
-            userId: userId,
+            productId: widget.productId ?? 0,
           );
         },
       ),
@@ -62,9 +52,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
 class ProductPageChildState extends StatefulWidget {
   final int? productId;
-  final int? userId;
 
-  const ProductPageChildState({super.key, this.productId, this.userId});
+  const ProductPageChildState({super.key, this.productId});
 
   @override
   State<ProductPageChildState> createState() => _ProductPageChildStateState();
@@ -72,27 +61,12 @@ class ProductPageChildState extends StatefulWidget {
 
 class _ProductPageChildStateState extends State<ProductPageChildState> {
   late ProductDetailCubit _cubit;
-  late CartCubit cubit;
-  int lengthCart = 0;
-  late final _listSize;
-  late final _listColor;
 
   @override
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<ProductDetailCubit>(context);
-    _cubit.fetchProductDetail(widget.productId!);
-    cubit = BlocProvider.of<CartCubit>(context);
-    cubit.fetchLengthCart(widget.userId!).then((value) {
-      lengthCart = value;
-    });
-    _listSize = ['S', 'M', 'L', 'XL', 'XXL'];
-    _listColor = [
-      'c1',
-      'c2',
-      'c3',
-      'c4',
-    ];
+    _cubit.fetchProductDetail(widget.productId ?? 0);
   }
 
   @override
@@ -106,63 +80,91 @@ class _ProductPageChildStateState extends State<ProductPageChildState> {
     return BlocBuilder<ProductDetailCubit, ProductDetailState>(
       bloc: _cubit,
       builder: (context, state) {
-        _cubit.handleShowSuccessAddToCart(context);
+        _cubit.showSuccessAddToCart(context);
         return state.loadProductDetalStatus == LoadStatus.loading
-            ? const LoadingStatus()
+            ? const CircularLoading()
             : Scaffold(
-                body: SafeArea(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: Stack(
-                      children: [
-                        SliderImageProductDetail(
-                          state: state,
-                          cubit: _cubit,
-                          lengthCart: lengthCart,
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          top: MediaQuery.of(context).size.height / 2.2,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 15,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.primaryColor,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(25),
-                                topLeft: Radius.circular(25),
-                              ),
-                            ),
-                            child: ListView(
-                              children: [
-                                InfoProductDetail(state: state, cubit: _cubit),
-                                AppStyles.sizedBoxStyle(),
-                                SizeColorProductDetail(
-                                  cubit: _cubit,
-                                  state: state,
-                                  listSize: _listSize,
-                                  listColor: _listColor,
-                                ),
-                                DescriptionProductDetail(
-                                  description:
-                                      state.productEntity?.description ?? '',
-                                ),
-                                AppStyles.sizedBoxStyle(height: 15),
-                                AddToCartProductDetail(
-                                  state: state,
-                                  cubit: _cubit,
-                                ),
-                              ],
+                body: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: [
+                      SlideImageProduct(
+                        currentImage: state.currentImage,
+                        onTabBackIcon: _cubit.backPage,
+                        onTabCartIcon: _cubit.openCartPage,
+                        onChangeImage: _cubit.handleChangImage,
+                        images: state.productEntity?.images ?? [],
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        top: MediaQuery.of(context).size.height / 2.2,
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                            bottom: 0,
+                            left: 15,
+                            right: 15,
+                            top: 15,
+                          ),
+                          decoration: const BoxDecoration(
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(25),
+                              topLeft: Radius.circular(25),
                             ),
                           ),
+                          child: ListView(
+                            padding: const EdgeInsets.only(bottom: 0),
+                            children: [
+                              InformationProduct(
+                                quantity: state.quantity,
+                                title: state.productEntity?.title,
+                                description: state.productEntity?.description,
+                                handleDecreseQuantity: () {
+                                  int? price = state.productEntity?.price;
+                                  _cubit.handleDecresementCouting(
+                                    price: price,
+                                  );
+                                },
+                                handleIncreseQuantity: () {
+                                  int? price = state.productEntity?.price;
+                                  _cubit.handleIncresementCouting(
+                                    price: price,
+                                  );
+                                },
+                              ),
+                              AppStyles.sizedBoxStyle(),
+                              SizeAndColorProduct(
+                                handleChangeColor: _cubit.handleChangeColor,
+                                handleChangeSize: _cubit.handleChangeSize,
+                                currentColor: state.currentColor,
+                                currentSize: state.currentSize,
+                              ),
+                              DescriptionProduct(
+                                description:
+                                    state.productEntity?.description ?? '',
+                              ),
+                              AppStyles.sizedBoxStyle(height: 24),
+                              BlocBuilder<AppCubit, AppState>(
+                                builder: (context, stateUser) {
+                                  return AddToCart(
+                                    totalPrice: state.totalPrice,
+                                    handleAddToCart: () {
+                                      _cubit.handleAddToCart(
+                                        userEntity: stateUser.user,
+                                        productEntity: state.productEntity,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               );

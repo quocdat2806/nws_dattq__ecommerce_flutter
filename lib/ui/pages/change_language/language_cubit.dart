@@ -3,8 +3,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/bloc/setting/app_setting_cubit.dart';
-import 'package:newware_final_project/database/shared_preferences_helper.dart';
-import 'package:newware_final_project/ui/pages/language/language_state.dart';
+import 'package:newware_final_project/ui/pages/change_language/language_state.dart';
 
 
 class LanguageCubit extends Cubit<LanguageState> {
@@ -16,15 +15,15 @@ class LanguageCubit extends Cubit<LanguageState> {
     required this.settingCubit,
   }) : super( LanguageState());
 
-  void changeViLanguage({isSave}){
+  void changeViLanguage(){
       settingCubit.changeViLanguage();
   }
-  void changeEnLanguage({isSave}){
+  void changeEnLanguage(){
     settingCubit.changeEnLanguage();
   }
-  void saveSetting({language='en'}){
+  void saveSetting() {
     settingCubit.saveLanguage();
-    SharedPreferencesHelper.setDefaultLanguage(language:language );
   }
+
 
 }

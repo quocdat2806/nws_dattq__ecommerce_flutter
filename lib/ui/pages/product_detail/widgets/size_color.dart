@@ -5,20 +5,39 @@ import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
-class SizeColorProductDetail extends StatelessWidget {
-  final listSize;
-  final listColor;
-  final cubit;
-  final state;
+class SizeAndColorProduct extends StatefulWidget {
+  final Function(int index)?handleChangeSize;
+  final Function(int index)?handleChangeColor;
+  final int ?currentSize;
+  final int ?currentColor;
 
-  const SizeColorProductDetail({
+
+  const SizeAndColorProduct({
     super.key,
-    required this.cubit,
-    required this.state,
-    required this.listSize,
-    required this.listColor,
+    this.handleChangeColor,
+    this.handleChangeSize,
+    this.currentColor,
+    this.currentSize
   });
 
+  @override
+  State<SizeAndColorProduct> createState() => _SizeAndColorProductState();
+}
+
+class _SizeAndColorProductState extends State<SizeAndColorProduct> {
+  late final _listSize;
+  late final _listColor;
+  @override
+  void initState() {
+    _listSize = ['S', 'M', 'L', 'XL', 'XXL'];
+    _listColor = [
+      'c1',
+      'c2',
+      'c3',
+      'c4',
+    ];
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -42,10 +61,10 @@ class SizeColorProductDetail extends StatelessWidget {
             Row(
               children: [
                 ...List.generate(
-                  listSize.length,
+                  _listSize.length,
                   (index) => InkWell(
                     onTap: () {
-                      cubit.handleChangeSize(index);
+                      widget.handleChangeSize!(index);
                     },
                     child: Container(
                       margin: const EdgeInsets.only(
@@ -58,7 +77,7 @@ class SizeColorProductDetail extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: state.currentSize == index ? Colors.black : null,
+                        color: widget.currentSize == index ? Colors.black : null,
                         border: Border.all(
                           width: 1,
                           color: AppColors.greyColor,
@@ -67,9 +86,9 @@ class SizeColorProductDetail extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          '${listSize[index]}',
+                          '${_listSize[index]}',
                           style: TextStyle(
-                            color: state.currentSize == index
+                            color: widget.currentSize == index
                                 ? Colors.white
                                 : null,
                           ),
@@ -99,10 +118,10 @@ class SizeColorProductDetail extends StatelessWidget {
           child: Column(
             children: [
               ...List.generate(
-                listColor.length,
+                _listColor.length,
                 (index) => InkWell(
                   onTap: () {
-                    cubit.handleChangeColor(index);
+                    widget.handleChangeColor!(index);
                   },
                   child: Container(
                     constraints: const BoxConstraints(
@@ -122,7 +141,7 @@ class SizeColorProductDetail extends StatelessWidget {
                         getColorIndex(index),
                       ),
                     ),
-                    child: state.currentColor == index
+                    child: widget.currentColor == index
                         ? Icon(
                             Icons.check,
                             size: 20,
@@ -140,7 +159,7 @@ class SizeColorProductDetail extends StatelessWidget {
   }
 
   int getColorIndex(int index) {
-    switch (listColor[index]) {
+    switch (_listColor[index]) {
       case 'c1':
         return 0xFFFFFF;
       case 'c2':

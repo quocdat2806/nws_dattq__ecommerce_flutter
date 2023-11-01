@@ -24,11 +24,11 @@ class HeaderAction extends StatelessWidget {
           onTap: () {
             (onTabLeftIcon!=null) ? onTabLeftIcon!():null;
           },
-          child: AppStyles.iconSvgStyle(
+          child: pathIconLeft !=null? AppStyles.iconSvgStyle(
             pathImage: pathIconLeft,
             width: 35.0,
             height: 35.0,
-          ),
+          ):const SizedBox.shrink(),
         ),
         InkWell(
           onTap: ()  {

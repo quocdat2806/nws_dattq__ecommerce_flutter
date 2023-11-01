@@ -4,17 +4,16 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 class SocketIoConnect {
   MainCubit? mainCubit;
-  int? userId;
-  SocketIoConnect({this.mainCubit, this.userId});
+  SocketIoConnect({this.mainCubit});
   connectAndListen() {
     IO.Socket socket = IO.io(
       'https://backend-newware.onrender.com',
       OptionBuilder().setTransports(['websocket']).build(),
     );
     socket.onConnect((_) {
-      socket.on("notificationCouter", (data) {
-        int dataParse = int.parse(data);
-        mainCubit?.couterNotify(dataParse);
+      socket.on("notificationCouter", (quantityNotify) {
+        int notify = int.parse(quantityNotify);
+        mainCubit?.setCouterNotify(notify);
       });
     });
     socket.onDisconnect((_) => ('disconnect'));

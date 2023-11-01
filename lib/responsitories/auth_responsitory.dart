@@ -62,7 +62,7 @@ class AuthResponsitoryImpl extends AuthResponsitory {
   ) async {
     await Future.delayed(
       const Duration(
-        seconds: 2,
+        seconds: 1,
       ),
     );
     return authProvider.singIn(

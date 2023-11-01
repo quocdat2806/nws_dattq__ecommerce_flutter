@@ -2,11 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/models/entities/token/token_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/auth_responsitory.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
-import 'package:newware_final_project/ui/pages/auth/signup/singup_state.dart';
+import 'package:newware_final_project/responsitories/auth_responsitory.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
+import 'package:newware_final_project/ui/pages/auth/signup/signup_state.dart';
 import 'package:newware_final_project/utils/utils.dart';
-import 'singup_navigator.dart';
+import 'signup_navigator.dart';
 
 class SingUpCubit extends Cubit<SingUpState> {
   final SignUpNavigator navigator;

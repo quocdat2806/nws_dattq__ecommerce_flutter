@@ -52,6 +52,8 @@
   "textItem": "item",
   "textCheckoutCart": "Process To Checkout",
   "textCartEmpty": "Your Cart is empty! Please Add To Cart",
+  "textNotifyEmpty": "Not have notify yet",
+
   "textCheckoutCartSuccess": "You checkout success",
   "textDescNotify": "You have successfully installed your order",
   "textChangeLanguage": "Change Language",
@@ -69,5 +71,8 @@
   "textUploadImage": "Upload Image",
   "textSetting": "Setting",
   "textSearchPage": "Search",
-  "textSearchProduct": "Search Product"
+  "textSearchProduct": "Search Product",
+  "textYouWantToLogOut": "Do you want to logout ?",
+  "textYes": "Yes",
+  "textNo": "No"
 }

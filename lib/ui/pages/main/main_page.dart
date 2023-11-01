@@ -1,17 +1,15 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/generated/l10n.dart';
-import 'package:newware_final_project/router/router_config.dart';
 import 'package:newware_final_project/socket/socket_io.dart';
-import 'package:newware_final_project/ui/pages/cart/cart_page.dart';
 import 'package:newware_final_project/ui/pages/home/home_page.dart';
 import 'package:newware_final_project/ui/pages/main/main_cubit.dart';
 import 'package:newware_final_project/ui/pages/main/widgets/bottomnavigation_item.dart';
 import 'package:newware_final_project/ui/pages/notification/notification_page.dart';
 import 'package:newware_final_project/ui/pages/profile/profile_page.dart';
+import 'package:newware_final_project/ui/pages/shop_cart/cart_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({
@@ -27,20 +25,12 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: MainCubit(),
-      child: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
-        int? userId = state.user!.id;
-        return MainPageChildState(
-          userId: userId,
-        );
-      }),
+      child: const MainPageChildState(),
     );
   }
 }
-
 class MainPageChildState extends StatefulWidget {
-  final int? userId;
-
-  const MainPageChildState({super.key, required this.userId});
+  const MainPageChildState({super.key});
 
   @override
   State<MainPageChildState> createState() => _MainPageChildStateState();
@@ -54,13 +44,11 @@ class _MainPageChildStateState extends State<MainPageChildState> {
   void initState() {
     super.initState();
     _cubit = BlocProvider.of<MainCubit>(context);
-    socket = SocketIoConnect(mainCubit: _cubit, userId: widget.userId)
-        .connectAndListen();
+    socket = SocketIoConnect(mainCubit: _cubit).connectAndListen();
   }
 
   @override
   void dispose() {
-    // _cubit.close();
     super.dispose();
   }
 
@@ -81,7 +69,12 @@ class _MainPageChildStateState extends State<MainPageChildState> {
             ),
           ),
           bottomNavigationBar: Container(
-            padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 0),
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 10,
+              bottom: 0,
+            ),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(40),
@@ -102,35 +95,36 @@ class _MainPageChildStateState extends State<MainPageChildState> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BottomNavigationItem(
-                  pathIcon: AppImages.pathHomeIcon,
+                  pathIconNavigation: AppImages.pathHomeIcon,
                   title: S.of(context).textHome,
                   onTabItem: _cubit.switchTap,
                   index: 0,
-                  state: state,
+                  isActivePage: state.selectedIndex==0,
                 ),
                 BottomNavigationItem(
-                  pathIcon: AppImages.pathCartIcon,
+                  pathIconNavigation: AppImages.pathCartIcon,
                   title: S.of(context).textCart,
                   onTabItem: _cubit.switchTap,
                   index: 1,
-                  state: state,
+                  isActivePage: state.selectedIndex==1,
+
                 ),
                 BottomNavigationItem(
-                  pathIcon: AppImages.pathNotifyIcon,
+                  pathIconNavigation: AppImages.pathNotifyIcon,
                   title: S.of(context).textNotify,
                   onTabItem: _cubit.switchTap,
                   index: 2,
-                  state: state,
                   hasNotify: true,
-                  quantityNotify: state.couterNotify,
-                  clearNotifyFun: _cubit.clearNotify,
+                  isActivePage: state.selectedIndex==2,
+                  quantityNotify: state.quantityNotify,
+                  handleClearNotify: _cubit.clearNotify,
                 ),
                 BottomNavigationItem(
-                  pathIcon: AppImages.pathProfileIcon,
+                  pathIconNavigation: AppImages.pathProfileIcon,
                   title: S.of(context).textProfile,
                   onTabItem: _cubit.switchTap,
+                  isActivePage: state.selectedIndex==3,
                   index: 3,
-                  state: state,
                 ),
               ],
             ),

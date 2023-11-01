@@ -1,6 +1,12 @@
 class ConfigHeaderRequestApi{
-  static const  Map<String, String> requestHeaders = {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-  };
+
+ static  Map<String,String>requestHeaders({token}){
+    return  {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+  }
+
+
 }

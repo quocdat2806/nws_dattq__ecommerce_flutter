@@ -5,13 +5,13 @@ import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
 class NotificationItem extends StatelessWidget {
-  final String? pathImageAvatar;
+  final String? pathImage;
   final String? timeDiff;
   final String? idNotification;
 
   const NotificationItem({
     super.key,
-    this.pathImageAvatar,
+    this.pathImage,
     this.timeDiff,
     this.idNotification,
   });
@@ -35,7 +35,7 @@ class NotificationItem extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      pathImageAvatar ?? AppImages.pathErrorImage,
+                      pathImage ?? AppImages.pathErrorImage,
                     ),
                   ),
                 ),

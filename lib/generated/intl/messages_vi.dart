@@ -88,8 +88,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "textMyCart": MessageLookupByLibrary.simpleMessage("Giỏ Hàng Của Tôi"),
         "textName": MessageLookupByLibrary.simpleMessage("Tên"),
         "textNameLable": MessageLookupByLibrary.simpleMessage("Tên của bạn"),
+        "textNo": MessageLookupByLibrary.simpleMessage("Không"),
         "textNotification": MessageLookupByLibrary.simpleMessage("Thông Báo"),
         "textNotify": MessageLookupByLibrary.simpleMessage("Thông Báo"),
+        "textNotifyEmpty":
+            MessageLookupByLibrary.simpleMessage("Chưa có thông báo mới nhất"),
         "textOkay": MessageLookupByLibrary.simpleMessage("Được"),
         "textOn": MessageLookupByLibrary.simpleMessage("bật"),
         "textOr": MessageLookupByLibrary.simpleMessage("hoặc"),
@@ -121,6 +124,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "textValidateEmptyString":
             MessageLookupByLibrary.simpleMessage("Vui lòng nhập trường này"),
         "textWelcome": MessageLookupByLibrary.simpleMessage("Chào mừng"),
+        "textYes": MessageLookupByLibrary.simpleMessage("Có"),
+        "textYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
+            "Bạn có muốn đăng xuất không ?"),
         "titleOnbroadingPage_1": MessageLookupByLibrary.simpleMessage(
             "Giảm giá 20%\nSản phẩm mới đến"),
         "titleOnbroadingPage_2": MessageLookupByLibrary.simpleMessage(

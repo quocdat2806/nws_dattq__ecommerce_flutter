@@ -580,6 +580,16 @@ class S {
     );
   }
 
+  /// `Not have notify yet`
+  String get textNotifyEmpty {
+    return Intl.message(
+      'Not have notify yet',
+      name: 'textNotifyEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `You checkout success`
   String get textCheckoutCartSuccess {
     return Intl.message(
@@ -755,6 +765,36 @@ class S {
     return Intl.message(
       'Search Product',
       name: 'textSearchProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to logout ?`
+  String get textYouWantToLogOut {
+    return Intl.message(
+      'Do you want to logout ?',
+      name: 'textYouWantToLogOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get textYes {
+    return Intl.message(
+      'Yes',
+      name: 'textYes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get textNo {
+    return Intl.message(
+      'No',
+      name: 'textNo',
       desc: '',
       args: [],
     );

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/models/entities/category/category_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/category_responsitory.dart';
+import 'package:newware_final_project/responsitories/category_responsitory.dart';
 import 'package:newware_final_project/ui/pages/home/home_navigator.dart';
 import 'package:newware_final_project/ui/pages/home/home_state.dart';
 

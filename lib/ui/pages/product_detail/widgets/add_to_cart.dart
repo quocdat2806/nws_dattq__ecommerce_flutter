@@ -7,22 +7,22 @@ import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
-import 'package:newware_final_project/models/enums/load_status.dart';
 
-class AddToCartProductDetail extends StatelessWidget {
-  final state;
-  final cubit;
+class AddToCart extends StatelessWidget {
+  final int? totalPrice;
+  final Function()?handleAddToCart;
 
-  const AddToCartProductDetail({
+  const AddToCart({
     super.key,
-    required this.state,
-    required this.cubit,
+    this.totalPrice,
+    this.handleAddToCart,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Column(
           children: [
@@ -36,9 +36,7 @@ class AddToCartProductDetail extends StatelessWidget {
             ),
             AppStyles.sizedBoxStyle(height: 4),
             Text(
-              '\$${cubit.handleTotalPrice(
-                price: state.productEntity?.price ?? 0,
-              )}.00 ',
+              '\$ $totalPrice .00 ',
               style: AppStyles.textStyle(
                 fontFamily: 'Bold',
                 fontSize: 20,
@@ -53,9 +51,7 @@ class AddToCartProductDetail extends StatelessWidget {
             vertical: 14,
           ),
           decoration: BoxDecoration(
-            color: state.loadAddtoCartStatus != LoadStatus.successAddToCart
-                ? AppColors.secondaryColor
-                : AppColors.greyColor,
+            color:  AppColors.secondaryColor,
             borderRadius: BorderRadius.circular(40),
           ),
           child: Row(
@@ -67,12 +63,7 @@ class AddToCartProductDetail extends StatelessWidget {
               BlocBuilder<AppCubit, AppState>(
                 builder: (context, stateUser) {
                   return InkWell(
-                    onTap: () {
-                      cubit.handleAddToCart(
-                        userEntity: stateUser.user,
-                        productEntity: state.productEntity,
-                      );
-                    },
+                    onTap: handleAddToCart,
                     child: Text(
                       S.of(context).textAddToCart,
                       style: AppStyles.textStyle(

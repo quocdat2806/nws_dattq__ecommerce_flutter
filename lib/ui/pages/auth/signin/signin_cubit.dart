@@ -2,10 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/models/entities/user/user_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/auth_responsitory.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
-import 'package:newware_final_project/ui/pages/auth/signin/singin_navigator.dart';
-import 'package:newware_final_project/ui/pages/auth/signin/singin_state.dart';
+import 'package:newware_final_project/responsitories/auth_responsitory.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
+import 'package:newware_final_project/ui/pages/auth/signin/signin_navigator.dart';
+import 'package:newware_final_project/ui/pages/auth/signin/signin_state.dart';
 import 'package:newware_final_project/utils/utils.dart';
 
 class SignInCubit extends Cubit<SignInState> {
@@ -73,20 +73,16 @@ class SignInCubit extends Cubit<SignInState> {
       );
     }
   }
-  void signInWithGoogle(){
-    emit(
-      state.copyWith(
-        signInStatus: LoadStatus.loading,
-      ),
-    );
 
-  }
-  void onTabShowAndHideIcon(){
+  void onTabShowAndHidePassword() {
     bool isHide = !state.isShowOrHidePassword;
-    emit(state.copyWith(isShowOrHidePassword: isHide));
+    emit(
+      state.copyWith(isShowOrHidePassword: isHide),
+    );
   }
+
   void signIn(bool isValidate) async {
-    if(!isValidate){
+    if (!isValidate) {
       return;
     }
     String email = state.email ?? '';

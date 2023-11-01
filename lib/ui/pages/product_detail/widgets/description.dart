@@ -3,11 +3,9 @@ import 'package:newware_final_project/common/app_colors.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
-class DescriptionProductDetail extends StatelessWidget {
+class DescriptionProduct extends StatelessWidget {
   final String description;
-
-
-  const DescriptionProductDetail({super.key,  required this.description});
+  const DescriptionProduct({super.key,  required this.description});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/models/entities/cart/cart_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
-import 'package:newware_final_project/router/router_config.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
 import 'package:newware_final_project/socket/socket_io.dart';
 import 'package:newware_final_project/ui/commons/show_success.dart';
 
@@ -18,8 +16,6 @@ class CartCubit extends Cubit<CartState> {
   CartCubit({
     required this.userRepo,
   }) : super(const CartState());
-
-
   handleCheckOutCartSuccess(BuildContext context){
     if (state.updateCartStatus == LoadStatus.successCheckout) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -27,7 +23,7 @@ class CartCubit extends Cubit<CartState> {
           context,
           S.current.textCheckoutCartSuccess,
         );
-        handleDeleteUpdateCartStatus();
+        deleteCheckoutCartStatus();
       });
     }
   }
@@ -37,32 +33,31 @@ class CartCubit extends Cubit<CartState> {
       Navigator.pop(context);
     }
   }
-  Future<int> fetchLengthCart(int userId) async {
+  void fetchCart(int userId) async {
     emit(
       state.copyWith(
         fetchCartStatus: LoadStatus.loading,
-        updateCartStatus: LoadStatus.loading,
       ),
     );
     try {
       final listCartEntity = await userRepo.getCart(userId);
-
       if (listCartEntity != null) {
+        int totalPrice = handleTotalPriceCart(listCartEntity);
+
         emit(
           state.copyWith(
             fetchCartStatus: LoadStatus.success,
             listCartEntity: listCartEntity,
+            totalPriceCart: totalPrice,
             updateCartStatus: LoadStatus.success,
           ),
         );
-        return state.listCartEntity.length;
       } else {
         emit(
           state.copyWith(
             fetchCartStatus: LoadStatus.failure,
           ),
         );
-        return 0;
       }
     } catch (error) {
       emit(
@@ -70,11 +65,10 @@ class CartCubit extends Cubit<CartState> {
           fetchCartStatus: LoadStatus.failure,
         ),
       );
-      return 0;
     }
   }
 
-  void updateCart() {
+  void updateCartWhenClose() {
     if (state.listCartEntity.isEmpty) {
       return;
     }
@@ -84,10 +78,10 @@ class CartCubit extends Cubit<CartState> {
       rethrow;
     }
   }
-  void handleDeleteUpdateCartStatus(){
+  void deleteCheckoutCartStatus(){
     emit(
       state.copyWith(
-        updateCartStatus: LoadStatus.loading,
+        updateCartStatus: LoadStatus.initial,
       ),
     );
   }
@@ -131,10 +125,13 @@ class CartCubit extends Cubit<CartState> {
     quantity = quantity + 1;
     list[index].total = (quantity * price) as int?;
     list[index].quantity = quantity;
+    int totalPrice = handleTotalPriceCart(list);
+
     emit(
       state.copyWith(
         listCartEntity: list,
         updateCartStatus: LoadStatus.success,
+        totalPriceCart: totalPrice
       ),
     );
   }
@@ -153,21 +150,21 @@ class CartCubit extends Cubit<CartState> {
     }
     list[index].total = (quantity * price) as int?;
     list[index].quantity = quantity;
-
+    int totalPrice = handleTotalPriceCart(list);
     emit(
       state.copyWith(
         listCartEntity: list,
         updateCartStatus: LoadStatus.success,
+        totalPriceCart: totalPrice
       ),
     );
   }
 
-  int handleTotalPrice() {
+  int handleTotalPriceCart(List<CartEntity>list) {
     int total = 0;
-    for (var element in state.listCartEntity) {
+    for (var element in list) {
       total += element.total!;
     }
-    emit(state.copyWith(totalPriceCart: total));
     return total;
   }
 }

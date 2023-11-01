@@ -11,10 +11,10 @@ class MainCubit extends Cubit<MainState> {
       ),
     );
   }
-  void couterNotify(int data){
+  void setCouterNotify(int couterNotify){
     emit(
       state.copyWith(
-        couterNotify: data,
+        quantityNotify: couterNotify,
       ),
     );
 
@@ -26,7 +26,7 @@ class MainCubit extends Cubit<MainState> {
     }
     emit(
       state.copyWith(
-        couterNotify: 0,
+        quantityNotify: 0,
       ),
     );
   }

@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 
 class LanguageItem extends StatelessWidget {
-  final state;
+  final String ? currentLanguage;
   final Function()? onTabLanguage;
   final String? languageText;
   final String? symboliclanguage;
 
   const LanguageItem({
     super.key,
-    this.state,
+    this.currentLanguage,
     this.onTabLanguage,
     this.symboliclanguage,
     this.languageText,
@@ -44,7 +44,7 @@ class LanguageItem extends StatelessWidget {
                 ),
               ],
             ),
-            (state.language == symboliclanguage)
+            (currentLanguage == symboliclanguage)
                 ? const Align(
                     alignment: Alignment.centerRight,
                     child: Icon(

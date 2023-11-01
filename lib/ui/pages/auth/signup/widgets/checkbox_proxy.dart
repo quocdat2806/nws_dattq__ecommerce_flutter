@@ -4,7 +4,7 @@ import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
 class CheckBoxProxy extends StatefulWidget {
-  final Function() ?changStatusCheckbox;
+  final Function()? changStatusCheckbox;
 
   final bool? isChecked;
 
@@ -29,7 +29,9 @@ class _CheckBoxProxyState extends State<CheckBoxProxy> {
     return CheckboxListTile(
       value: widget.isChecked,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20))
+        borderRadius: BorderRadius.all(
+          Radius.circular(20),
+        ),
       ),
       contentPadding: const EdgeInsets.all(0),
       controlAffinity: ListTileControlAffinity.leading,
@@ -40,7 +42,7 @@ class _CheckBoxProxyState extends State<CheckBoxProxy> {
           fontFamily: 'Regular',
         ),
       ),
-      onChanged: (value){
+      onChanged: (value) {
         widget.changStatusCheckbox!();
       },
     );

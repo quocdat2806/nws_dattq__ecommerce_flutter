@@ -2,11 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/models/entities/product/product_entity.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
-import 'package:newware_final_project/repositories/product_responsitory.dart';
+import 'package:newware_final_project/responsitories/product_responsitory.dart';
 import 'package:newware_final_project/ui/pages/product_list/product_list_navigator.dart';
-
 part 'product_list_state.dart';
-
 class ProductListCubit extends Cubit<ProductListState> {
   final ProductListNavigator navigator;
   final ProductResponsitory proRepo;
@@ -27,7 +25,6 @@ class ProductListCubit extends Cubit<ProductListState> {
             fetchProductStatus: LoadStatus.success,
             listProduct: productList,
             listFilterProduct: productList,
-            loadMoreStatus: LoadStatus.success,
           ),
         );
       } else {
@@ -54,13 +51,14 @@ class ProductListCubit extends Cubit<ProductListState> {
     off++;
     try {
       final productList = await proRepo.getProductsInCategory(categoryId, off);
-
       List<ProductEntity> list = [...state.listFilterProduct];
       list.addAll(productList ?? []);
       if (productList != null) {
         emit(
           state.copyWith(
-              listFilterProduct: list, loadMoreStatus: LoadStatus.loadingMore),
+            listFilterProduct: list,
+            loadMoreStatus: LoadStatus.success,
+          ),
         );
       } else {
         emit(
@@ -86,7 +84,7 @@ class ProductListCubit extends Cubit<ProductListState> {
       emit(
         state.copyWith(
           listFilterProduct: state.listProduct,
-          loadMoreStatus: LoadStatus.loadingMore,
+          loadMoreStatus: LoadStatus.success,
           offset: 0,
         ),
       );

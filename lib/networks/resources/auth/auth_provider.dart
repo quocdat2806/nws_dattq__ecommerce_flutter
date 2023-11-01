@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/models/entities/token/token_entity.dart';
 import 'package:newware_final_project/models/entities/user/user_entity.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +27,7 @@ class AuthProvider {
           ApiAuth.singUp,
         ),
         body: endcodedUserInfo,
-        headers: ConfigHeaderRequestApi.requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(),
       );
       if (response.statusCode == HttpStatus.created ||
           response.statusCode == 200 ||
@@ -59,7 +58,7 @@ class AuthProvider {
         Uri.parse(
           ApiAuth.singIn,
         ),
-        headers: ConfigHeaderRequestApi.requestHeaders,
+        headers: ConfigHeaderRequestApi.requestHeaders(),
         body: endcodedUserInfor,
       );
       if (response.statusCode == HttpStatus.created ||

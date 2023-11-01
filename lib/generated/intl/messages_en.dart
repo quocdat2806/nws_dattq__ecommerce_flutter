@@ -86,9 +86,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "textMyCart": MessageLookupByLibrary.simpleMessage("My Cart"),
         "textName": MessageLookupByLibrary.simpleMessage("Name"),
         "textNameLable": MessageLookupByLibrary.simpleMessage("Your name"),
+        "textNo": MessageLookupByLibrary.simpleMessage("No"),
         "textNotification":
             MessageLookupByLibrary.simpleMessage("Notification"),
         "textNotify": MessageLookupByLibrary.simpleMessage("Notify"),
+        "textNotifyEmpty":
+            MessageLookupByLibrary.simpleMessage("Not have notify yet"),
         "textOkay": MessageLookupByLibrary.simpleMessage("Okay"),
         "textOn": MessageLookupByLibrary.simpleMessage("on"),
         "textOr": MessageLookupByLibrary.simpleMessage("or"),
@@ -121,6 +124,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "textValidateEmptyString":
             MessageLookupByLibrary.simpleMessage("Please enter this field"),
         "textWelcome": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "textYes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "textYouWantToLogOut":
+            MessageLookupByLibrary.simpleMessage("Do you want to logout ?"),
         "titleOnbroadingPage_1": MessageLookupByLibrary.simpleMessage(
             "20% Discount\nNew Arrival Product"),
         "titleOnbroadingPage_2": MessageLookupByLibrary.simpleMessage(

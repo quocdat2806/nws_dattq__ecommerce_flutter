@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/bloc/app_cubit.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
-import 'package:newware_final_project/repositories/auth_responsitory.dart';
+import 'package:newware_final_project/responsitories/auth_responsitory.dart';
 import 'package:newware_final_project/ui/pages/splash/splash_cubit.dart';
-
 import 'splash_navigator.dart';
 
 class SplashPage extends StatefulWidget {
@@ -49,7 +48,7 @@ class _SplashChildPageState extends State<SplashChildPage> {
   @override
   void initState() {
     super.initState();
-    _splashCubit = context.read<SplashCubit>();
+    _splashCubit =  BlocProvider.of<SplashCubit>(context);
     _splashCubit.checkLogin();
   }
 

@@ -7,10 +7,16 @@ import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
 class CheckOutCart extends StatelessWidget {
-  final state;
-  final cubit;
+  final int? totalPrice;
+  final Function()? handleCheckoutCart;
+  final int? lengthItem;
 
-  const CheckOutCart({super.key, this.state, this.cubit});
+  const CheckOutCart({
+    super.key,
+    this.totalPrice,
+    this.handleCheckoutCart,
+    this.lengthItem,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +30,10 @@ class CheckOutCart extends StatelessWidget {
             children: [
               Text(
                 '${S.of(context).textTotal}'
-                 ' ${state.listCartEntity.length}'
-                  ' ${S.of(context).textItem}',
+                ' $lengthItem'
+                ' ${S.of(context).textItem}',
               ),
-              Text('${cubit.handleTotalPrice()}.00')
+              Text('$totalPrice.00')
             ],
           ),
           Container(
@@ -35,15 +41,11 @@ class CheckOutCart extends StatelessWidget {
             margin: const EdgeInsets.only(top: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: state.listCartEntity.isNotEmpty
-                  ? AppColors.secondaryColor
-                  : AppColors.greyColor,
+              color: AppColors.secondaryColor,
             ),
             width: MediaQuery.of(context).size.width,
             child: InkWell(
-              onTap: () {
-                cubit.handleCheckout();
-              },
+              onTap: handleCheckoutCart,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

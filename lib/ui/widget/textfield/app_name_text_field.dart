@@ -27,7 +27,7 @@ class AppNameTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            labelText!,
+            labelText??'',
             style: AppStyles.textStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -48,7 +48,8 @@ class AppNameTextField extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: (value) {
-                        onChanged!(value);
+                      onChanged!=null? onChanged!(value):null;
+
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -61,7 +62,7 @@ class AppNameTextField extends StatelessWidget {
                     },
                     controller: textEditingController,
                     decoration: InputDecoration(
-                      hintText: hintText!,
+                      hintText: hintText??'',
                       hintStyle: AppStyles.textStyle(
                         color: AppColors.greyColor_1,
                       ),

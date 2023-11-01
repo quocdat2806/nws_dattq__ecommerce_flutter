@@ -50,7 +50,4 @@ class UserResponsitoryImpl extends UserResponsitory{
     return userProvider.updateCartWhenClosePage(list);
   }
 
-
-
-
 }

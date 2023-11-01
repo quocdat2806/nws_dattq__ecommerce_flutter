@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newware_final_project/models/entities/user/user_entity.dart';
-import 'package:newware_final_project/repositories/auth_responsitory.dart';
-import 'package:newware_final_project/repositories/user_responsitory.dart';
+import 'package:newware_final_project/responsitories/auth_responsitory.dart';
+import 'package:newware_final_project/responsitories/user_responsitory.dart';
 
 import '../models/enums/load_status.dart';
 
@@ -11,7 +11,6 @@ part 'app_state.dart';
 class AppCubit extends Cubit<AppState> {
   UserResponsitory userRepo;
   AuthResponsitory authRepo;
-
   AppCubit({
     required this.userRepo,
     required this.authRepo,
