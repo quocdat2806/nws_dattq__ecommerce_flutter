@@ -4,14 +4,14 @@ import 'package:newware_final_project/socket/socket_io.dart';
 part 'main_state.dart';
 class MainCubit extends Cubit<MainState> {
   MainCubit() : super(const MainState());
-  void switchTap(int index) {
+  void handleSwitchTap(int index) {
     emit(
       state.copyWith(
         selectedIndex: index,
       ),
     );
   }
-  void setCouterNotify(int couterNotify){
+  void setQuantityNotify(int couterNotify){
     emit(
       state.copyWith(
         quantityNotify: couterNotify,

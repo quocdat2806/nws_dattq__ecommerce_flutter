@@ -38,19 +38,19 @@ class _HomePageState extends State<HomePage> {
         final navigator = HomeNavigator(context: context);
         return HomeCubit(navigator: navigator, cateRepo: cateRepo);
       },
-      child: const HomePageChildState(),
+      child: const HomeChildPage(),
     );
   }
 }
 
-class HomePageChildState extends StatefulWidget {
-  const HomePageChildState({super.key});
+class HomeChildPage extends StatefulWidget {
+  const HomeChildPage({super.key});
 
   @override
-  State<HomePageChildState> createState() => _HomePageChildStateState();
+  State<HomeChildPage> createState() => _HomeChildPageState();
 }
 
-class _HomePageChildStateState extends State<HomePageChildState> {
+class _HomeChildPageState extends State<HomeChildPage> {
   late HomeCubit _cubit;
 
   @override
@@ -84,7 +84,7 @@ class _HomePageChildStateState extends State<HomePageChildState> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SearchCategory(
-                      handleSearch: _cubit.searchCategory,
+                      searchCategory: _cubit.searchCategory,
                     ),
                     const SizedBox(height: 24),
                     Expanded(
@@ -106,7 +106,7 @@ class _HomePageChildStateState extends State<HomePageChildState> {
                           CategoryEntity categoryEntity =
                               state.listFilterCategory[index];
                           return CategoryItem(
-                            onTabCategory: () {
+                            handleTabCategory: () {
                               _cubit.gotoProductListPage(
                                 categoryName: categoryName,
                                 categoryId: categoryId,

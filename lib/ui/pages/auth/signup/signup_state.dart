@@ -11,9 +11,9 @@ class  SingUpState  extends Equatable{
   final String? password;
   final String? confirmPassword;
   final String? name;
-  final bool checkProxy;
-  final bool isHideOrShowPassword;
-  final bool isHideOrShowConfirmPassword;
+  final bool isCheckProxy;
+  final bool isHidePassword;
+  final bool isHideConfirmPassword;
   const SingUpState({
     this.signUpStatus = LoadStatus.initial,
     this.emailStatus = StatusInput.initial,
@@ -24,9 +24,9 @@ class  SingUpState  extends Equatable{
     this.password='',
     this.name='',
     this.confirmPassword='',
-    this.checkProxy = false,
-    this.isHideOrShowPassword = true,
-    this.isHideOrShowConfirmPassword=true,
+    this.isCheckProxy = false,
+    this.isHidePassword = true,
+    this.isHideConfirmPassword=true,
   });
 
   @override
@@ -40,9 +40,9 @@ class  SingUpState  extends Equatable{
     password,
     name,
     confirmPassword,
-    checkProxy,
-    isHideOrShowPassword,
-    isHideOrShowConfirmPassword
+    isCheckProxy,
+    isHidePassword,
+    isHideConfirmPassword
   ];
 
   SingUpState copyWith({
@@ -55,9 +55,9 @@ class  SingUpState  extends Equatable{
     String? password,
     String? confirmPassword,
     String? name,
-    bool? checkProxy,
-    bool? isHideOrShowPassword,
-    bool? isHideOrShowConfirmPassword,
+    bool? isCheckProxy,
+    bool? isHidePassword,
+    bool? isHideConfirmPassword,
   }) {
     return SingUpState(
       signUpStatus: signUpStatus ?? this.signUpStatus,
@@ -70,10 +70,10 @@ class  SingUpState  extends Equatable{
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       name: name ?? this.name,
-      checkProxy: checkProxy ?? this.checkProxy,
-      isHideOrShowPassword: isHideOrShowPassword ?? this.isHideOrShowPassword,
-      isHideOrShowConfirmPassword:
-          isHideOrShowConfirmPassword ?? this.isHideOrShowConfirmPassword,
+      isCheckProxy: isCheckProxy ?? this.isCheckProxy,
+      isHidePassword: isHidePassword ?? this.isHidePassword,
+      isHideConfirmPassword:
+          isHideConfirmPassword ?? this.isHideConfirmPassword,
     );
   }
 }

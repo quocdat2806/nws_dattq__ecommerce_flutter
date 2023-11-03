@@ -47,14 +47,22 @@ class SingUpCubit extends Cubit<SingUpState> {
     }
   }
 
-  void onTabShowAndHidePassword() {
-    bool isHidePassword = !state.isHideOrShowPassword;
-    emit(state.copyWith(isHideOrShowPassword: isHidePassword));
+  void handleShowOrHidePassword() {
+    bool isHidePassword = !state.isHidePassword;
+    emit(
+      state.copyWith(
+        isHidePassword: isHidePassword,
+      ),
+    );
   }
 
-  void onTabShowAndHideConfirmPassword() {
-    bool isHideConfirmPassword = !state.isHideOrShowConfirmPassword;
-    emit(state.copyWith(isHideOrShowConfirmPassword: isHideConfirmPassword));
+  void handleShowOrHideConfirmPassword() {
+    bool isHideConfirmPassword = !state.isHideConfirmPassword;
+    emit(
+      state.copyWith(
+        isHideConfirmPassword: isHideConfirmPassword,
+      ),
+    );
   }
 
   void changeConfirmPassword({
@@ -138,17 +146,17 @@ class SingUpCubit extends Cubit<SingUpState> {
     }
   }
 
-  void switchCheckboxStatus() {
+  void handleTabCheckbox() {
     emit(
-      state.copyWith(checkProxy: !state.checkProxy),
+      state.copyWith(isCheckProxy: !state.isCheckProxy),
     );
   }
 
-  void singUp(bool isValidate) async {
-    if(!state.checkProxy){
+  void handleSingUp(bool isValidate) async {
+    if (!state.isCheckProxy) {
       return;
     }
-    if(!isValidate){
+    if (!isValidate) {
       return;
     }
     String email = state.email ?? '';

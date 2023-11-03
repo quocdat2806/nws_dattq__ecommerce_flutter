@@ -7,7 +7,7 @@ import 'package:newware_final_project/ui/pages/profile/profile_cubit.dart';
 import 'package:newware_final_project/ui/pages/profile/profile_navigator.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/form_infomation.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/logout.dart';
-import 'package:newware_final_project/ui/pages/profile/widgets/setting.dart';
+import 'package:newware_final_project/ui/pages/profile/widgets/form_setting.dart';
 import 'package:newware_final_project/ui/pages/profile/widgets/upload_image.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -27,19 +27,19 @@ class _ProfilePageState extends State<ProfilePage> {
           appCubit: RepositoryProvider.of<AppCubit>(context),
         );
       },
-      child: const ProfileChildPageState(),
+      child: const ProfileChildPage(),
     );
   }
 }
 
-class ProfileChildPageState extends StatefulWidget {
-  const ProfileChildPageState({super.key});
+class ProfileChildPage extends StatefulWidget {
+  const ProfileChildPage({super.key});
 
   @override
-  State<ProfileChildPageState> createState() => _ProfileChildPageStateState();
+  State<ProfileChildPage> createState() => _ProfileChildPageState();
 }
 
-class _ProfileChildPageStateState extends State<ProfileChildPageState> {
+class _ProfileChildPageState extends State<ProfileChildPage> {
   late ProfileCubit _cubit;
 
   @override
@@ -64,7 +64,6 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
               bottom: 24,
             ),
             child: Column(
-
               children: [
                 const SizedBox(height: 24),
                 UploadImage(
@@ -95,9 +94,9 @@ class _ProfileChildPageStateState extends State<ProfileChildPageState> {
                   ),
                 ),
                 AppStyles.sizedBoxStyle(height: 15),
-                Setting(onTab: _cubit.openLanguagePage),
+                Setting(handleTabFormSetting: _cubit.openLanguagePage),
                 AppStyles.sizedBoxStyle(),
-                Logout(onTabLogout: _cubit.singOut),
+                Logout(handleLogout: _cubit.handleSingOut),
               ],
             ),
           ),

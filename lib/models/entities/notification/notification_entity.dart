@@ -32,8 +32,5 @@ class NotificationEntity {
 
   };
 
-  @override
-  String toString() {
-    return 'NotificationEntity{id: $id, isRead: $isRead, createdAt: $createdAt, image: $image}';
-  }
+
 }

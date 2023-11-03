@@ -6,17 +6,17 @@ import 'package:newware_final_project/models/entities/category/category_entity.d
 import 'package:newware_final_project/ui/widget/shimmer/app_shimmer.dart';
 class CategoryItem extends StatelessWidget {
   final CategoryEntity? categoryEntity;
-  final Function()? onTabCategory;
+  final Function()? handleTabCategory;
   const CategoryItem({
     super.key,
     this.categoryEntity,
-    this.onTabCategory,
+    this.handleTabCategory,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTabCategory,
+      onTap: handleTabCategory,
       child: CachedNetworkImage(
         imageUrl: categoryEntity?.image ?? "http://via.placeholder.com/200x150",
         imageBuilder: (context, imageProvider) => Container(

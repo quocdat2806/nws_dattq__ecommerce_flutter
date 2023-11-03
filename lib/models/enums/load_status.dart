@@ -5,7 +5,7 @@ enum LoadStatus {
   failure,
   loadingMore,
   successAddToCart,
-  successCheckout,
+  successCheckoutCart,
 
 }
 enum StatusInput{

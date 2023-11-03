@@ -7,15 +7,15 @@ import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
 class CheckOutCart extends StatelessWidget {
-  final int? totalPrice;
+  final int? totalPriceCart;
   final Function()? handleCheckoutCart;
-  final int? lengthItem;
+  final int? lengthItemCart;
 
   const CheckOutCart({
     super.key,
-    this.totalPrice,
+    this.totalPriceCart,
     this.handleCheckoutCart,
-    this.lengthItem,
+    this.lengthItemCart,
   });
 
   @override
@@ -30,10 +30,10 @@ class CheckOutCart extends StatelessWidget {
             children: [
               Text(
                 '${S.of(context).textTotal}'
-                ' $lengthItem'
+                ' $lengthItemCart'
                 ' ${S.of(context).textItem}',
               ),
-              Text('$totalPrice.00')
+              Text('$totalPriceCart.00')
             ],
           ),
           Container(

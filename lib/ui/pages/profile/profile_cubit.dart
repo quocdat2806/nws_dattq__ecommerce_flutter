@@ -13,7 +13,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     required this.appCubit,
   }) : super( ProfileState());
 
-  void singOut()async{
+  void handleSingOut()async{
     await appCubit.signOut();
     navigator.openAuthPage();
   }

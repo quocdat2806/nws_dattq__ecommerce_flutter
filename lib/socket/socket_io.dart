@@ -13,7 +13,7 @@ class SocketIoConnect {
     socket.onConnect((_) {
       socket.on("notificationCouter", (quantityNotify) {
         int notify = int.parse(quantityNotify);
-        mainCubit?.setCouterNotify(notify);
+        mainCubit?.setQuantityNotify(notify);
       });
     });
     socket.onDisconnect((_) => ('disconnect'));

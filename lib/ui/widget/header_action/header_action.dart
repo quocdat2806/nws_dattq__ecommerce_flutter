@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 
 class HeaderAction extends StatelessWidget {
-  final Function()? onTabRightIcon;
-  final Function()? onTabLeftIcon;
+  final Function()? handleTabRightIcon;
+  final Function()? handleTabLeftIcon;
   final String? pathIconLeft;
   final Widget? iconRight;
 
   const HeaderAction({
     super.key,
-    this.onTabRightIcon,
+    this.handleTabRightIcon,
     this.pathIconLeft,
     this.iconRight,
-    this.onTabLeftIcon,
+    this.handleTabLeftIcon,
   });
 
   @override
@@ -22,7 +22,7 @@ class HeaderAction extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            (onTabLeftIcon!=null) ? onTabLeftIcon!():null;
+            (handleTabLeftIcon!=null) ? handleTabLeftIcon!():null;
           },
           child: pathIconLeft !=null? AppStyles.iconSvgStyle(
             pathImage: pathIconLeft,
@@ -32,7 +32,7 @@ class HeaderAction extends StatelessWidget {
         ),
         InkWell(
           onTap: ()  {
-            (onTabRightIcon!=null) ? onTabRightIcon!():null;
+            (handleTabRightIcon!=null) ? handleTabRightIcon!():null;
           },
           child: iconRight ?? const SizedBox.shrink(),
         ),

@@ -8,16 +8,16 @@ import 'package:newware_final_project/ui/widget/shimmer/app_shimmer.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductEntity? productEntity;
-  final Function(int id)? onTabProductItem;
+  final Function(int id)? handleTabProductItem;
 
-  const ProductItem({super.key, this.productEntity, this.onTabProductItem});
+  const ProductItem({super.key, this.productEntity, this.handleTabProductItem});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (onTabProductItem != null) {
-          onTabProductItem!(productEntity?.id??0);
+        if (handleTabProductItem != null) {
+          handleTabProductItem!(productEntity?.id??0);
         }
       },
       child: Column(

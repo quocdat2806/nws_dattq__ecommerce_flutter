@@ -61,7 +61,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     }
   }
 
-  void handleIncresementCouting({
+  void handleIncresementQuantity({
     int? price,
   }) {
     int quantity = state.quantity!;
@@ -76,7 +76,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   }
 
 //decresement quantity
-  void handleDecresementCouting({
+  void handleDecresementQuantity({
     int? price,
   }) {
     int quantity = state.quantity!;
@@ -109,9 +109,9 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     ProductEntity? productEntity,
   }) async {
     CartEntity cartEntity = CartEntity(
-      userEntity: userEntity!,
-      productEntity: productEntity!,
-      image: state.productEntity!.images![state.currentImage!],
+      userEntity: userEntity,
+      productEntity: productEntity,
+      image: state.productEntity?.images?[state.currentImageIndex??0],
       quantity: state.quantity,
       total: state.totalPrice,
     );
@@ -125,13 +125,13 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       }
       emit(
         state.copyWith(
-          loadAddtoCartStatus: LoadStatus.successAddToCart,
+          addtoCartStatus: LoadStatus.successAddToCart,
           quantity: 1,
         ),
       );
     } else {
       emit(
-        state.copyWith(loadAddtoCartStatus: LoadStatus.failure),
+        state.copyWith(addtoCartStatus: LoadStatus.failure),
       );
     }
   }
@@ -139,13 +139,13 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   void deleteAddToCartStatus() {
     emit(
       state.copyWith(
-        loadAddtoCartStatus: LoadStatus.initial,
+        addtoCartStatus: LoadStatus.initial,
       ),
     );
   }
 
   void showSuccessAddToCart(BuildContext context) {
-    if (state.loadAddtoCartStatus == LoadStatus.successAddToCart) {
+    if (state.addtoCartStatus == LoadStatus.successAddToCart) {
       WidgetsBinding.instance.addPostFrameCallback(
             (_) {
           SuccessAlert().showSuccessAlert(
@@ -156,7 +156,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       );
       deleteAddToCartStatus();
     }
-    if (state.loadAddtoCartStatus == LoadStatus.failure) {
+    if (state.addtoCartStatus == LoadStatus.failure) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ErrorAlert().showError(context);
       });
@@ -167,7 +167,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   void handleChangeSize(int indexSize) {
     emit(
       state.copyWith(
-        currentSize: indexSize,
+        currentSizeIndex: indexSize,
       ),
     );
   }
@@ -176,7 +176,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   void handleChangImage(int indexImage) {
     emit(
       state.copyWith(
-        currentImage: indexImage,
+        currentImageIndex: indexImage,
       ),
     );
   }
@@ -185,7 +185,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   void handleChangeColor(int indexSize) {
     emit(
       state.copyWith(
-        currentColor: indexSize,
+        currentColorIndex: indexSize,
       ),
     );
   }

@@ -5,11 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 
 class BottomNavigationItem extends StatelessWidget {
-  final Function(int index)? onTabItem;
-  final Function? handleClearNotify;
+  final Function(int index)? handleSwitchTab;
+  final Function? clearNotify;
   final int? index;
   final String? title;
-  final String? pathIconNavigation;
+  final String? pathIcon;
   final bool hasNotify;
   final int? quantityNotify;
   final bool? isActivePage;
@@ -17,12 +17,12 @@ class BottomNavigationItem extends StatelessWidget {
   const BottomNavigationItem({
     super.key,
     this.index,
-    this.onTabItem,
+    this.handleSwitchTab,
     this.title,
-    this.pathIconNavigation,
+    this.pathIcon,
     this.hasNotify = false,
     this.quantityNotify,
-    this.handleClearNotify,
+    this.clearNotify,
     this.isActivePage = false,
   });
 
@@ -30,9 +30,9 @@ class BottomNavigationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onTabItem!(index!);
-        if (handleClearNotify != null) {
-          handleClearNotify!();
+        handleSwitchTab!(index!);
+        if (clearNotify != null) {
+          clearNotify!();
         }
       },
       child: Stack(
@@ -84,7 +84,7 @@ class BottomNavigationItem extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(3),
                           child: SvgPicture.asset(
-                            pathIconNavigation!,
+                            pathIcon!,
                             width: 20,
                             height: 20,
                             // ignore: deprecated_member_use

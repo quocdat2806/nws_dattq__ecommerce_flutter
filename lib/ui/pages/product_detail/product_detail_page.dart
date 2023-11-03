@@ -41,7 +41,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       },
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
-          return ProductPageChildState(
+          return ProductPageChildPage(
             productId: widget.productId ?? 0,
           );
         },
@@ -50,16 +50,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 }
 
-class ProductPageChildState extends StatefulWidget {
+class ProductPageChildPage extends StatefulWidget {
   final int? productId;
 
-  const ProductPageChildState({super.key, this.productId});
+  const ProductPageChildPage({super.key, this.productId});
 
   @override
-  State<ProductPageChildState> createState() => _ProductPageChildStateState();
+  State<ProductPageChildPage> createState() => _ProductPageChildPageState();
 }
 
-class _ProductPageChildStateState extends State<ProductPageChildState> {
+class _ProductPageChildPageState extends State<ProductPageChildPage> {
   late ProductDetailCubit _cubit;
 
   @override
@@ -90,10 +90,10 @@ class _ProductPageChildStateState extends State<ProductPageChildState> {
                   child: Stack(
                     children: [
                       SlideImageProduct(
-                        currentImage: state.currentImage,
-                        onTabBackIcon: _cubit.backPage,
-                        onTabCartIcon: _cubit.openCartPage,
-                        onChangeImage: _cubit.handleChangImage,
+                        currentImageIndex: state.currentImageIndex,
+                        handleTabBackIcon: _cubit.backPage,
+                        handleTabCartIcon: _cubit.openCartPage,
+                        handleChangeNextImage: _cubit.handleChangImage,
                         images: state.productEntity?.images ?? [],
                       ),
                       Positioned(
@@ -124,13 +124,13 @@ class _ProductPageChildStateState extends State<ProductPageChildState> {
                                 description: state.productEntity?.description,
                                 handleDecreseQuantity: () {
                                   int? price = state.productEntity?.price;
-                                  _cubit.handleDecresementCouting(
+                                  _cubit.handleDecresementQuantity(
                                     price: price,
                                   );
                                 },
                                 handleIncreseQuantity: () {
                                   int? price = state.productEntity?.price;
-                                  _cubit.handleIncresementCouting(
+                                  _cubit.handleIncresementQuantity(
                                     price: price,
                                   );
                                 },
@@ -139,8 +139,8 @@ class _ProductPageChildStateState extends State<ProductPageChildState> {
                               SizeAndColorProduct(
                                 handleChangeColor: _cubit.handleChangeColor,
                                 handleChangeSize: _cubit.handleChangeSize,
-                                currentColor: state.currentColor,
-                                currentSize: state.currentSize,
+                                currentColor: state.currentColorIndex,
+                                currentSize: state.currentSizeIndex,
                               ),
                               DescriptionProduct(
                                 description:

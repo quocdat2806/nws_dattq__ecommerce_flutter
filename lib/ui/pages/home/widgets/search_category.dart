@@ -6,9 +6,9 @@ import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/hooks/debounce.dart';
 
 class SearchCategory extends StatefulWidget {
-  final Function(String value) handleSearch;
+  final Function(String value) searchCategory;
 
-  const SearchCategory({super.key, required this.handleSearch});
+  const SearchCategory({super.key, required this.searchCategory});
 
   @override
   State<SearchCategory> createState() => _SearchCategoryState();
@@ -39,7 +39,7 @@ class _SearchCategoryState extends State<SearchCategory> {
               controller: searchTextController,
               onChanged: (value) {
                 UseDebouncer(milliseconds: 500).run(() {
-                  widget.handleSearch(value);
+                  widget.searchCategory(value);
                 });
               },
               decoration: InputDecoration(

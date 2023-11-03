@@ -8,18 +8,18 @@ import 'package:newware_final_project/ui/widget/header_action/header_action.dart
 
 class SlideImageProduct extends StatelessWidget {
   final List<String>?images;
-  final Function(int value)?onChangeImage;
-  final Function ()?onTabBackIcon;
-  final Function ()?onTabCartIcon;
-  final int ?currentImage;
+  final Function(int value)?handleChangeNextImage;
+  final Function ()?handleTabBackIcon;
+  final Function ()?handleTabCartIcon;
+  final int ?currentImageIndex;
 
   SlideImageProduct({
     super.key,
     this.images,
-    this.onChangeImage,
-    this.onTabBackIcon,
-    this.onTabCartIcon,
-    this.currentImage
+    this.handleChangeNextImage,
+    this.handleTabBackIcon,
+    this.handleTabCartIcon,
+    this.currentImageIndex
   });
 
   final PageController pageController = PageController(initialPage: 0);
@@ -39,7 +39,7 @@ class SlideImageProduct extends StatelessWidget {
               ),
             ),
             onPageChanged: (value) {
-              onChangeImage!(value);
+              handleChangeNextImage!(value);
             },
           ),
           Positioned(
@@ -47,8 +47,8 @@ class SlideImageProduct extends StatelessWidget {
             right: 20,
             top: 40,
             child: HeaderAction(
-              onTabLeftIcon:onTabBackIcon,
-              onTabRightIcon: onTabCartIcon,
+              handleTabLeftIcon:handleTabBackIcon,
+              handleTabRightIcon: handleTabCartIcon,
               pathIconLeft: AppImages.pathBackImage,
               iconRight: Stack(
                 children: [
@@ -104,12 +104,12 @@ class SlideImageProduct extends StatelessWidget {
                   (index) => Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Container(
-                      padding: currentImage == index
+                      padding: currentImageIndex == index
                           ? const EdgeInsets.all(3)
                           : EdgeInsets.zero,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: currentImage == index
+                        border: currentImageIndex == index
                             ? Border.all(
                                 width: 1.5,
                                 color: AppColors.primaryColor,

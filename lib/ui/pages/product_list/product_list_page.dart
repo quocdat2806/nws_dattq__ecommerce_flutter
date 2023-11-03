@@ -34,7 +34,7 @@ class _ProductListPageState extends State<ProductListPage> {
         navigator: ProductListNavigator(context: context),
         proRepo: RepositoryProvider.of<ProductResponsitory>(context),
       ),
-      child: ProductListChildPageState(
+      child: ProductListChildPage(
         categoryId: widget.categoryId ?? 0,
         categoryName: widget.categoryName ?? '',
       ),
@@ -42,22 +42,22 @@ class _ProductListPageState extends State<ProductListPage> {
   }
 }
 
-class ProductListChildPageState extends StatefulWidget {
+class ProductListChildPage extends StatefulWidget {
   final String? categoryName;
   final int? categoryId;
 
-  const ProductListChildPageState({
+  const ProductListChildPage({
     super.key,
     this.categoryName,
     this.categoryId,
   });
 
   @override
-  State<ProductListChildPageState> createState() =>
-      _ProductListChildPageStateState();
+  State<ProductListChildPage> createState() =>
+      _ProductListChildPageState();
 }
 
-class _ProductListChildPageStateState extends State<ProductListChildPageState> {
+class _ProductListChildPageState extends State<ProductListChildPage> {
   late ProductListCubit _cubit;
   final ScrollController _scrollController = ScrollController();
 
@@ -72,10 +72,10 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
   void _scrollListener() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      _cubit.loadMore(widget.categoryId!);
+      _cubit.loadMoreProduct(widget.categoryId!);
     }
     if (_scrollController.position.pixels == 0) {
-      _cubit.clearMore();
+      _cubit.clearAllMoreProduct();
     }
   }
 
@@ -110,8 +110,8 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   HeaderAction(
-                    onTabRightIcon: _cubit.openSearchPage,
-                    onTabLeftIcon: _cubit.backPage,
+                    handleTabRightIcon: _cubit.openSearchPage,
+                    handleTabLeftIcon: _cubit.backPage,
                     pathIconLeft: AppImages.pathBackImage,
                     iconRight: AppStyles.iconSvgStyle(
                       pathImage: AppImages.pathSearchImage,
@@ -144,7 +144,7 @@ class _ProductListChildPageStateState extends State<ProductListChildPageState> {
                         ProductEntity productEntity = state
                             .listFilterProduct[index];
                         return ProductItem(
-                          onTabProductItem: _cubit.openProductDetailPage,
+                          handleTabProductItem: _cubit.openProductDetailPage,
                           productEntity: productEntity,
                         );
                       },

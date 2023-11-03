@@ -5,12 +5,12 @@ import 'package:newware_final_project/generated/l10n.dart';
 
 class OnboardingSubPage extends StatelessWidget {
   final String title;
-  final String image;
+  final String pathImage;
 
   const OnboardingSubPage({
     super.key,
     required this.title,
-    required this.image,
+    required this.pathImage,
   });
 
   @override
@@ -33,7 +33,7 @@ class OnboardingSubPage extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(image),
+                  image: AssetImage(pathImage),
                 ),
               ),
             ),

@@ -25,19 +25,19 @@ class _LanguagePageState extends State<LanguagePage> {
           appCubit: RepositoryProvider.of<AppCubit>(context),
         );
       },
-      child: const LanguagePageState(),
+      child: const LanguageChildPage(),
     );
   }
 }
 
-class LanguagePageState extends StatefulWidget {
-  const LanguagePageState({super.key});
+class LanguageChildPage extends StatefulWidget {
+  const LanguageChildPage({super.key});
 
   @override
-  State<LanguagePageState> createState() => _LanguagePageStateState();
+  State<LanguageChildPage> createState() => _LanguageChildPageState();
 }
 
-class _LanguagePageStateState extends State<LanguagePageState> {
+class _LanguageChildPageState extends State<LanguageChildPage> {
   late LanguageCubit _cubit;
 
   @override

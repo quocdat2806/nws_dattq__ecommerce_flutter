@@ -5,11 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:newware_final_project/common/app_images_icons.dart';
 
 class NextButton extends StatelessWidget {
-  final Function() onNextPage;
+  final Function() handleNextPage;
 
   const NextButton({
     super.key,
-    required this.onNextPage,
+    required this.handleNextPage,
   });
 
   @override
@@ -19,7 +19,7 @@ class NextButton extends StatelessWidget {
         backgroundColor: Colors.black,
         shape: const CircleBorder(),
       ),
-      onPressed: onNextPage,
+      onPressed: handleNextPage,
       child: SvgPicture.asset(
         AppImages.pathNextIcon,
       ),

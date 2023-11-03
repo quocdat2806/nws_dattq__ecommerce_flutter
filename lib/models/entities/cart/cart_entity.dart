@@ -42,8 +42,4 @@ class CartEntity {
         "image": image,
       };
 
-  @override
-  String toString() {
-    return 'CartEntity{id: $id, userEntity: $userEntity, productEntity: $productEntity, quantity: $quantity, total: $total, image: $image}';
-  }
 }

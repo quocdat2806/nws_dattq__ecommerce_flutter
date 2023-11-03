@@ -43,7 +43,7 @@ class ProductListCubit extends Cubit<ProductListState> {
     }
   }
 
-  void loadMore(int categoryId) async {
+  void loadMoreProduct(int categoryId) async {
     emit(
       state.copyWith(loadMoreStatus: LoadStatus.loading),
     );
@@ -76,7 +76,7 @@ class ProductListCubit extends Cubit<ProductListState> {
     }
   }
 
-  void clearMore() async {
+  void clearAllMoreProduct() async {
     emit(
       state.copyWith(loadMoreStatus: LoadStatus.loading),
     );

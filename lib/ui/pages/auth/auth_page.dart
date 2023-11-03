@@ -28,7 +28,7 @@ class AuthPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(10),
               child: AppButton(
-                onTabButton: authNavigator.openSignInPage,
+                handleTabButton: authNavigator.openSignInPage,
                 textButton:  S.of(context).textLogin,
                 backGroundColor: AppColors.primaryColor,
                 textColor: AppColors.secondaryColor,
@@ -39,7 +39,7 @@ class AuthPage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(10),
               child: AppButton(
-                onTabButton: authNavigator.openSignUpPage,
+                handleTabButton: authNavigator.openSignUpPage,
                 textButton: S.of(context).textSingUp,
                 backGroundColor: Colors.transparent,
                 textColor: AppColors.primaryColor,

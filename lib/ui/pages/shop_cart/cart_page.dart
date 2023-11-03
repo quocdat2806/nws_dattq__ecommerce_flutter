@@ -32,7 +32,7 @@ class _CartPageState extends State<CartPage> {
       },
       child: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
         int? userId = state.user?.id;
-        return CartChildPageState(
+        return CartChildPage(
           userId: userId,
         );
       }),
@@ -40,16 +40,16 @@ class _CartPageState extends State<CartPage> {
   }
 }
 
-class CartChildPageState extends StatefulWidget {
+class CartChildPage extends StatefulWidget {
   final int? userId;
 
-  const CartChildPageState({super.key, required this.userId});
+  const CartChildPage({super.key, required this.userId});
 
   @override
-  State<CartChildPageState> createState() => _CartChildPageStateState();
+  State<CartChildPage> createState() => _CartChildPageState();
 }
 
-class _CartChildPageStateState extends State<CartChildPageState> {
+class _CartChildPageState extends State<CartChildPage> {
   late CartCubit _cubit;
 
   @override
@@ -87,7 +87,7 @@ class _CartChildPageStateState extends State<CartChildPageState> {
             buildWhen: (previous, current) =>
                 previous.updateCartStatus != current.updateCartStatus,
             builder: (context, state) {
-              _cubit.handleCheckOutCartSuccess(context);
+              _cubit.showCheckOutCartSuccess(context);
               return state.fetchCartStatus == LoadStatus.loading
                   ? const CircularLoading()
                   : Column(
@@ -100,7 +100,7 @@ class _CartChildPageStateState extends State<CartChildPageState> {
                             top: 20,
                           ),
                           child: HeaderAction(
-                            onTabLeftIcon: () {
+                            handleTabLeftIcon: () {
                               _cubit.backPage(context);
                             },
                             pathIconLeft: hasActiveRouteBelow == true
@@ -154,9 +154,9 @@ class _CartChildPageStateState extends State<CartChildPageState> {
                         ),
                         state.listCartEntity.isNotEmpty
                             ? CheckOutCart(
-                                lengthItem: state.listCartEntity.length,
-                                totalPrice: state.totalPriceCart,
-                                handleCheckoutCart: _cubit.handleCheckout,
+                                lengthItemCart: state.listCartEntity.length,
+                                totalPriceCart: state.totalPriceCart,
+                                handleCheckoutCart: _cubit.handleCheckoutCart,
                               )
                             : const SizedBox.shrink(),
                       ],

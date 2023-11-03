@@ -6,22 +6,22 @@ import 'package:newware_final_project/utils/utils.dart';
 
 class AppPasswordField extends StatelessWidget {
   final TextEditingController textEditingController;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onChangedText;
   final String? labelText;
   final String? hintText;
-  final Widget? icon;
-  final Widget? iconShowOrHide;
-  final bool isShowOrHide;
-  final Function()? handleShowOrHide;
+  final Widget? iconValidate;
+  final Widget? iconShowOrHidePassword;
+  final bool isHidePassword;
+  final Function()? handleShowOrHidePassword;
   const AppPasswordField({
     Key? key,
     required this.textEditingController,
-    this.onChanged,
-    this.icon,
+    this.onChangedText,
+    this.iconValidate,
     this.labelText ,
-    this.iconShowOrHide,
-    this.isShowOrHide = false,
-    this.handleShowOrHide,
+    this.iconShowOrHidePassword,
+    this.isHidePassword = true,
+    this.handleShowOrHidePassword,
     this.hintText,
   }) : super(key: key);
 
@@ -54,10 +54,10 @@ class AppPasswordField extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: (value) {
-                      onChanged!=null? onChanged!(value):null;
+                      onChangedText!=null? onChangedText!(value):null;
                     },
-                    obscureText: isShowOrHide ? true : false,
-                    enableSuggestions: isShowOrHide ? true : false,
+                    obscureText: isHidePassword ? true : false,
+                    enableSuggestions: isHidePassword ? true : false,
                     obscuringCharacter: '*',
                     maxLines: 1,
                     controller: textEditingController,
@@ -80,11 +80,11 @@ class AppPasswordField extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: handleShowOrHide,
-                  child: iconShowOrHide ?? const SizedBox.shrink(),
+                  onTap: handleShowOrHidePassword,
+                  child: iconShowOrHidePassword ?? const SizedBox.shrink(),
                 ),
                 const SizedBox(width: 10),
-                icon ?? const SizedBox.shrink(),
+                iconValidate ?? const SizedBox.shrink(),
               ],
             ),
           ),

@@ -3,7 +3,7 @@ import 'package:newware_final_project/common/app_images_icons.dart';
 import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/models/enums/load_status.dart';
 
-class ValidateInput {
+class UseValidateInput {
   Map<String, Widget> checkValidateSingUp({
     state,
   }) {

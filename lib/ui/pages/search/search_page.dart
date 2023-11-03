@@ -26,7 +26,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xFFe35c49),
+        backgroundColor: const Color(0xFFE3C391),
         title: Text(
           S.current.textSearchPage,
           style: AppStyles.textStyle(
@@ -35,12 +35,14 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         centerTitle: true,
-        leading: iconBack(onTabBackIcon: () {
-          Navigator.pop(
-            context,
-            searchEdittingController.text,
-          );
-        }),
+        leading: iconBack(
+          handleTabBackIcon: () {
+            Navigator.pop(
+              context,
+              searchEdittingController.text,
+            );
+          },
+        ),
         actions: [
           AppStyles.iconSvgStyle(
             pathImage: AppImages.pathQuestionImage,
@@ -54,7 +56,7 @@ class _SearchPageState extends State<SearchPage> {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
-                color: Color(0xFFe35c49),
+                color: Color(0xFFE3C391),
               ),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -85,12 +87,14 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ),
                     ),
-                    iconSearch(onTabSearchIcon: () {
-                      Navigator.pop(
-                        context,
-                        searchEdittingController.text,
-                      );
-                    }),
+                    iconSearch(
+                      handleTabSearchIcon: () {
+                        Navigator.pop(
+                          context,
+                          searchEdittingController.text,
+                        );
+                      },
+                    ),
                     const SizedBox(width: 10),
                   ],
                 ),
@@ -101,9 +105,10 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-  Widget iconBack({Function()? onTabBackIcon}) {
+
+  Widget iconBack({Function()? handleTabBackIcon}) {
     return InkWell(
-      onTap: onTabBackIcon,
+      onTap: handleTabBackIcon,
       child: const Icon(
         Icons.navigate_before_outlined,
         size: 30,
@@ -111,9 +116,10 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-  Widget iconSearch({Function()? onTabSearchIcon}) {
+
+  Widget iconSearch({Function()? handleTabSearchIcon}) {
     return InkWell(
-      onTap: onTabSearchIcon,
+      onTap: handleTabSearchIcon,
       child: AppStyles.iconSvgStyle(
         pathImage: AppImages.pathSearchImage,
       ),

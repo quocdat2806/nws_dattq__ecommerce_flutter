@@ -97,7 +97,7 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
       body: BlocBuilder<SingUpCubit, SingUpState>(
         bloc: _cubit,
         builder: (context, state) {
-          final Map<String, Widget> icons = ValidateInput().checkValidateSingUp(
+          final Map<String, Widget> icons = UseValidateInput().checkValidateSingUp(
             state: state,
           );
           emailIcon = icons['emailIcon'];
@@ -135,8 +135,8 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                   AppNameTextField(
                                     labelText: S.current.textName,
                                     hintText: S.current.textNameLable,
-                                    icon: nameIcon,
-                                    onChanged: (text) {
+                                    iconValidate: nameIcon,
+                                    onChangedText: (text) {
                                       _cubit.changeName(
                                         name: text,
                                       );
@@ -147,8 +147,8 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                   AppEmailTextField(
                                     labelText: S.current.textEmail,
                                     hintText: S.current.textEmailLable,
-                                    icon: emailIcon,
-                                    onChanged: (text) {
+                                    iconValidate: emailIcon,
+                                    onChangedText: (text) {
                                       _cubit.changeEmail(
                                         email: text,
                                       );
@@ -159,18 +159,18 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                   AppPasswordField(
                                     labelText: S.current.textPassword,
                                     hintText: S.current.textPasswordLable,
-                                    isShowOrHide: state.isHideOrShowPassword,
-                                    handleShowOrHide:
-                                        _cubit.onTabShowAndHidePassword,
-                                    iconShowOrHide: state.isHideOrShowPassword
+                                    isHidePassword: state.isHidePassword,
+                                    handleShowOrHidePassword:
+                                        _cubit.handleShowOrHidePassword,
+                                    iconShowOrHidePassword: state.isHidePassword
                                         ? const Icon(
                                             Icons.remove_red_eye,
                                           )
                                         : const Icon(
                                             Icons.visibility_off_outlined,
                                           ),
-                                    icon: passwordIcon,
-                                    onChanged: (text) {
+                                    iconValidate: passwordIcon,
+                                    onChangedText: (text) {
                                       _cubit.changePassword(
                                         password: text,
                                       );
@@ -183,22 +183,22 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                                     labelText: S.current.textConfirmPassword,
                                     hintText:
                                         S.current.textConfirmPasswordLable,
-                                    isShowOrHide:
-                                        state.isHideOrShowConfirmPassword,
-                                    handleShowAndHide:
-                                        _cubit.onTabShowAndHideConfirmPassword,
-                                    iconShowOrHide:
-                                        state.isHideOrShowConfirmPassword
+                                    isHidePassword:
+                                        state.isHideConfirmPassword,
+                                    handleShowOrHideConfirmPassword:
+                                        _cubit.handleShowOrHideConfirmPassword,
+                                    iconShowOrHideConfirmPassword:
+                                        state.isHideConfirmPassword
                                             ? const Icon(
                                                 Icons.remove_red_eye,
                                               )
                                             : const Icon(
                                                 Icons.visibility_off_outlined,
                                               ),
-                                    icon: confirmPasswordIcon,
+                                    iconValidate: confirmPasswordIcon,
                                     passwordEdittingController:
                                         passwordTextController,
-                                    onChanged: (text) {
+                                    onChangedText: (text) {
                                       _cubit.changeConfirmPassword(
                                         confirmPassword: text,
                                       );
@@ -211,21 +211,21 @@ class _SingUpChildPageState extends State<SingUpChildPage> {
                             ),
                             AppStyles.sizedBoxStyle(),
                             CheckBoxProxy(
-                              isChecked: state.checkProxy,
-                              changStatusCheckbox: _cubit.switchCheckboxStatus,
+                              isCheckedCheckbox: state.isCheckProxy,
+                              handleTabCheckbox: _cubit.handleTabCheckbox,
                             ),
                             AppStyles.sizedBoxStyle(
                               height: 15,
                             ),
                             AppButton(
-                              onTabButton: () {
-                                _cubit.singUp(
+                              handleTabButton: () {
+                                _cubit.handleSingUp(
                                   _formKey.currentState!.validate(),
                                 );
                               },
                               textButton: AppTexts.textSingUp,
                               textColor: AppColors.primaryColor,
-                              backGroundColor: state.checkProxy
+                              backGroundColor: state.isCheckProxy
                                   ? AppColors.secondaryColor
                                   : AppColors.greyColor,
                               icon: null,

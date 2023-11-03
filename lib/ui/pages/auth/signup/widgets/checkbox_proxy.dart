@@ -4,14 +4,14 @@ import 'package:newware_final_project/common/app_styles.dart';
 import 'package:newware_final_project/generated/l10n.dart';
 
 class CheckBoxProxy extends StatefulWidget {
-  final Function()? changStatusCheckbox;
+  final Function()? handleTabCheckbox;
 
-  final bool? isChecked;
+  final bool? isCheckedCheckbox;
 
   const CheckBoxProxy({
     super.key,
-    this.changStatusCheckbox,
-    this.isChecked = false,
+    this.handleTabCheckbox,
+    this.isCheckedCheckbox = false,
   });
 
   @override
@@ -27,7 +27,7 @@ class _CheckBoxProxyState extends State<CheckBoxProxy> {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      value: widget.isChecked,
+      value: widget.isCheckedCheckbox,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(20),
@@ -43,7 +43,7 @@ class _CheckBoxProxyState extends State<CheckBoxProxy> {
         ),
       ),
       onChanged: (value) {
-        widget.changStatusCheckbox!();
+        widget.handleTabCheckbox!();
       },
     );
   }

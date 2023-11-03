@@ -7,22 +7,22 @@ import 'package:newware_final_project/utils/utils.dart';
 class AppConfirmPasswordField extends StatelessWidget {
   final TextEditingController textEditingController;
   final TextEditingController? passwordEdittingController;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onChangedText;
   final String? labelText;
   final String? hintText;
-  final Widget? icon;
-  final Widget? iconShowOrHide;
-  final bool isShowOrHide;
-  final Function()? handleShowAndHide;
+  final Widget? iconValidate;
+  final Widget? iconShowOrHideConfirmPassword;
+  final bool isHidePassword;
+  final Function()? handleShowOrHideConfirmPassword;
 
   const AppConfirmPasswordField({
     Key? key,
     required this.textEditingController,
-    this.onChanged,
-    this.icon,
-    this.iconShowOrHide,
-    this.isShowOrHide=false,
-    this.handleShowAndHide,
+    this.onChangedText,
+    this.iconValidate,
+    this.iconShowOrHideConfirmPassword,
+    this.isHidePassword=true,
+    this.handleShowOrHideConfirmPassword,
     this.labelText,
     this.hintText,
     this.passwordEdittingController,
@@ -57,7 +57,7 @@ class AppConfirmPasswordField extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: (value) {
-                      onChanged!=null? onChanged!(value):null;
+                      onChangedText!=null? onChangedText!(value):null;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -71,8 +71,8 @@ class AppConfirmPasswordField extends StatelessWidget {
                       }
                       return null;
                     },
-                    obscureText: isShowOrHide ? true : false,
-                    enableSuggestions: isShowOrHide ? true : false,
+                    obscureText: isHidePassword ? true : false,
+                    enableSuggestions: isHidePassword ? true : false,
                     keyboardType: TextInputType.visiblePassword,
                     controller: textEditingController,
                     obscuringCharacter: '*',
@@ -86,11 +86,11 @@ class AppConfirmPasswordField extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: handleShowAndHide,
-                  child: iconShowOrHide ?? const SizedBox.shrink(),
+                  onTap: handleShowOrHideConfirmPassword,
+                  child: iconShowOrHideConfirmPassword ?? const SizedBox.shrink(),
                 ),
                 const SizedBox(width: 10),
-                icon ?? const SizedBox.shrink(),
+                iconValidate ?? const SizedBox.shrink(),
               ],
             ),
           ),

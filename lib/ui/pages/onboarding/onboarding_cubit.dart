@@ -28,7 +28,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     );
   }
 
-  void onNextPage({
+  void handleNextPage({
     required int nextPage,
     required BuildContext context,
   }) {

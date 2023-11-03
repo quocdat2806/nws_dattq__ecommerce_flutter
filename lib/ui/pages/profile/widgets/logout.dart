@@ -8,14 +8,14 @@ import 'package:newware_final_project/ui/commons/show_confirm.dart';
 
 class Logout extends StatelessWidget {
 
-  final Function()onTabLogout;
-  const Logout({super.key, required this.onTabLogout});
+  final Function()handleLogout;
+  const Logout({super.key, required this.handleLogout});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        ConfirmAlert().showLogoutAlert(context,onTabLogout);
+        ConfirmAlert().showLogoutAlert(context,handleLogout);
       },
       child: Container(
         margin: const EdgeInsets.only(top: 10),

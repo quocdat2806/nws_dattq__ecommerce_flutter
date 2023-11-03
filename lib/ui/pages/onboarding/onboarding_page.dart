@@ -54,15 +54,15 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
       _onboardingPages = [
         OnboardingSubPage(
           title: S.current.titleOnbroadingPage_1,
-          image: AppImages.pathOnbroadingPageImage_1,
+          pathImage: AppImages.pathOnbroadingPageImage_1,
         ),
         OnboardingSubPage(
           title: S.current.titleOnbroadingPage_2,
-          image: AppImages.pathOnbroadingPageImage_2,
+          pathImage: AppImages.pathOnbroadingPageImage_2,
         ),
         OnboardingSubPage(
           title: S.current.titleOnbroadingPage_3,
-          image: AppImages.pathOnbroadingPageImage_3,
+          pathImage: AppImages.pathOnbroadingPageImage_3,
         ),
       ];
     }
@@ -105,8 +105,8 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
                     ),
                     const Spacer(),
                     NextButton(
-                      onNextPage: (){
-                        nextPage(state);
+                      handleNextPage: (){
+                        handleNextPage(state);
                       },
                     ),
                   ],
@@ -119,7 +119,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
     );
   }
 
-  void nextPage(OnboardingState state){
+  void handleNextPage(OnboardingState state){
     int nextPage = state.activePage + 1;
     _pageViewController.animateToPage(
       nextPage,
@@ -128,7 +128,7 @@ class _OnboardingChildPageState extends State<OnboardingChildPage> {
       ),
       curve: Curves.linear,
     );
-    _cubit.onNextPage(
+    _cubit.handleNextPage(
       nextPage: nextPage,
       context: context,
     );

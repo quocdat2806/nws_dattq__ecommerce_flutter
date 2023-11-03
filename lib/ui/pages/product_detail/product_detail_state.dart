@@ -2,22 +2,22 @@ part of 'product_detail_cubit.dart';
 
 class ProductDetailState extends Equatable {
   final LoadStatus loadProductDetalStatus;
-  final LoadStatus loadAddtoCartStatus;
+  final LoadStatus addtoCartStatus;
   final ProductEntity? productEntity;
   final int? quantity;
   final int? totalPrice;
-  final int ?currentImage;
-  final int ?currentSize;
-  final int ?currentColor;
+  final int ?currentImageIndex;
+  final int ?currentSizeIndex;
+  final int ?currentColorIndex;
   const ProductDetailState({
     this.loadProductDetalStatus = LoadStatus.initial,
-    this.loadAddtoCartStatus = LoadStatus.initial,
+    this.addtoCartStatus = LoadStatus.initial,
     this.productEntity,
     this.quantity = 1,
     this.totalPrice=0 ,
-    this.currentColor = 0,
-    this.currentImage = 0,
-    this.currentSize= 0,
+    this.currentColorIndex = 0,
+    this.currentImageIndex = 0,
+    this.currentSizeIndex= 0,
   });
 
   @override
@@ -27,32 +27,32 @@ class ProductDetailState extends Equatable {
         productEntity,
         quantity,
         totalPrice,
-        currentImage,
-        currentColor,
-        currentSize,
-        loadAddtoCartStatus,
+        currentImageIndex,
+        currentColorIndex,
+        currentSizeIndex,
+        addtoCartStatus,
       ];
 
   ProductDetailState copyWith({
     LoadStatus? loadProductDetalStatus,
-    LoadStatus? loadAddtoCartStatus,
+    LoadStatus? addtoCartStatus,
     ProductEntity? productEntity,
     int? quantity,
     int? totalPrice,
-    int? currentImage,
-    int? currentSize,
-    int? currentColor,
+    int? currentImageIndex,
+    int? currentSizeIndex,
+    int? currentColorIndex,
   }) {
     return ProductDetailState(
       loadProductDetalStatus:
           loadProductDetalStatus ?? this.loadProductDetalStatus,
-      loadAddtoCartStatus: loadAddtoCartStatus ?? this.loadAddtoCartStatus,
+      addtoCartStatus: addtoCartStatus ?? this.addtoCartStatus,
       productEntity: productEntity ?? this.productEntity,
       quantity: quantity ?? this.quantity,
       totalPrice: totalPrice ?? this.totalPrice,
-      currentImage: currentImage ?? this.currentImage,
-      currentSize: currentSize ?? this.currentSize,
-      currentColor: currentColor ?? this.currentColor,
+      currentImageIndex: currentImageIndex ?? this.currentImageIndex,
+      currentSizeIndex: currentSizeIndex ?? this.currentSizeIndex,
+      currentColorIndex: currentColorIndex ?? this.currentColorIndex,
     );
   }
 }

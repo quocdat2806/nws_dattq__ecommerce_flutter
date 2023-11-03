@@ -8,7 +8,7 @@ class AppButton extends StatelessWidget {
   final Widget? icon;
   final Color textColor;
   final bool isHasBorder;
-  final Function()? onTabButton;
+  final Function()? handleTabButton;
 
   const AppButton({
     super.key,
@@ -17,13 +17,13 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.textColor = Colors.white,
     this.isHasBorder = false,
-    this.onTabButton,
+    this.handleTabButton,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTabButton,
+      onTap: handleTabButton,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Container(

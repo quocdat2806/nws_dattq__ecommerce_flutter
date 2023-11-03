@@ -50,7 +50,7 @@ class _SuccessPageState extends State<SuccessPage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: AppButton(
-                onTabButton: successNavigator.openMainPage,
+                handleTabButton: successNavigator.openMainPage,
                 textButton: S.of(context).textStartShopping,
                 textColor: AppColors.primaryColor,
                 backGroundColor: AppColors.secondaryColor,

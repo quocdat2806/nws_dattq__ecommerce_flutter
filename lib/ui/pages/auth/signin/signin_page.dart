@@ -86,7 +86,7 @@ class _SingInChildPageState extends State<SingInChildPage> {
         bloc: _cubit,
         builder: (context, state) {
           Map<String, Widget> icons =
-              ValidateInput().checkValidateLogin(state: state);
+              UseValidateInput().checkValidateLogin(state: state);
           emailIcon = icons['emailIcon'];
           passwordIcon = icons['passwordIcon'];
           return state.signInStatus == LoadStatus.loading
@@ -120,8 +120,8 @@ class _SingInChildPageState extends State<SingInChildPage> {
                                   AppEmailTextField(
                                     labelText: S.current.textEmail,
                                     hintText: S.current.textEmailLable,
-                                    icon: emailIcon,
-                                    onChanged: (text) {
+                                    iconValidate: emailIcon,
+                                    onChangedText: (text) {
                                       _cubit.changeEmail(
                                         email: text,
                                       );
@@ -134,18 +134,18 @@ class _SingInChildPageState extends State<SingInChildPage> {
                                   AppPasswordField(
                                     labelText: S.current.textPassword,
                                     hintText: S.current.textPasswordLable,
-                                    isShowOrHide: state.isShowOrHidePassword,
-                                    handleShowOrHide:
-                                        _cubit.onTabShowAndHidePassword,
-                                    icon: passwordIcon,
-                                    iconShowOrHide: state.isShowOrHidePassword
+                                    isHidePassword: state.isHidePassword,
+                                    handleShowOrHidePassword:
+                                        _cubit.handleShowOrHidePassword,
+                                    iconValidate: passwordIcon,
+                                    iconShowOrHidePassword: state.isHidePassword
                                         ? const Icon(
                                             Icons.remove_red_eye,
                                           )
                                         : const Icon(
                                             Icons.visibility_off_outlined,
                                           ),
-                                    onChanged: (text) {
+                                    onChangedText: (text) {
                                       _cubit.changePassword(
                                         password: text,
                                       );
@@ -170,8 +170,8 @@ class _SingInChildPageState extends State<SingInChildPage> {
                               height: 20,
                             ),
                             AppButton(
-                              onTabButton: () {
-                                _cubit.signIn(
+                              handleTabButton: () {
+                                _cubit.handleSignIn(
                                   _formKey.currentState!.validate(),
                                 );
                               },

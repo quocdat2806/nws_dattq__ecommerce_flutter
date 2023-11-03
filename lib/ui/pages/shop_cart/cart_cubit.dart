@@ -16,8 +16,9 @@ class CartCubit extends Cubit<CartState> {
   CartCubit({
     required this.userRepo,
   }) : super(const CartState());
-  handleCheckOutCartSuccess(BuildContext context){
-    if (state.updateCartStatus == LoadStatus.successCheckout) {
+
+  showCheckOutCartSuccess(BuildContext context) {
+    if (state.updateCartStatus == LoadStatus.successCheckoutCart) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         SuccessAlert().showSuccessAlert(
           context,
@@ -28,22 +29,22 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  void backPage(BuildContext context){
+  void backPage(BuildContext context) {
     if (Navigator.canPop(context)) {
       Navigator.pop(context);
     }
   }
+
   void fetchCart(int userId) async {
     emit(
       state.copyWith(
-        fetchCartStatus: LoadStatus.loading,
-      ),
+          fetchCartStatus: LoadStatus.loading,
+          updateCartStatus: LoadStatus.loading),
     );
     try {
       final listCartEntity = await userRepo.getCart(userId);
       if (listCartEntity != null) {
         int totalPrice = handleTotalPriceCart(listCartEntity);
-
         emit(
           state.copyWith(
             fetchCartStatus: LoadStatus.success,
@@ -78,17 +79,24 @@ class CartCubit extends Cubit<CartState> {
       rethrow;
     }
   }
-  void deleteCheckoutCartStatus(){
+
+  void deleteCheckoutCartStatus() {
     emit(
       state.copyWith(
         updateCartStatus: LoadStatus.initial,
       ),
     );
   }
-  void handleCheckout() async {
+
+  void handleCheckoutCart() async {
     if (state.listCartEntity.isEmpty) {
       return;
     }
+    emit(
+      state.copyWith(
+        updateCartStatus: LoadStatus.loading,
+      ),
+    );
     Map<String, dynamic>? result = await userRepo.checkoutCart(
       state.listCartEntity,
     );
@@ -97,16 +105,12 @@ class CartCubit extends Cubit<CartState> {
     if (socket.connected) {
       socket.emit('checkoutCart');
     }
-    emit(
-      state.copyWith(
-        updateCartStatus: LoadStatus.loading,
-      ),
-    );
+
     if (result != null) {
       emit(
         state.copyWith(
           listCartEntity: [],
-          updateCartStatus: LoadStatus.successCheckout,
+          updateCartStatus: LoadStatus.successCheckoutCart,
         ),
       );
     } else {
@@ -119,20 +123,23 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void handleIncreseQuantity(index, price) {
-    emit(state.copyWith(updateCartStatus: LoadStatus.loading));
-    List<CartEntity> list = List.from(state.listCartEntity);
+    emit(
+      state.copyWith(
+        updateCartStatus: LoadStatus.loading,
+      ),
+    );
+    List<CartEntity> listCart = List.from(state.listCartEntity);
     int quantity = state.listCartEntity[index].quantity!;
     quantity = quantity + 1;
-    list[index].total = (quantity * price) as int?;
-    list[index].quantity = quantity;
-    int totalPrice = handleTotalPriceCart(list);
+    listCart[index].total = (quantity * price) as int?;
+    listCart[index].quantity = quantity;
+    int totalPriceCart = handleTotalPriceCart(listCart);
 
     emit(
       state.copyWith(
-        listCartEntity: list,
-        updateCartStatus: LoadStatus.success,
-        totalPriceCart: totalPrice
-      ),
+          listCartEntity: listCart,
+          updateCartStatus: LoadStatus.success,
+          totalPriceCart: totalPriceCart),
     );
   }
 
@@ -142,29 +149,28 @@ class CartCubit extends Cubit<CartState> {
         updateCartStatus: LoadStatus.loading,
       ),
     );
-    List<CartEntity> list = List.from(state.listCartEntity);
+    List<CartEntity> listCart = List.from(state.listCartEntity);
     int? quantity = state.listCartEntity[index].quantity;
     quantity = quantity! - 1;
     if (quantity < 1) {
       quantity = 1;
     }
-    list[index].total = (quantity * price) as int?;
-    list[index].quantity = quantity;
-    int totalPrice = handleTotalPriceCart(list);
+    listCart[index].total = (quantity * price) as int?;
+    listCart[index].quantity = quantity;
+    int totalPriceCart = handleTotalPriceCart(listCart);
     emit(
       state.copyWith(
-        listCartEntity: list,
-        updateCartStatus: LoadStatus.success,
-        totalPriceCart: totalPrice
-      ),
+          listCartEntity: listCart,
+          updateCartStatus: LoadStatus.success,
+          totalPriceCart: totalPriceCart),
     );
   }
 
-  int handleTotalPriceCart(List<CartEntity>list) {
-    int total = 0;
+  int handleTotalPriceCart(List<CartEntity> list) {
+    int totalPriceCart = 0;
     for (var element in list) {
-      total += element.total!;
+      totalPriceCart += element.total!;
     }
-    return total;
+    return totalPriceCart;
   }
 }

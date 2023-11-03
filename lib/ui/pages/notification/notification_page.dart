@@ -31,34 +31,34 @@ class _NotificationPageState extends State<NotificationPage> {
           userRepo: userRepo,
         );
       },
-      child: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
-        // chỗ này em sử lí ở node js . và ở client
-        // nếu cái cart ma > 2 thì hiển thị avatar ng dùng
-        // nếu cart < 2 thì hiển thị hàng mua
-        int? userId = state.user?.id;
-        String? avatar = state.user?.avatar;
-        return NotificationChildPageState(
-          userId: userId,
-          avatar: avatar,
-        );
-      }),
+      child: BlocBuilder<AppCubit, AppState>(
+        builder: (context, state) {
+          // chỗ này em sử lí ở node js . và ở client
+          // nếu cái cart ma > 2 thì hiển thị avatar ng dùng
+          // nếu cart < 2 thì hiển thị ảnh đơn  hàng mua
+          int? userId = state.user?.id;
+          String? avatar = state.user?.avatar;
+          return NotificationChildPage(
+            userId: userId,
+            avatar: avatar,
+          );
+        },
+      ),
     );
   }
 }
 
-class NotificationChildPageState extends StatefulWidget {
+class NotificationChildPage extends StatefulWidget {
   final int? userId;
   final String? avatar;
 
-  const NotificationChildPageState({super.key, this.userId, this.avatar});
+  const NotificationChildPage({super.key, this.userId, this.avatar});
 
   @override
-  State<NotificationChildPageState> createState() =>
-      _NotificationChildPageStateState();
+  State<NotificationChildPage> createState() => _NotificationChildPageState();
 }
 
-class _NotificationChildPageStateState
-    extends State<NotificationChildPageState> {
+class _NotificationChildPageState extends State<NotificationChildPage> {
   late NotificationCubit _cubit;
 
   @override
@@ -147,16 +147,17 @@ class _NotificationChildPageStateState
                               .listNotificationEntity[index].createdAt
                               .toString()
                               .formattedTime;
-                          String diffTimeString =
+                          String timeDiff =
                               DateDifferent().diffTime(dateFormatter);
-                          String? id = state.listNotificationEntity[index].id;
+                          String? idNotification =
+                              state.listNotificationEntity[index].id;
                           String? pathImage =
                               state.listNotificationEntity[index].image ??
                                   widget.avatar;
                           return NotificationItem(
-                            idNotification: id,
+                            idNotification: idNotification,
                             pathImage: pathImage,
-                            timeDiff: diffTimeString,
+                            timeDiff: timeDiff,
                           );
                         },
                       ),

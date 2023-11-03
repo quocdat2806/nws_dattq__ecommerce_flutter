@@ -6,16 +6,16 @@ import 'package:newware_final_project/generated/l10n.dart';
 import 'package:newware_final_project/utils/utils.dart';
 class AppEmailTextField extends StatelessWidget {
   final TextEditingController textEditingController;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onChangedText;
   final String? labelText;
   final String? hintText;
-  final Widget? icon;
+  final Widget? iconValidate;
 
   const AppEmailTextField({
     Key? key,
     required this.textEditingController,
-    this.onChanged,
-    this.icon,
+    this.onChangedText,
+    this.iconValidate,
     this.labelText ,
     this.hintText,
   }) : super(key: key);
@@ -60,7 +60,7 @@ class AppEmailTextField extends StatelessWidget {
                     },
                     controller: textEditingController,
                     onChanged: (value) {
-                      onChanged!=null? onChanged!(value):null;
+                      onChangedText!=null? onChangedText!(value):null;
                     },
                     decoration: InputDecoration(
                       hintText: hintText??'',
@@ -71,7 +71,7 @@ class AppEmailTextField extends StatelessWidget {
                     ),
                   ),
                 ),
-                icon ?? const SizedBox.shrink(),
+                iconValidate ?? const SizedBox.shrink(),
               ],
             ),
           ),
